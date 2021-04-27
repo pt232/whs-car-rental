@@ -1,0 +1,26 @@
+@import url("variables.css");
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+*::before,
+*::after,
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Poppins", sans-serif, Arial;
+  font-size: 10px;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  background-color: var(--clr-background);
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+}
