@@ -17,7 +17,7 @@ Befolge diese einfachen Schritte, um eine lokale Kopie des Projektes zum Laufen 
    ```sh
    git clone https://github.com/pt232/whs-car-rental.git
    ```
-2. NPM-Packages im Client- und Server-Ordner installiern
+2. NPM-Packages im Client- und Server-Ordner installieren
    ```sh
    npm install
    ```
