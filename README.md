@@ -8,8 +8,8 @@ Befolge diese einfachen Schritte, um eine lokale Kopie des Projektes zum Laufen 
 
 ### Vorraussetzungen
 
-- [Node.js](https://git-scm.com/) installieren
-- [Git](https://nodejs.org/) installieren
+- [Node.js](https://nodejs.org/) installieren
+- [Git](https://git-scm.com/) installieren
 
 ### Installation
 
