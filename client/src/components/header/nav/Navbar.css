@@ -1,0 +1,42 @@
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4.5rem 0;
+}
+
+.nav__logo {
+  font-size: 2.4rem;
+  font-weight: bold;
+}
+
+.nav__logo span {
+  color: var(--color-blue);
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+}
+
+.nav__item:not(:last-child) {
+  margin-right: 3.5rem;
+}
+
+.nav__link {
+  font-size: 1.6rem;
+  transition: color 350ms;
+}
+
+.nav__link:hover {
+  color: var(--color-blue);
+}
+
+.nav__login {
+  display: flex;
+  align-items: center;
+}
+
+.nav__login a:first-child {
+  margin-right: 3.5rem;
+}

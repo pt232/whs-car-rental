@@ -1,0 +1,26 @@
+.extras {
+  flex: 1;
+  padding: 7rem 0;
+  background-color: var(--color-background);
+}
+
+.extras__title {
+  margin-bottom: 4rem;
+  font-size: 2.4rem;
+  font-weight: normal;
+}
+
+.extras__content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.extras__specs {
+  flex: 2;
+  margin-right: 5.5rem;
+}
+
+.extras__overview {
+  flex: 1;
+}

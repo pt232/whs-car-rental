@@ -1,0 +1,47 @@
+.price-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.4rem;
+  background-color: var(--color-blue-lighter);
+  border-radius: var(--border-radius);
+}
+
+.price-card__information {
+  margin-bottom: 1.5rem;
+  padding: 1rem 0;
+  text-align: center;
+}
+
+.price-card__days,
+.price-card__price,
+.price-card__day {
+  color: var(--color-blue-dark);
+}
+
+.price-card__days {
+  font-size: 1.2rem;
+}
+
+.price-card__price {
+  font-size: 3.6rem;
+}
+
+.price-card__price > span {
+  display: inline-block;
+  margin-right: -0.5rem;
+  color: inherit;
+  font-size: 2rem;
+}
+
+.price-card__day {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.price-card__btn {
+  padding: 1rem 2.6rem;
+  font-size: 1.2rem !important;
+  border-radius: 0.4rem !important;
+}

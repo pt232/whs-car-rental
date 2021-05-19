@@ -1,0 +1,18 @@
+.overview-card > *:not(:last-child) {
+  margin-bottom: 2.5rem;
+}
+
+.overview-card__title {
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+}
+
+.overview-card__subtitle {
+  font-size: 1.4rem;
+  font-weight: normal;
+}
+
+.overview-card__btn {
+  padding: 1rem;
+  font-size: 1.4rem !important;
+}

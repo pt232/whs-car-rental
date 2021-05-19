@@ -1,44 +1,24 @@
-import React, { useState, useEffect } from "react";
-import "./App.css";
+import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import CarExtrasPage from "../pages/listing/extras/CarExtrasPage";
+import HomePage from "../pages/home/HomePage";
+import ListingPage from "../pages/listing/ListingPage";
+import Footer from "./footer/Footer";
+import Navbar from "./header/nav/Navbar";
+import CarCheckoutPage from "../pages/listing/checkout/CarCheckoutPage";
 
 const App = () => {
-  const [message, setMessage] = useState("");
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch("http://localhost:5000/example", {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-        },
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          return data;
-        })
-        .catch((error) => {
-          return {
-            error,
-            message: "Jemand hat den Stecker gezogen... 🐒",
-          };
-        });
-
-      setLoading(false);
-      setMessage(response.message);
-    };
-
-    fetchData();
-  }, []);
-
   return (
-    <div className="example">
-      <div className="example__box">
-        {!loading ? message : "Daten werden geladen..."}
-      </div>
-    </div>
+    <Router>
+      <Navbar />
+      <Switch>
+        <Route path="/" exact component={HomePage} />
+        <Route path="/listing" exact component={ListingPage} />
+        <Route path="/listing/extras" component={CarExtrasPage} />
+        <Route path="/listing/checkout" component={CarCheckoutPage} />
+      </Switch>
+      <Footer />
+    </Router>
   );
 };
 

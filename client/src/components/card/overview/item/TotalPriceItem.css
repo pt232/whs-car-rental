@@ -1,0 +1,13 @@
+.total-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2.5rem 1.5rem;
+  background-color: var(--color-gray-lighter);
+}
+
+.total-price__name,
+.total-price__value {
+  font-size: 1.6rem;
+  font-weight: 600;
+}

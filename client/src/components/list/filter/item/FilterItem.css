@@ -1,0 +1,27 @@
+.filter-option {
+  display: flex;
+  align-items: center;
+}
+
+.filter-option:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.filter-option__checkbox {
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-right: 2rem;
+  cursor: pointer;
+}
+
+.filter-option__checkbox:not(:checked) {
+  border: 1px solid var(--color-black);
+  border-radius: 0.4rem;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.filter-option__label {
+  font-size: 1.4rem;
+  cursor: pointer;
+}

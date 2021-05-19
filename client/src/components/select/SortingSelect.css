@@ -1,0 +1,30 @@
+.sorting-select-wrapper {
+  position: relative;
+  width: 22rem;
+  padding: 1.2rem 1.4rem;
+  background-color: #fff;
+  box-shadow: 2px 4px 1.5rem rgba(0, 0, 0, 0.08);
+  border-radius: var(--border-radius);
+}
+
+.sorting-select-wrapper::after {
+  content: "\f107";
+  position: absolute;
+  top: 50%;
+  right: 1.4rem;
+  color: var(--color-gray);
+  font-family: var(--font-icon);
+  font-size: 1.4rem;
+  font-weight: 900;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.sorting-select {
+  position: relative;
+  width: 100%;
+  font-size: 1.4rem;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}

@@ -1,0 +1,21 @@
+.car-information {
+  display: flex;
+  align-items: center;
+  flex-flow: wrap;
+  margin: 1.6rem 0;
+}
+
+.car-information__item {
+  display: flex;
+  align-items: center;
+  margin: 1rem 2rem 1rem 0;
+}
+
+.car-information__icon {
+  width: 2.2rem;
+  margin-right: 0.8rem;
+}
+
+.car-information__text {
+  font-size: 1.2rem;
+}

@@ -1,0 +1,30 @@
+.price-table__table {
+  width: 100%;
+  padding: 1.5rem 0;
+  background-color: var(--color-gray-lighter);
+}
+
+.price-table__title {
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.price-table__th {
+  padding: 0 1.5rem 1rem 1.5rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-align: left;
+}
+
+.price-table__td {
+  padding: 0.5rem 1.5rem;
+  color: var(--color-gray);
+  font-size: 1.4rem;
+  line-height: 1.4;
+  text-align: right;
+}
+
+.price-table__td:first-child {
+  text-align: left;
+}

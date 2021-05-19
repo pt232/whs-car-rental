@@ -1,0 +1,35 @@
+.footer {
+  width: 100%;
+  padding: 3rem 0;
+}
+
+.footer__links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer__items {
+  display: flex;
+  align-items: center;
+}
+
+.footer__item:first-child {
+  margin-right: 3.5rem;
+}
+
+.footer__link {
+  font-size: 1.6rem;
+  transition: 350ms color;
+}
+
+.footer__social {
+  color: var(--color-gray);
+  font-size: 2.5rem;
+  transition: 350ms color;
+}
+
+.footer__link:hover,
+.footer__social:hover {
+  color: var(--color-blue);
+}

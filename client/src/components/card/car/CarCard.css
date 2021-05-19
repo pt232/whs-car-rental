@@ -1,0 +1,25 @@
+.car-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+}
+
+.car-card__image {
+  max-width: 30rem;
+  object-fit: contain;
+}
+
+.car-card__information {
+  flex: 1;
+  margin: 0 3rem 0 2rem;
+}
+
+.car-card__title {
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
+}
+
+.car-card__subtitle {
+  font-size: 1.4rem;
+  font-weight: normal;
+}
