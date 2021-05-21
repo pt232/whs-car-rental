@@ -1,0 +1,56 @@
+.login-form__container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2.5rem;
+}
+
+.login-form__label {
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+}
+
+.login-form__label--small {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.login-form__input {
+  padding: 0.6rem 1.2rem;
+  background-color: var(--color-gray-lighter);
+  border: 1px solid var(--color-gray-lighter);
+}
+
+.login-form__input:focus {
+  border: 1px solid var(--color-blue);
+}
+
+.login-form__remember {
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-form__option {
+  display: flex;
+  align-items: center;
+}
+
+.login-form__checkbox {
+  width: 1.8rem;
+  height: 1.8rem;
+  margin-right: 1rem;
+  cursor: pointer;
+}
+
+.login-form__checkbox:not(:checked) {
+  border: 1px solid var(--color-black);
+  border-radius: 0.4rem;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.login-form__btn {
+  width: 100%;
+  margin-top: 4rem;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.4rem !important;
+}

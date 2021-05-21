@@ -1,0 +1,28 @@
+.registration-form__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.registration-form__container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.registration-form__container:first-child {
+  margin-right: 4rem;
+}
+
+.login-form__required {
+  color: #ff0000;
+}
+
+.registration-form__btn {
+  width: 50%;
+  max-width: 37.1rem;
+  margin-top: 4rem;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.4rem !important;
+}

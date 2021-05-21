@@ -33,7 +33,7 @@ const Navbar = () => {
             </li>
           </ul>
           <div className="nav__login">
-            <Link to="/" className="nav__link">
+            <Link to="/login" className="nav__link">
               Anmelden
             </Link>
             <Link to="/" className="btn btn--transparent">

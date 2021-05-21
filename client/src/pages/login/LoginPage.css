@@ -1,0 +1,26 @@
+.login {
+  padding: 7rem 0;
+  background-color: var(--color-background);
+  flex: 1;
+}
+
+.login__wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.login__sign-in {
+  flex: 1;
+  margin-right: 5.5rem;
+}
+
+.login__sign-up {
+  flex: 2;
+}
+
+.login__title {
+  margin-bottom: 3.5rem;
+  font-size: 2.4rem;
+  font-weight: normal;
+}
