@@ -9,3 +9,18 @@
   font-size: 2.4rem;
   font-weight: normal;
 }
+
+.checkout__content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.checkout__information {
+  flex: 1;
+  margin-right: 5.5rem;
+}
+
+.checkout__form {
+  flex: 2;
+}

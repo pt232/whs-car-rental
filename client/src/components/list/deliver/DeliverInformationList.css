@@ -1,0 +1,25 @@
+.deliver-list {
+  padding: 3.5rem 0;
+}
+
+.deliver-list__item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.deliver-list__icon {
+  margin-right: 2rem;
+  color: var(--color-gray);
+  font-size: 2.2rem;
+}
+
+.deliver-list__heading {
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.deliver-list__text {
+  color: var(--color-gray);
+  font-size: 1.2rem;
+}

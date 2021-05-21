@@ -13,7 +13,7 @@ const CarExtrasPage = () => {
             <SpecsList />
           </div>
           <div className="extras__overview">
-            <OverviewCard />
+            <OverviewCard displayBtn={true} />
           </div>
         </div>
       </div>

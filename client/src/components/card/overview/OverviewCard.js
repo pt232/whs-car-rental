@@ -6,7 +6,7 @@ import carImage from "../../../images/car.png";
 import "./OverviewCard.css";
 import TotalPriceItem from "./item/TotalPriceItem";
 
-const OverviewCard = () => {
+const OverviewCard = ({ displayBtn }) => {
   return (
     <Card>
       <div className="overview-card">
@@ -17,12 +17,14 @@ const OverviewCard = () => {
         <img src={carImage} alt="Volkswagen Golf 7" />
         <PriceTable />
         <TotalPriceItem />
-        <Link
-          to="/listing/checkout"
-          className="overview-card__btn btn btn--filled"
-        >
-          Weiter
-        </Link>
+        {displayBtn ? (
+          <Link
+            to="/listing/checkout"
+            className="overview-card__btn btn btn--filled"
+          >
+            Weiter
+          </Link>
+        ) : null}
       </div>
     </Card>
   );
