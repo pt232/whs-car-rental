@@ -1,6 +1,6 @@
 # Autovermietung 🚗
 
-Hier entsteht noch etwas...
+Entwicklung einer web-basiertenAnwendung für eine Autovermietung
 
 ## Loslegen
 
