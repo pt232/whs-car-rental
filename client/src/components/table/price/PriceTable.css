@@ -27,4 +27,5 @@
 
 .price-table__td:first-child {
   text-align: left;
+  word-break: break-all;
 }

@@ -3,3 +3,52 @@
   font-size: 1.8rem;
   font-weight: 600;
 }
+
+.checkout-form > *:not(:last-child) {
+  margin-bottom: 3rem;
+}
+
+.checkout-form__options {
+  display: flex;
+  align-items: center;
+}
+
+.checkout-form__option {
+  display: flex;
+  align-items: center;
+}
+
+.checkout-form__option:first-child {
+  margin-right: 3rem;
+}
+
+.checkout-form__label {
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.checkout-form__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkout-form__container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 50%;
+}
+
+.checkout-form__container:first-child {
+  margin-right: 4rem;
+}
+
+.checkout-form__required {
+  color: #ff0000;
+}
+
+.checkout-form__btn {
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.4rem !important;
+}

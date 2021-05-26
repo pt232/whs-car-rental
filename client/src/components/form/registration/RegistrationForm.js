@@ -8,66 +8,54 @@ const RegistrationForm = () => {
       <form className="registration-form">
         <div className="registration-form__row">
           <div className="registration-form__container">
-            <label htmlFor="name" className="login-form__label">
-              Vorname <span className="login-form__required">*</span>
+            <label htmlFor="regName" className="label">
+              Vorname <span className="registration-form__required">*</span>
             </label>
-            <input type="text" className="login-form__input" id="mail" />
+            <input type="text" className="input" id="regName" />
           </div>
           <div className="registration-form__container">
-            <label htmlFor="lastName" className="login-form__label">
-              Nachname <span className="login-form__required">*</span>
+            <label htmlFor="regLastName" className="label">
+              Nachname <span className="registration-form__required">*</span>
             </label>
-            <input type="text" className="login-form__input" id="lastName" />
+            <input type="text" className="input" id="regLastName" />
           </div>
         </div>
         <div className="registration-form__row">
           <div className="registration-form__container">
-            <label htmlFor="telephone" className="login-form__label">
+            <label htmlFor="regTelephone" className="label">
               Telefonnummer
             </label>
-            <input
-              type="telephone"
-              className="login-form__input"
-              id="telephone"
-            />
+            <input type="telephone" className="input" id="regTelephone" />
           </div>
           <div className="registration-form__container">
-            <label htmlFor="mail" className="login-form__label">
-              E-Mail-Adresse <span className="login-form__required">*</span>
+            <label htmlFor="regMail" className="label">
+              E-Mail-Adresse{" "}
+              <span className="registration-form__required">*</span>
             </label>
-            <input type="email" className="login-form__input" id="mail" />
+            <input type="email" className="input" id="regMail" />
           </div>
         </div>
         <div className="registration-form__row">
           <div className="registration-form__container">
-            <label htmlFor="pw" className="login-form__label">
-              Passwort <span className="login-form__required">*</span>
+            <label htmlFor="regPw" className="label">
+              Passwort <span className="registration-form__required">*</span>
             </label>
-            <input type="email" className="login-form__input" id="pw" />
+            <input type="email" className="input" id="regPw" />
           </div>
           <div className="registration-form__container">
-            <label htmlFor="pwRepeat" className="login-form__label">
+            <label htmlFor="regPwRepeat" className="label">
               Passwort wiederholen{" "}
-              <span className="login-form__required">*</span>
+              <span className="registration-form__required">*</span>
             </label>
-            <input type="email" className="login-form__input" id="pwRepeat" />
+            <input type="email" className="input" id="regPwRepeat" />
           </div>
         </div>
-        <div className="login-form__container">
-          <div className="login-form__remember">
-            <div className="login-form__option">
-              <input
-                type="checkbox"
-                id="remember"
-                className="login-form__checkbox"
-              />
-              <label
-                htmlFor="remember"
-                className="login-form__label login-form__label--small"
-              >
-                Ich akzeptiere die Datenschutzbestimmungen
-              </label>
-            </div>
+        <div className="registration-form__container">
+          <div className="registration-form__option">
+            <input type="checkbox" id="regRemember" className="checkbox" />
+            <label htmlFor="regRemember" className="label label--small">
+              Ich akzeptiere die Datenschutzbestimmungen
+            </label>
           </div>
         </div>
         <button

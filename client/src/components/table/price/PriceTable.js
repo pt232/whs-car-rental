@@ -10,7 +10,7 @@ const PriceTable = () => {
           <tr>
             <th className="price-table__th">Menge</th>
             <th className="price-table__th">Stückpreis</th>
-            <th className="price-table__th">Zwischensumme</th>
+            <th className="price-table__th">Summe</th>
           </tr>
         </thead>
         <tbody>
@@ -22,7 +22,7 @@ const PriceTable = () => {
         </tbody>
         <tfoot>
           <tr>
-            <td className="price-table__td">Extrakosten gesamt</td>
+            <td className="price-table__td">Gesamtkosten</td>
             <td colSpan="2" className="price-table__td">
               11 &euro;
             </td>

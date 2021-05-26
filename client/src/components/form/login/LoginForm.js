@@ -7,43 +7,28 @@ const LoginForm = () => {
     <Card>
       <form className="login-form">
         <div className="login-form__container">
-          <label htmlFor="mail" className="login-form__label">
+          <label htmlFor="loginMail" className="label">
             E-Mail-Adresse
           </label>
-          <input
-            type="email"
-            className="login-form__input"
-            id="mail"
-            required
-          />
+          <input type="email" className="input" id="loginMail" required />
         </div>
         <div className="login-form__container">
-          <label htmlFor="pw" className="login-form__label">
+          <label htmlFor="loginPw" className="label">
             Passwort
           </label>
-          <input
-            type="password"
-            className="login-form__input"
-            id="pw"
-            required
-          />
+          <input type="password" className="input" id="loginPw" required />
         </div>
         <div className="login-form__container">
-          <div className="login-form__remember">
+          <div className="login-form__options">
             <div className="login-form__option">
-              <input
-                type="checkbox"
-                id="remember"
-                className="login-form__checkbox"
-              />
-              <label
-                htmlFor="remember"
-                className="login-form__label login-form__label--small"
-              >
+              <input type="checkbox" id="loginRemember" className="checkbox" />
+              <label htmlFor="loginRemember" className="label label--small">
                 Angemeldet bleiben
               </label>
             </div>
-            <span className="login-form__label--small">Passwort vergessen</span>
+            <span className="login-form__forgot label label--small">
+              Passwort vergessen
+            </span>
           </div>
         </div>
         <button type="submit" className="login-form__btn btn btn--filled">

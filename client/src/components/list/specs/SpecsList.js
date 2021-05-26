@@ -19,12 +19,12 @@ const SpecsList = () => {
     {
       id: 2,
       name: "Glas- & Reifenschutz",
-      icon: faUserFriends,
+      icon: faCarSide,
     },
     {
       id: 3,
       name: "Zweifahreroption",
-      icon: faCarSide,
+      icon: faUserFriends,
     },
     {
       id: 4,

@@ -11,6 +11,7 @@ const CarList = () => {
       <CarCard />
       <CarCard />
       <CarCard />
+      <CarCard />
     </>
   );
 };

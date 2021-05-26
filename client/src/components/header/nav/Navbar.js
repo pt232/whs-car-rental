@@ -36,7 +36,7 @@ const Navbar = () => {
             <Link to="/login" className="nav__link">
               Anmelden
             </Link>
-            <Link to="/" className="btn btn--transparent">
+            <Link to="/login" className="btn btn--transparent">
               Registrieren
             </Link>
           </div>

@@ -6,59 +6,79 @@ const CheckoutForm = () => {
   return (
     <Card>
       <h3 className="checkout-form__title">Rechnungsadresse</h3>
-      <form className="registration-form">
-        <div className="registration-form__row">
-          <div className="registration-form__container">
-            <label htmlFor="name" className="login-form__label">
-              Vorname <span className="login-form__required">*</span>
+      <form className="checkout-form">
+        <div className="checkout-form__options">
+          <div className="checkout-form__option">
+            <input type="checkbox" id="checkoutMale" className="checkbox" />
+            <label htmlFor="checkoutMale" className="checkout-form__label">
+              Herr
             </label>
-            <input type="text" className="login-form__input" id="mail" />
           </div>
-          <div className="registration-form__container">
-            <label htmlFor="lastName" className="login-form__label">
-              Nachname <span className="login-form__required">*</span>
+          <div className="checkout-form__option">
+            <input type="checkbox" id="checkoutFemale" className="checkbox" />
+            <label htmlFor="checkoutFemale" className="checkout-form__label">
+              Frau
             </label>
-            <input type="text" className="login-form__input" id="lastName" />
           </div>
         </div>
-        <div className="registration-form__row">
-          <div className="registration-form__container">
-            <label htmlFor="telephone" className="login-form__label">
+        <div className="checkout-form__row">
+          <div className="checkout-form__container">
+            <label htmlFor="checkoutName" className="label">
+              Vorname <span className="checkout-form__required">*</span>
+            </label>
+            <input type="text" className="input" id="checkoutName" />
+          </div>
+          <div className="checkout-form__container">
+            <label htmlFor="checkoutLastName" className="label">
+              Nachname <span className="checkout-form__required">*</span>
+            </label>
+            <input type="text" className="input" id="checkoutLastName" />
+          </div>
+        </div>
+        <div className="checkout-form__row">
+          <div className="checkout-form__container">
+            <label htmlFor="checkoutMail" className="label">
+              E-Mail-Adresse <span className="checkout-form__required">*</span>
+            </label>
+            <input type="mail" className="input" id="checkoutMail" />
+          </div>
+          <div className="checkout-form__container">
+            <label htmlFor="checkoutTelephone" className="label">
               Telefonnummer
             </label>
-            <input
-              type="telephone"
-              className="login-form__input"
-              id="telephone"
-            />
-          </div>
-          <div className="registration-form__container">
-            <label htmlFor="mail" className="login-form__label">
-              E-Mail-Adresse <span className="login-form__required">*</span>
-            </label>
-            <input type="email" className="login-form__input" id="mail" />
+            <input type="telephone" className="input" id="checkoutTelephone" />
           </div>
         </div>
-        <div className="registration-form__row">
-          <div className="registration-form__container">
-            <label htmlFor="pw" className="login-form__label">
-              Passwort <span className="login-form__required">*</span>
+        <div className="checkout-form__row">
+          <div className="checkout-form__container">
+            <label htmlFor="checkoutCountry" className="label">
+              Land
             </label>
-            <input type="email" className="login-form__input" id="pw" />
+            <input type="text" id="checkoutCountry" className="input" />
           </div>
-          <div className="registration-form__container">
-            <label htmlFor="pwRepeat" className="login-form__label">
-              Passwort wiederholen{" "}
-              <span className="login-form__required">*</span>
+          <div className="checkout-form__container">
+            <label htmlFor="checkoutTelephone" className="label">
+              Ort <span className="checkout-form__required">*</span>
             </label>
-            <input type="email" className="login-form__input" id="pwRepeat" />
+            <input type="telephone" className="input" id="checkoutTelephone" />
           </div>
         </div>
-        <button
-          style={{ width: "100%", maxWidth: "100%" }}
-          type="submit"
-          className="registration-form__btn btn btn--filled"
-        >
+        <div className="checkout-form__row">
+          <div className="checkout-form__container">
+            <label htmlFor="checkoutStreet" className="label">
+              Straße und Hausnummer{" "}
+              <span className="checkout-form__required">*</span>
+            </label>
+            <input type="text" className="input" id="checkoutStreet" />
+          </div>
+          <div className="checkout-form__container">
+            <label htmlFor="checkoutCityCode" className="label">
+              Postleitzahl <span className="checkout-form__required">*</span>
+            </label>
+            <input type="text" className="input" id="checkoutCityCode" />
+          </div>
+        </div>
+        <button type="submit" className="checkout-form__btn btn btn--filled">
           Jetzt kostenpflichtig bestellen!
         </button>
       </form>

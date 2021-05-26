@@ -11,12 +11,12 @@
 }
 
 .login__sign-in {
-  flex: 1;
+  flex: 1 1 32%;
   margin-right: 5.5rem;
 }
 
 .login__sign-up {
-  flex: 2;
+  flex: 1 1 68%;
 }
 
 .login__title {
