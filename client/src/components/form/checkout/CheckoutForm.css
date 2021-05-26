@@ -47,6 +47,39 @@
   color: #ff0000;
 }
 
+.registration-form__wrapper {
+  position: relative;
+  flex: 1 1 50%;
+}
+
+.registration-form__wrapper::after {
+  content: "\f107";
+  position: absolute;
+  top: 50%;
+  right: 1.4rem;
+  color: var(--color-gray);
+  font-family: var(--font-icon);
+  font-size: 1.4rem;
+  font-weight: 900;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.checkout-form__select {
+  width: 100%;
+  height: 3.4rem;
+  padding: 0.6rem 5rem 0.6rem 1.2rem;
+  background-color: var(--color-gray-lighter);
+  border: 1px solid var(--color-gray-lighter);
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.checkout-form__select:focus {
+  border: 1px solid var(--color-blue);
+}
+
 .checkout-form__btn {
   width: 100%;
   padding: 0.8rem 1.2rem;

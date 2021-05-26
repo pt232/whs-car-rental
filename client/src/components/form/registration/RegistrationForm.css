@@ -27,6 +27,20 @@
   align-items: center;
 }
 
+.registration-form__input {
+  position: relative;
+  flex: 1 1 50%;
+}
+
+.registration-form__icon {
+  position: absolute;
+  top: 50%;
+  right: 1.5rem;
+  color: var(--color-gray);
+  font-size: 1.4rem;
+  transform: translateY(-50%);
+}
+
 .registration-form__btn {
   width: 50%;
   max-width: 37.93rem;

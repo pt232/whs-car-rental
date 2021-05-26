@@ -1,5 +1,7 @@
 import React from "react";
 import Card from "../../card/Card";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 import "./RegistrationForm.css";
 
 const RegistrationForm = () => {
@@ -11,13 +13,13 @@ const RegistrationForm = () => {
             <label htmlFor="regName" className="label">
               Vorname <span className="registration-form__required">*</span>
             </label>
-            <input type="text" className="input" id="regName" />
+            <input type="text" className="input" id="regName" required />
           </div>
           <div className="registration-form__container">
             <label htmlFor="regLastName" className="label">
               Nachname <span className="registration-form__required">*</span>
             </label>
-            <input type="text" className="input" id="regLastName" />
+            <input type="text" className="input" id="regLastName" required />
           </div>
         </div>
         <div className="registration-form__row">
@@ -32,7 +34,7 @@ const RegistrationForm = () => {
               E-Mail-Adresse{" "}
               <span className="registration-form__required">*</span>
             </label>
-            <input type="email" className="input" id="regMail" />
+            <input type="email" className="input" id="regMail" required />
           </div>
         </div>
         <div className="registration-form__row">
@@ -40,14 +42,26 @@ const RegistrationForm = () => {
             <label htmlFor="regPw" className="label">
               Passwort <span className="registration-form__required">*</span>
             </label>
-            <input type="email" className="input" id="regPw" />
+            <div className="registration-form__input">
+              <FontAwesomeIcon
+                icon={faEyeSlash}
+                className="registration-form__icon"
+              />
+              <input type="text" className="input" id="regPw" required />
+            </div>
           </div>
           <div className="registration-form__container">
             <label htmlFor="regPwRepeat" className="label">
               Passwort wiederholen{" "}
               <span className="registration-form__required">*</span>
             </label>
-            <input type="email" className="input" id="regPwRepeat" />
+            <div className="registration-form__input">
+              <FontAwesomeIcon
+                icon={faEyeSlash}
+                className="registration-form__icon"
+              />
+              <input type="text" className="input" id="regPwRepeat" required />
+            </div>
           </div>
         </div>
         <div className="registration-form__container">

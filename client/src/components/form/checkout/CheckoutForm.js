@@ -26,13 +26,18 @@ const CheckoutForm = () => {
             <label htmlFor="checkoutName" className="label">
               Vorname <span className="checkout-form__required">*</span>
             </label>
-            <input type="text" className="input" id="checkoutName" />
+            <input type="text" className="input" id="checkoutName" required />
           </div>
           <div className="checkout-form__container">
             <label htmlFor="checkoutLastName" className="label">
               Nachname <span className="checkout-form__required">*</span>
             </label>
-            <input type="text" className="input" id="checkoutLastName" />
+            <input
+              type="text"
+              className="input"
+              id="checkoutLastName"
+              required
+            />
           </div>
         </div>
         <div className="checkout-form__row">
@@ -40,7 +45,7 @@ const CheckoutForm = () => {
             <label htmlFor="checkoutMail" className="label">
               E-Mail-Adresse <span className="checkout-form__required">*</span>
             </label>
-            <input type="mail" className="input" id="checkoutMail" />
+            <input type="email" className="input" id="checkoutMail" required />
           </div>
           <div className="checkout-form__container">
             <label htmlFor="checkoutTelephone" className="label">
@@ -54,13 +59,22 @@ const CheckoutForm = () => {
             <label htmlFor="checkoutCountry" className="label">
               Land
             </label>
-            <input type="text" id="checkoutCountry" className="input" />
+            <div className="registration-form__wrapper">
+              <select id="checkoutCountry" className="checkout-form__select">
+                <option value="Deutschland">Deutschland</option>
+              </select>
+            </div>
           </div>
           <div className="checkout-form__container">
             <label htmlFor="checkoutTelephone" className="label">
               Ort <span className="checkout-form__required">*</span>
             </label>
-            <input type="telephone" className="input" id="checkoutTelephone" />
+            <input
+              type="telephone"
+              className="input"
+              id="checkoutTelephone"
+              required
+            />
           </div>
         </div>
         <div className="checkout-form__row">
@@ -69,13 +83,18 @@ const CheckoutForm = () => {
               Straße und Hausnummer{" "}
               <span className="checkout-form__required">*</span>
             </label>
-            <input type="text" className="input" id="checkoutStreet" />
+            <input type="text" className="input" id="checkoutStreet" required />
           </div>
           <div className="checkout-form__container">
             <label htmlFor="checkoutCityCode" className="label">
               Postleitzahl <span className="checkout-form__required">*</span>
             </label>
-            <input type="text" className="input" id="checkoutCityCode" />
+            <input
+              type="text"
+              className="input"
+              id="checkoutCityCode"
+              required
+            />
           </div>
         </div>
         <button type="submit" className="checkout-form__btn btn btn--filled">
