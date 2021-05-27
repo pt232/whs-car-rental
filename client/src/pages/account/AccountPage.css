@@ -1,0 +1,26 @@
+.account {
+  padding: 7rem 0;
+  background-color: var(--color-background);
+  flex: 1;
+}
+
+.account__title {
+  margin-bottom: 4rem;
+  font-size: 2.4rem;
+  font-weight: normal;
+}
+
+.account__content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.account__information {
+  flex: 1 1 30%;
+  margin-right: 5.5rem;
+}
+
+.account__dashboard {
+  flex: 1 1 70%;
+}

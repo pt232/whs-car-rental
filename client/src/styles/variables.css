@@ -3,8 +3,7 @@
 :root {
   /* Colors */
   --color-blue: #3067da;
-  --color-blue-light: rgba(48, 103, 218, 0.3);
-  --color-blue-lighter: rgba(48, 103, 218, 0.1);
+  --color-blue-light: #eaf0fb;
   --color-blue-dark: #1144ad;
   --color-black: #111516;
   --color-gray: #7b7c7d;

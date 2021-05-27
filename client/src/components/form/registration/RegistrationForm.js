@@ -47,7 +47,7 @@ const RegistrationForm = () => {
                 icon={faEyeSlash}
                 className="registration-form__icon"
               />
-              <input type="text" className="input" id="regPw" required />
+              <input type="password" className="input" id="regPw" required />
             </div>
           </div>
           <div className="registration-form__container">
@@ -60,7 +60,12 @@ const RegistrationForm = () => {
                 icon={faEyeSlash}
                 className="registration-form__icon"
               />
-              <input type="text" className="input" id="regPwRepeat" required />
+              <input
+                type="password"
+                className="input"
+                id="regPwRepeat"
+                required
+              />
             </div>
           </div>
         </div>

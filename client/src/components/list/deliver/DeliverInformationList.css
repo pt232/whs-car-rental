@@ -5,7 +5,11 @@
 .deliver-list__item {
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.deliver-list__item:last-child {
+  margin-bottom: 0;
 }
 
 .deliver-list__icon {

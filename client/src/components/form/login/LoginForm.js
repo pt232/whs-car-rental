@@ -1,11 +1,19 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import Card from "../../card/Card";
 import "./LoginForm.css";
 
 const LoginForm = () => {
+  const history = useHistory();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    history.push("/account");
+  };
+
   return (
     <Card>
-      <form className="login-form">
+      <form className="login-form" onSubmit={handleSubmit}>
         <div className="login-form__container">
           <label htmlFor="loginMail" className="label">
             E-Mail-Adresse

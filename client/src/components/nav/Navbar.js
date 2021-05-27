@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { containerSizeAtLocation } from "../../../utils/helpers";
+import { containerSizeAtLocation } from "../../utils/helpers";
 import "./Navbar.css";
 
 const Navbar = () => {

@@ -4,9 +4,10 @@ import CarExtrasPage from "../pages/listing/extras/CarExtrasPage";
 import HomePage from "../pages/home/HomePage";
 import ListingPage from "../pages/listing/ListingPage";
 import Footer from "./footer/Footer";
-import Navbar from "./header/nav/Navbar";
+import Navbar from "./nav/Navbar";
 import CarCheckoutPage from "../pages/listing/checkout/CarCheckoutPage";
 import LoginPage from "../pages/login/LoginPage";
+import AccountPage from "../pages/account/AccountPage";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route path="/listing/extras" component={CarExtrasPage} />
         <Route path="/listing/checkout" component={CarCheckoutPage} />
         <Route path="/login" component={LoginPage} />
+        <Route path="/account" component={AccountPage} />
       </Switch>
       <Footer />
     </Router>
