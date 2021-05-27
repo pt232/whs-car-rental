@@ -2,16 +2,16 @@
 
 Entwicklung einer web-basierten Anwendung für eine Autovermietung
 
-## Loslegen 🚀
+## Loslegen 
 
 Befolge diese einfachen Schritte, um eine lokale Kopie des Projektes zum Laufen zu bringen.
 
-### Vorraussetzungen 📢
+### Vorraussetzungen 
 
 - [Node.js](https://nodejs.org/) installieren
 - [Git](https://git-scm.com/) installieren
 
-### Installation 🤓
+### Installation 
 
 1. Clone des Repositorys erstellen
    ```sh
