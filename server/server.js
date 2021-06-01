@@ -4,12 +4,15 @@ if (process.env.NODE_ENV !== "production") {
 
 const express = require("express");
 const cors = require("cors");
+const carRouter = require("./routes/car.routes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(cors());
+
+app.use("/api/v1/car", carRouter);
 
 app.listen(PORT, () => {
   console.log(
