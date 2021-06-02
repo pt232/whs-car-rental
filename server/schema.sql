@@ -28,18 +28,16 @@ CREATE TABLE `car` (
   `brand_id` int NOT NULL,
   `type_id` int NOT NULL,
   `image` blob NOT NULL,
-  `price_id` int NOT NULL,
+  `price` decimal(10,2) NOT NULL,
   `partner_id` int NOT NULL,
   `station_id` int NOT NULL,
   PRIMARY KEY (`id`),
   KEY `brand_id` (`brand_id`),
   KEY `type_id` (`type_id`),
-  KEY `price_id` (`price_id`),
   KEY `partner_id` (`partner_id`),
   KEY `station_id` (`station_id`),
   CONSTRAINT `car_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `car_brand` (`id`),
   CONSTRAINT `car_ibfk_2` FOREIGN KEY (`type_id`) REFERENCES `car_type` (`id`),
-  CONSTRAINT `car_ibfk_3` FOREIGN KEY (`price_id`) REFERENCES `charge` (`id`),
   CONSTRAINT `car_ibfk_4` FOREIGN KEY (`partner_id`) REFERENCES `partner` (`id`),
   CONSTRAINT `car_ibfk_5` FOREIGN KEY (`station_id`) REFERENCES `rental_station` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -147,7 +145,7 @@ DROP TABLE IF EXISTS `charge`;
 CREATE TABLE `charge` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `price` decimal(10,2) DEFAULT NULL,
+  `price` decimal(10,2) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -278,4 +276,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-31 19:31:56
+-- Dump completed on 2021-06-02 19:21:44

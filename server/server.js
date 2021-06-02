@@ -10,7 +10,11 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: `http://localhost:${PORT}`,
+  })
+);
 
 app.use("/api/v1/car", carRouter);
 
