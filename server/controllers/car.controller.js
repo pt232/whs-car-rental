@@ -1,10 +1,11 @@
 const tables = require("../config/associations");
 
 const getCars = (req, res) => {
-  tables.Car.findAll().then(() => {
-    console.log("Test");
+  tables.Car.findAll({
+    include: [{ model: tables.Partner }],
+  }).then((cars) => {
+    res.json(cars);
   });
-  res.send("Hello World");
 };
 
 module.exports = {

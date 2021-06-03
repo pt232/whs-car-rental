@@ -16,6 +16,7 @@ const CarType = db.define("car_type", {
       model: CarClass,
       key: "id",
     },
+    field: "class_id",
   },
   doors: {
     type: DataTypes.ENUM,
@@ -50,6 +51,7 @@ const CarType = db.define("car_type", {
   freeKilometers: {
     type: DataTypes.ENUM,
     values: ["750", "1500"],
+    field: "free_kilometers",
   },
   protection: {
     type: DataTypes.BOOLEAN,
