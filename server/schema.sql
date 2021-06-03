@@ -40,7 +40,7 @@ CREATE TABLE `car` (
   CONSTRAINT `car_ibfk_2` FOREIGN KEY (`type_id`) REFERENCES `car_type` (`id`),
   CONSTRAINT `car_ibfk_4` FOREIGN KEY (`partner_id`) REFERENCES `partner` (`id`),
   CONSTRAINT `car_ibfk_5` FOREIGN KEY (`station_id`) REFERENCES `rental_station` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,6 +49,7 @@ CREATE TABLE `car` (
 
 LOCK TABLES `car` WRITE;
 /*!40000 ALTER TABLE `car` DISABLE KEYS */;
+INSERT INTO `car` VALUES (1,'Golf 7',1,1,'',225.00,1,1);
 /*!40000 ALTER TABLE `car` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -123,7 +124,7 @@ CREATE TABLE `car_type` (
   PRIMARY KEY (`id`),
   KEY `class_id` (`class_id`),
   CONSTRAINT `car_type_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `car_class` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,6 +133,7 @@ CREATE TABLE `car_type` (
 
 LOCK TABLES `car_type` WRITE;
 /*!40000 ALTER TABLE `car_type` DISABLE KEYS */;
+INSERT INTO `car_type` VALUES (1,2,'4','4-5',0,0,0,0,0,NULL,0,0);
 /*!40000 ALTER TABLE `car_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -276,4 +278,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-02 19:21:44
+-- Dump completed on 2021-06-03 15:23:58
