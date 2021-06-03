@@ -12,10 +12,6 @@ const CarType = db.define("car_type", {
   classId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: {
-      model: CarClass,
-      key: "id",
-    },
     field: "class_id",
   },
   doors: {

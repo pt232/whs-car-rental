@@ -14,15 +14,10 @@ const tables = {
   Station,
 };
 
-tables.CarBrand.belongsTo(tables.Car);
-tables.Car.hasOne(tables.CarBrand);
-tables.CarType.belongsTo(tables.Car);
-tables.Car.hasOne(tables.CarType);
-tables.Partner.belongsTo(tables.Car);
-tables.Car.hasOne(tables.Partner);
-tables.Station.belongsTo(tables.Car);
-tables.Car.hasOne(tables.Station);
-tables.CarClass.belongsTo(tables.CarType);
-tables.CarType.hasOne(tables.CarClass);
+tables.Car.hasOne(tables.CarBrand, { foreignKey: "id" });
+tables.Car.hasOne(tables.CarType, { foreignKey: "id" });
+tables.Car.hasOne(tables.Partner, { foreignKey: "id" });
+tables.Car.hasOne(tables.Station, { foreignKey: "id" });
+tables.CarType.hasOne(tables.CarClass, { foreignKey: "id" });
 
 module.exports = tables;

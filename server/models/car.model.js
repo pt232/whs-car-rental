@@ -19,19 +19,11 @@ const Car = db.define("car", {
   brandId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: {
-      model: CarBrand,
-      key: "id",
-    },
     field: "brand_id",
   },
   typeId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: {
-      model: CarType,
-      key: "id",
-    },
     field: "type_id",
   },
   image: {
@@ -45,19 +37,11 @@ const Car = db.define("car", {
   partnerId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: {
-      model: Partner,
-      key: "id",
-    },
     field: "partner_id",
   },
   stationId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    references: {
-      model: Station,
-      key: "id",
-    },
     field: "station_id",
   },
 });
