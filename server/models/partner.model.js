@@ -12,6 +12,10 @@ const Partner = db.define("partner", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  image: {
+    type: DataTypes.BLOB("long"),
+    allowNull: false,
+  },
   phone: {
     type: DataTypes.STRING,
     allowNull: false,

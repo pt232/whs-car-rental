@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from "react";
 import { CarContext } from "../../../context/car/CarState";
 import CarCard from "../../card/car/CarCard";
+import { LoadingSpinner } from "../../spinner/LoadingSpinner";
 
 const CarList = () => {
-  const { cars, getCars } = useContext(CarContext);
+  const { cars, loading, getCars } = useContext(CarContext);
 
   useEffect(() => {
     getCars();
@@ -12,17 +13,28 @@ const CarList = () => {
 
   return (
     <>
-      {cars.map((car) => {
-        return (
-          <CarCard
-            key={car.id}
-            car={car}
-            carType={car.carType}
-            partner={car.partner}
-            station={car.rentalStation}
-          />
-        );
-      })}
+      {loading ? (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            margin: "6rem 0",
+          }}
+        >
+          <LoadingSpinner />
+        </div>
+      ) : (
+        cars.map((car) => {
+          return (
+            <CarCard
+              key={car.id}
+              car={car}
+              carType={car.carType}
+              partner={car.partner}
+            />
+          );
+        })
+      )}
     </>
   );
 };

@@ -23,7 +23,7 @@ const Car = db.define("car", {
     field: "type_id",
   },
   image: {
-    type: DataTypes.BLOB,
+    type: DataTypes.BLOB("long"),
     allowNull: false,
   },
   price: {
