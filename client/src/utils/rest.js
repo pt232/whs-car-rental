@@ -7,6 +7,6 @@ export const get = async (endpoint) => {
     const res = await fetch(url);
     return await res.json();
   } catch (error) {
-    return error;
+    throw new Error(error);
   }
 };

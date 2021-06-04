@@ -1,6 +1,5 @@
 const { DataTypes } = require("sequelize");
 const db = require("../config/db");
-const CarClass = require("./carClass.mode");
 
 const CarType = db.define("car_type", {
   id: {

@@ -6,7 +6,7 @@ import CarInformationList from "../../list/car/CarInformationList";
 import CarPartnerItem from "./item/CarPartnerItem";
 import "./CarCard.css";
 
-const CarCard = () => {
+const CarCard = ({ car, carType, partner, station }) => {
   return (
     <Card marginTop={35}>
       <div className="car-card">
@@ -17,13 +17,15 @@ const CarCard = () => {
         />
         <div className="car-card__information">
           <div>
-            <h3 className="car-card__title">Kompaktklasse</h3>
-            <h5 className="car-card__subtitle">Volkswagen Golf 7</h5>
+            <h3 className="car-card__title">{carType.carClass.name}</h3>
+            <h5 className="car-card__subtitle">
+              {car.carBrand.name + " " + car.name}
+            </h5>
           </div>
           <CarInformationList />
-          <CarPartnerItem />
+          <CarPartnerItem partner={partner} />
         </div>
-        <PriceCard />
+        <PriceCard price={car.price} />
       </div>
     </Card>
   );

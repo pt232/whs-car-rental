@@ -32,10 +32,10 @@ CREATE TABLE `car` (
   `partner_id` int NOT NULL,
   `station_id` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `brand_id` (`brand_id`),
-  KEY `type_id` (`type_id`),
-  KEY `partner_id` (`partner_id`),
-  KEY `station_id` (`station_id`),
+  KEY `car_ibfk_1` (`brand_id`),
+  KEY `car_ibfk_4` (`partner_id`),
+  KEY `car_ibfk_5` (`station_id`),
+  KEY `car_ibfk_2` (`type_id`),
   CONSTRAINT `car_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `car_brand` (`id`),
   CONSTRAINT `car_ibfk_2` FOREIGN KEY (`type_id`) REFERENCES `car_type` (`id`),
   CONSTRAINT `car_ibfk_4` FOREIGN KEY (`partner_id`) REFERENCES `partner` (`id`),
@@ -122,7 +122,7 @@ CREATE TABLE `car_type` (
   `protection` tinyint(1) DEFAULT '0',
   `two_drivers` tinyint(1) DEFAULT '0',
   PRIMARY KEY (`id`),
-  KEY `class_id` (`class_id`),
+  KEY `car_type_ibfk_1` (`class_id`),
   CONSTRAINT `car_type_ibfk_1` FOREIGN KEY (`class_id`) REFERENCES `car_class` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -229,8 +229,8 @@ CREATE TABLE `rental` (
   `customer_id` int NOT NULL,
   `date` date NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `car_id` (`car_id`),
-  KEY `customer_id` (`customer_id`),
+  KEY `rental_ibfk_1` (`car_id`),
+  KEY `rental_ibfk_2` (`customer_id`),
   CONSTRAINT `rental_ibfk_1` FOREIGN KEY (`car_id`) REFERENCES `car` (`id`),
   CONSTRAINT `rental_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -278,4 +278,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-03 15:23:58
+-- Dump completed on 2021-06-03 22:05:43

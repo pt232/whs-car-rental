@@ -1,9 +1,5 @@
 const { DataTypes } = require("sequelize");
 const db = require("../config/db");
-const CarBrand = require("./carBrand.model");
-const CarType = require("./carType.model");
-const Partner = require("./partner.model");
-const Station = require("./station.model");
 
 const Car = db.define("car", {
   id: {

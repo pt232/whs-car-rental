@@ -6,16 +6,19 @@ const getCars = async (req, res) => {
       include: [
         {
           model: tables.CarBrand,
+          as: "carBrand",
         },
         {
           model: tables.CarType,
-          include: [{ model: tables.CarClass }],
+          as: "carType",
+          include: [{ model: tables.CarClass, as: "carClass" }],
         },
         {
           model: tables.Partner,
         },
         {
           model: tables.Station,
+          as: "rentalStation",
         },
       ],
     });
@@ -28,11 +31,7 @@ const getCars = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      error: {
-        name: error.name,
-        code: error.parent.code,
-        message: error.parent.sqlMessage,
-      },
+      error,
     });
   }
 };
