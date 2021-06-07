@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "../Card";
 import PriceCard from "../price/PriceCard";
 import CarInformationList from "../../list/car/CarInformationList";
 import CarPartnerItem from "./item/CarPartnerItem";
 import { blobToImageSrc } from "../../../utils/helpers";
 import "./CarCard.css";
+import CarInformationGrid from "../../grid/CarInformationGrid";
 
 const CarCard = ({ car, carType, partner }) => {
+  const [showMore, setShowMore] = useState(false);
+
   return (
-    <Card marginTop={35}>
+    <Card marginTop={35} collapsible={false}>
       <div className="car-card">
         <img
           src={blobToImageSrc(car.image.data)}
-          alt="Volkswagen Golf 7"
+          alt={car.carBrand.name + " " + car.name}
           className="car-card__image"
         />
         <div className="car-card__information">
@@ -25,7 +28,20 @@ const CarCard = ({ car, carType, partner }) => {
           <CarInformationList carType={carType} />
           <CarPartnerItem partner={partner} />
         </div>
-        <PriceCard price={car.price} />
+        <div className="car-card__price">
+          <PriceCard id={car.id} price={car.price} />
+          <span
+            className={`car-card__more ${
+              showMore ? "car-card__more--open" : ""
+            }`}
+            onClick={() => {
+              setShowMore((prevValue) => !prevValue);
+            }}
+          >
+            Mehr Informationen
+          </span>
+        </div>
+        {showMore ? <CarInformationGrid carType={carType} /> : null}
       </div>
     </Card>
   );

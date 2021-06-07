@@ -1,11 +1,12 @@
 .car-card {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: stretch;
 }
 
 .car-card__image {
-  max-width: 30rem;
+  width: 30rem;
+  height: 20rem;
   object-fit: contain;
 }
 
@@ -22,4 +23,55 @@
 .car-card__subtitle {
   font-size: 1.4rem;
   font-weight: normal;
+}
+
+.car-card__price {
+  display: flex;
+  flex-direction: column;
+}
+
+.car-card__more {
+  position: relative;
+  display: flex;
+  align-items: center;
+  align-self: flex-end;
+  padding-top: 1.5rem;
+  color: var(--color-gray);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 350ms;
+}
+
+.car-card__more::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: var(--color-gray);
+  transition: background-color 350ms;
+}
+
+.car-card__more::after {
+  content: "\f107";
+  padding-left: 0.5rem;
+  color: var(--color-gray);
+  font-family: var(--font-icon);
+  font-size: 1.2rem;
+  font-weight: 900;
+  pointer-events: none;
+  transition: color 350ms;
+}
+
+.car-card__more:hover,
+.car-card__more:hover::after {
+  color: var(--color-black);
+}
+
+.car-card__more:hover::before {
+  background-color: var(--color-black);
+}
+
+.car-card__more--open::after {
+  content: "\f106";
 }

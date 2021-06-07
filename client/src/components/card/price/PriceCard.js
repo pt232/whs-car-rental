@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./PriceCard.css";
 
-const PriceCard = ({ price }) => {
+const PriceCard = ({ id, price }) => {
   const calculatePriceByDays = (days) => {
     return price * days;
   };
@@ -16,7 +16,10 @@ const PriceCard = ({ price }) => {
         </h3>
         <span className="price-card__day">&#8364;{price}/Tag</span>
       </div>
-      <Link to="/listing/extras" className="price-card__btn btn btn--filled">
+      <Link
+        to={`/listing/checkout/${id}`}
+        className="price-card__btn btn btn--filled"
+      >
         Jetzt Reservieren!
       </Link>
     </div>

@@ -8,7 +8,7 @@ import CarPartnerItem from "../car/item/CarPartnerItem";
 import "./DeliverInformationCard.css";
 import DeliverInformationList from "../../list/deliver/DeliverInformationList";
 
-const DeliverInformationCard = () => {
+const DeliverInformationCard = ({ partner }) => {
   const items = [
     {
       icon: faMapMarkerAlt,
@@ -28,12 +28,14 @@ const DeliverInformationCard = () => {
     },
   ];
 
+  console.log(partner);
+
   return (
     <Card>
       <div className="deliver-card">
         <h3 className="deliver-card__title">Lieferinformationen</h3>
         <DeliverInformationList items={items} />
-        <CarPartnerItem />
+        {partner && <CarPartnerItem partner={partner} />}
       </div>
     </Card>
   );

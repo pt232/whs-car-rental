@@ -1,8 +1,10 @@
 const express = require("express");
-const { getCars } = require("../controllers/car.controller");
+const { getCars, getCar } = require("../controllers/car.controller");
 
 const router = express.Router();
 
 router.get("/", getCars);
+
+router.get("/:id", getCar);
 
 module.exports = router;

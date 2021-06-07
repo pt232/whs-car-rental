@@ -1,0 +1,28 @@
+.information-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-column: 2/4;
+  margin: 2rem 0 0 2rem;
+  gap: 1rem;
+}
+
+.information-grid__item {
+  display: flex;
+  align-items: center;
+}
+
+.information-grid__icon {
+  color: var(--color-blue);
+  font-size: 1.4rem;
+}
+
+.information-grid__icon--not {
+  color: var(--color-error);
+}
+
+.information-grid__property {
+  display: inline-block;
+  margin-left: 1rem;
+  font-size: 1.2rem;
+  word-break: break-all;
+}
