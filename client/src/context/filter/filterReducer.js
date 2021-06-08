@@ -10,6 +10,7 @@ export const filterReducer = (state, action) => {
     case REMOVE_FILTER:
       return {
         ...state,
+        filter: state.filter.filter((item) => item.value !== action.payload),
       };
     default:
       return state;
