@@ -6,13 +6,10 @@ export const FilterContext = createContext();
 
 export const FilterProvider = ({ children }) => {
   const initialState = {
-    filter: [],
     filterCards: [
       {
         title: "Fahrzeugklassen",
-        tableName: "carClass",
-        columnName: "name",
-        list: [
+        checkboxes: [
           "Kleinwagen",
           "Kompaktklasse",
           "Mittelklasse",
@@ -24,54 +21,39 @@ export const FilterProvider = ({ children }) => {
       },
       {
         title: "Türen",
-        tableName: "carType",
-        columnName: "doors",
-        list: ["2", "4"],
+        checkboxes: ["2", "4"],
       },
       {
         title: "Sitze",
-        tableName: "carType",
-        columnName: "seats",
-        list: ["2-3", "4-5", "6-7", "8-9"],
+        checkboxes: ["2-3", "4-5", "6-7", "8-9"],
       },
       {
         title: "Ausstattung",
-        tableName: "carType",
-        columnName: [
-          "navigation",
-          "air_conditioner",
-          "automatic",
-          "winter_tires",
-        ],
-        list: ["Navigation", "Klimaanlage", "Automatik", "Winterreifen"],
+        checkboxes: ["Navigation", "Klimaanlage", "Automatik", "Winterreifen"],
       },
       {
         title: "Versicherung & Schutz",
-        tableName: "carType",
-        columnName: ["insurance", "protection"],
-        list: ["Haftpflichtversicherung", "Glas- & Reifenschutz"],
+        checkboxes: ["Haftpflichtversicherung", "Glas- & Reifenschutz"],
       },
       {
         title: "Freikilometer",
-        tableName: "carType",
-        columnName: "free_kilometers",
-        list: ["750km", "1500km"],
+        checkboxes: ["750km", "1500km"],
       },
     ],
+    activeFilter: [],
     error: null,
   };
 
   const [state, dispatch] = useReducer(filterReducer, initialState);
 
-  const addFilter = (newFilter) => {
+  const addActiveFilter = (newFilter) => {
     dispatch({
       type: ADD_FILTER,
       payload: newFilter,
     });
-    console.log(state.filter);
   };
 
-  const removeFilter = (filterToRemove) => {
+  const removeActiveFilter = (filterToRemove) => {
     dispatch({
       type: REMOVE_FILTER,
       payload: filterToRemove,
@@ -81,10 +63,10 @@ export const FilterProvider = ({ children }) => {
   return (
     <FilterContext.Provider
       value={{
-        filter: state.filter,
         filterCards: state.filterCards,
-        addFilter,
-        removeFilter,
+        activeFilter: state.activeFilter,
+        addActiveFilter,
+        removeActiveFilter,
       }}
     >
       {children}

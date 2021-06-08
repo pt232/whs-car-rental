@@ -1,19 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { FilterContext } from "../../../../context/filter/FilterState";
 import "./FilterItem.css";
 
-const FilterItem = ({ tableName, columnName, value }) => {
-  const { addFilter, removeFilter } = useContext(FilterContext);
+const FilterItem = ({ value }) => {
+  const { activeFilter, addActiveFilter, removeActiveFilter } =
+    useContext(FilterContext);
+  const [checked, setChecked] = useState(activeFilter.includes(value));
 
   const handleChange = (e) => {
+    setChecked((prevValue) => !prevValue);
     if (e.target.checked) {
-      addFilter({
-        tableName,
-        columnName,
-        value,
-      });
+      addActiveFilter(value);
     } else {
-      removeFilter(value);
+      removeActiveFilter(value);
     }
   };
 
@@ -23,6 +22,7 @@ const FilterItem = ({ tableName, columnName, value }) => {
         type="checkbox"
         id={value}
         className="checkbox"
+        checked={checked}
         onChange={(e) => {
           handleChange(e);
         }}

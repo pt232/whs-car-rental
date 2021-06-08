@@ -5,12 +5,14 @@ export const filterReducer = (state, action) => {
     case ADD_FILTER:
       return {
         ...state,
-        filter: [...state.filter, action.payload],
+        activeFilter: [...state.activeFilter, action.payload],
       };
     case REMOVE_FILTER:
       return {
         ...state,
-        filter: state.filter.filter((item) => item.value !== action.payload),
+        activeFilter: state.activeFilter.filter(
+          (item) => item !== action.payload
+        ),
       };
     default:
       return state;

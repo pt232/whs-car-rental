@@ -1,6 +1,12 @@
 import { createContext, useReducer } from "react";
 import { get } from "../../utils/rest";
-import { CAR_ERROR, GET_CAR, GET_CARS, SET_LOADING } from "../types";
+import {
+  CAR_ERROR,
+  FILTER_CARS,
+  GET_CAR,
+  GET_CARS,
+  SET_LOADING,
+} from "../types";
 import { carReducer } from "./carReducer";
 
 export const CarContext = createContext();
@@ -15,7 +21,7 @@ export const CarProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(carReducer, initialState);
 
-  const getCars = async () => {
+  const getCars = async (activeFilter) => {
     dispatch({ type: SET_LOADING });
 
     try {
@@ -25,6 +31,13 @@ export const CarProvider = ({ children }) => {
         type: GET_CARS,
         payload: res.data,
       });
+
+      if (activeFilter.length !== 0) {
+        dispatch({
+          type: FILTER_CARS,
+          payload: { cars: res.data, filter: activeFilter },
+        });
+      }
     } catch (error) {
       dispatch({
         type: CAR_ERROR,

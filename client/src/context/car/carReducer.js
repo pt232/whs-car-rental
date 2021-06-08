@@ -1,4 +1,11 @@
-import { CAR_ERROR, GET_CAR, GET_CARS, SET_LOADING } from "../types";
+import { test } from "../../utils/helpers";
+import {
+  CAR_ERROR,
+  FILTER_CARS,
+  GET_CAR,
+  GET_CARS,
+  SET_LOADING,
+} from "../types";
 
 export const carReducer = (state, action) => {
   switch (action.type) {
@@ -12,6 +19,13 @@ export const carReducer = (state, action) => {
         ...state,
         cars: action.payload,
         loading: false,
+      };
+    case FILTER_CARS:
+      return {
+        ...state,
+        cars: action.payload.cars.filter((car) => {
+          return test(car, action.payload.filter);
+        }),
       };
     case GET_CAR:
       return {

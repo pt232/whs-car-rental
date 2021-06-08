@@ -20,7 +20,7 @@ const FilterCardList = () => {
             filterCard={true}
             collapsible={true}
           >
-            <FilterList card={card} />
+            <FilterList checkboxes={card.checkboxes} />
           </Card>
         );
       })}

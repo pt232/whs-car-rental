@@ -3,10 +3,6 @@ const tables = require("../config/associations");
 const getCars = async (req, res) => {
   try {
     const cars = await tables.Car.findAll({
-      where: {
-        "$carBrand.name$": "Opel",
-        "$carType->carClass.name$": "Van",
-      },
       include: [
         {
           model: tables.CarBrand,
