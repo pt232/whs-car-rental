@@ -8,8 +8,8 @@ export const blobToImageSrc = (blob) => {
   return URL.createObjectURL(new Blob([binary]));
 };
 
-export const test = (car, filter) => {
-  // Who wants some 🍝-Code? 🤬
+export const handleFilters = (car, filter) => {
+  // Who wants some 🍝-Code?
   let carClass =
     (filter.includes("Kleinwagen") &&
       car["carType"]["carClass"]["name"] === "Kleinwagen") ||

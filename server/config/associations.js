@@ -4,6 +4,7 @@ const CarType = require("../models/carType.model");
 const CarClass = require("../models/carClass.mode");
 const Partner = require("../models/partner.model");
 const Station = require("../models/station.model");
+const Customer = require("../models/customer.model");
 
 const tables = {
   Car,
@@ -12,6 +13,7 @@ const tables = {
   CarClass,
   Partner,
   Station,
+  Customer,
 };
 
 tables.Car.hasOne(tables.CarBrand, {

@@ -6,3 +6,5 @@ export const CAR_ERROR = "CAR_ERROR";
 
 export const ADD_FILTER = "ADD_FILTER";
 export const REMOVE_FILTER = "REMOVE_FILTER";
+export const ADD_STATION_FILTER = "ADD_STATION_FILTER";
+export const REMOVE_STATION_FILTER = "REMOVE_STATION_FILTER";

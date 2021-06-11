@@ -25,7 +25,7 @@ const CarList = () => {
         >
           <LoadingSpinner />
         </div>
-      ) : (
+      ) : cars.length !== 0 ? (
         cars.map((car) => {
           return (
             <CarCard
@@ -36,6 +36,18 @@ const CarList = () => {
             />
           );
         })
+      ) : (
+        <p
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            margin: "6rem 0",
+            fontSize: "1.4rem",
+          }}
+        >
+          Es konnte leider kein Mietwagen mit den angegebenen Filtern gefunden
+          werden.
+        </p>
       )}
     </>
   );

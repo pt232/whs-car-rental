@@ -33,12 +33,24 @@ const Navbar = () => {
             </li>
           </ul>
           <div className="nav__login">
-            <Link to="/login" className="nav__link">
-              Anmelden
-            </Link>
-            <Link to="/login" className="btn btn--transparent">
-              Registrieren
-            </Link>
+            {!localStorage.getItem("token") ? (
+              <>
+                <Link to="/login" className="nav__link">
+                  Anmelden
+                </Link>
+                <Link to="/login" className="btn btn--transparent">
+                  Registrieren
+                </Link>
+              </>
+            ) : (
+              <Link
+                to="/login"
+                className="btn btn--transparent"
+                onClick={() => localStorage.removeItem("token")}
+              >
+                Abmelden
+              </Link>
+            )}
           </div>
         </nav>
       </div>

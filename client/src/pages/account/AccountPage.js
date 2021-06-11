@@ -1,4 +1,5 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import {
   faAddressCard,
   faSearchLocation,
@@ -10,6 +11,7 @@ import DeliverInformationList from "../../components/list/deliver/DeliverInforma
 import "./AccountPage.css";
 
 const AccountPage = () => {
+  const token = localStorage.getItem("token");
   const items = [
     {
       icon: faAddressCard,
@@ -30,21 +32,24 @@ const AccountPage = () => {
   ];
 
   return (
-    <section className="account">
-      <div className="container container--small">
-        <h1 className="account__title">Herzlich Willkommen, John Doe!</h1>
-        <div className="account__content">
-          <aside className="account__information">
-            <Card title="Nutzerinformationen">
-              <DeliverInformationList items={items} padding={0} />
-            </Card>
-          </aside>
-          <div className="account__dashboard">
-            <DashboardCard />
+    <>
+      {!token ? <Redirect to="/login" /> : null}
+      <section className="account">
+        <div className="container container--small">
+          <h1 className="account__title">Herzlich Willkommen, John Doe!</h1>
+          <div className="account__content">
+            <aside className="account__information">
+              <Card title="Nutzerinformationen">
+                <DeliverInformationList items={items} padding={0} />
+              </Card>
+            </aside>
+            <div className="account__dashboard">
+              <DashboardCard />
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

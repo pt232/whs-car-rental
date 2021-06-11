@@ -1,25 +1,110 @@
-import React from "react";
+import React, { useState } from "react";
+import { post } from "../../../utils/rest";
 import Card from "../../card/Card";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import MessageList from "../../list/message/MessageList";
 import "./RegistrationForm.css";
 
 const RegistrationForm = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setTelephone] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordRepeat, setPasswordRepeat] = useState("");
+  const [errors, setErrors] = useState([]);
+  const [success, setSuccess] = useState([]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const phonePattern = /^[0-9]+$/;
+    const mailPattern = /\S+@\S+\.\S+/;
+    let validation = true;
+
+    setErrors([]);
+
+    if (!phonePattern.test(phone)) {
+      setErrors((prevValue) => [
+        ...prevValue,
+        "Die angegebene Telefonnummer ist ungültig",
+      ]);
+      validation = false;
+    }
+
+    if (!mailPattern.test(email)) {
+      setErrors((prevValue) => [
+        ...prevValue,
+        "Die angegebene E-Mail ist ungültig",
+      ]);
+      validation = false;
+    }
+
+    if (password !== passwordRepeat) {
+      setErrors((prevValue) => [
+        ...prevValue,
+        "Die angegebenen Passwörter sind nicht gleich",
+      ]);
+      validation = false;
+    }
+
+    if (password.length <= 6 || passwordRepeat.length <= 6) {
+      setErrors((prevValue) => [
+        ...prevValue,
+        "Das Passwort sollte mehr als 6 Zeichen haben",
+      ]);
+      validation = false;
+    }
+
+    if (validation) {
+      const res = await post("/api/v1/register", {
+        firstName,
+        lastName,
+        phone,
+        email,
+        password,
+      });
+
+      if (res.success === true) {
+        setSuccess((prevValue) => [...prevValue, res.data]);
+      } else {
+        setErrors((prevValue) => [...prevValue, res.data]);
+      }
+    }
+  };
+
   return (
     <Card>
-      <form className="registration-form">
+      {errors.length > 0 ? <MessageList items={errors} type="error" /> : null}
+      {success.length > 0 ? (
+        <MessageList items={success} type="success" />
+      ) : null}
+      <form className="registration-form" onSubmit={(e) => handleSubmit(e)}>
         <div className="registration-form__row">
           <div className="registration-form__container">
             <label htmlFor="regName" className="label">
               Vorname <span className="registration-form__required">*</span>
             </label>
-            <input type="text" className="input" id="regName" required />
+            <input
+              type="text"
+              className="input"
+              id="regName"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              required
+            />
           </div>
           <div className="registration-form__container">
             <label htmlFor="regLastName" className="label">
               Nachname <span className="registration-form__required">*</span>
             </label>
-            <input type="text" className="input" id="regLastName" required />
+            <input
+              type="text"
+              className="input"
+              id="regLastName"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              required
+            />
           </div>
         </div>
         <div className="registration-form__row">
@@ -27,14 +112,27 @@ const RegistrationForm = () => {
             <label htmlFor="regTelephone" className="label">
               Telefonnummer
             </label>
-            <input type="telephone" className="input" id="regTelephone" />
+            <input
+              type="telephone"
+              className="input"
+              id="regTelephone"
+              value={phone}
+              onChange={(e) => setTelephone(e.target.value)}
+            />
           </div>
           <div className="registration-form__container">
             <label htmlFor="regMail" className="label">
               E-Mail-Adresse{" "}
               <span className="registration-form__required">*</span>
             </label>
-            <input type="email" className="input" id="regMail" required />
+            <input
+              type="email"
+              className="input"
+              id="regMail"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
           </div>
         </div>
         <div className="registration-form__row">
@@ -43,11 +141,14 @@ const RegistrationForm = () => {
               Passwort <span className="registration-form__required">*</span>
             </label>
             <div className="registration-form__input">
-              <FontAwesomeIcon
-                icon={faEyeSlash}
-                className="registration-form__icon"
+              <input
+                type="password"
+                className="input"
+                id="regPw"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
               />
-              <input type="password" className="input" id="regPw" required />
             </div>
           </div>
           <div className="registration-form__container">
@@ -56,25 +157,15 @@ const RegistrationForm = () => {
               <span className="registration-form__required">*</span>
             </label>
             <div className="registration-form__input">
-              <FontAwesomeIcon
-                icon={faEyeSlash}
-                className="registration-form__icon"
-              />
               <input
                 type="password"
                 className="input"
                 id="regPwRepeat"
+                value={passwordRepeat}
+                onChange={(e) => setPasswordRepeat(e.target.value)}
                 required
               />
             </div>
-          </div>
-        </div>
-        <div className="registration-form__container">
-          <div className="registration-form__option">
-            <input type="checkbox" id="regRemember" className="checkbox" />
-            <label htmlFor="regRemember" className="label label--small">
-              Ich akzeptiere die Datenschutzbestimmungen
-            </label>
           </div>
         </div>
         <button

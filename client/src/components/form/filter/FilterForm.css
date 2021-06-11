@@ -25,6 +25,7 @@
 }
 
 .filter-form__container--column {
+  width: 100%;
   margin: 1rem 0;
   padding: 1rem 1.4rem 1rem 1.2rem;
   border: 1px solid var(--color-gray-light);
@@ -51,12 +52,44 @@
 }
 
 .filter-form__input {
+  width: 100%;
   padding-left: 2rem;
   font-size: 1.6rem;
 }
 
+.filter-form__input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
 .filter-form__input--column {
   font-size: 1.4rem;
+}
+
+.filter-form__wrapper {
+  position: relative;
+}
+
+.filter-form__suggestions {
+  position: absolute;
+  bottom: 150%;
+  width: 100%;
+  margin-left: 2rem;
+  padding: 1rem;
+  background-color: #fff;
+  font-size: 1.2rem;
+  border: 1px solid var(--color-gray);
+  border-radius: var(--border-radius);
+  box-shadow: 0px 4px 3.5rem rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: color 350ms;
+}
+
+.filter-form__suggestions > li:not(:last-child) {
+  margin-bottom: 1rem;
+}
+
+.filter-form__suggestions > li:hover {
+  color: var(--color-blue);
 }
 
 .filter-form__btn {

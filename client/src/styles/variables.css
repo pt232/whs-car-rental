@@ -10,6 +10,9 @@
   --color-gray-lighter: rgba(229, 229, 229, 0.4);
   --color-background: #f9fafb;
   --color-error: #d8000c;
+  --color-error-light: #ffbaba;
+  --color-success: #4f8a10;
+  --color-success-light: #dff2bf;
 
   --font-main: "Poppins", sans-serif;
   --font-icon: "Font Awesome 5 Free";

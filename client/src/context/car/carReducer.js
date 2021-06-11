@@ -1,4 +1,4 @@
-import { test } from "../../utils/helpers";
+import { handleFilters } from "../../utils/helpers";
 import {
   CAR_ERROR,
   FILTER_CARS,
@@ -24,7 +24,7 @@ export const carReducer = (state, action) => {
       return {
         ...state,
         cars: action.payload.cars.filter((car) => {
-          return test(car, action.payload.filter);
+          return handleFilters(car, action.payload.filter);
         }),
       };
     case GET_CAR:

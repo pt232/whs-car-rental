@@ -37,6 +37,6 @@
   align-items: center;
 }
 
-.nav__login a:first-child {
+.nav__login a:not(:last-child) {
   margin-right: 3.5rem;
 }
