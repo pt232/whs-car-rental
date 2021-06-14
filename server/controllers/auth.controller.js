@@ -4,6 +4,7 @@ if (process.env.NODE_ENV !== "production") {
 
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const generator = require("generate-password");
 const tables = require("../config/associations");
 const transporter = require("../services/transporter");
 
@@ -67,7 +68,7 @@ const verifyUser = async (req, res) => {
     const user = jwt.verify(token, process.env.EMAIL_TOKEN_SECRET);
     console.log(user);
     await tables.Customer.update(
-      { confirmed: true },
+      { confirmed: true, blocked: false },
       {
         where: {
           id: user.id,
@@ -86,7 +87,7 @@ const verifyUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, attemptNumber } = req.body;
   const user = await tables.Customer.findOne({ where: { email } });
 
   if (!user) {
@@ -100,6 +101,22 @@ const loginUser = async (req, res) => {
     return res.status(401).json({
       success: false,
       data: "Bitte bestätigen Sie die Registrierung",
+    });
+  }
+
+  if (user.blocked) {
+    return res.status(401).json({
+      success: false,
+      data: "Ihr Konto wurde gesperrt. Klicken Sie auf 'Passwort vergessen', um ein neues Passwort zu generieren",
+    });
+  }
+
+  if (attemptNumber >= 3) {
+    tables.Customer.update({ blocked: true }, { where: { id: user.id } });
+
+    return res.status(401).json({
+      success: false,
+      data: "Ihr Konto wurde gesperrt. Klicken Sie auf 'Passwort vergessen', um ein neues Passwort zu generieren",
     });
   }
 
@@ -153,4 +170,65 @@ const changePassword = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, verifyUser, loginUser, changePassword };
+const forgotPassword = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const user = await tables.Customer.findOne({ where: { email: email } });
+
+    if (!user) {
+      return res.status(409).json({
+        success: false,
+        data: "Ungültige E-Mail",
+      });
+    }
+
+    if (!user.confirmed) {
+      return res.status(401).json({
+        success: false,
+        data: "Bitte bestätigen Sie die Registrierung",
+      });
+    }
+
+    const plainTextPassword = generator.generate({
+      length: 10,
+      numbers: true,
+    });
+
+    user.password = await bcrypt.hash(plainTextPassword, 10);
+    await user.save();
+
+    const emailToken = jwt.sign(
+      {
+        id: user.id,
+      },
+      process.env.EMAIL_TOKEN_SECRET
+    );
+    const confirmationUrl = `http://localhost:5000/api/v1/confirmation/${emailToken}`;
+
+    await transporter.sendMail({
+      to: user.email,
+      subject: "Konto reaktivieren",
+      html: `Ihr neues Passwort: ${plainTextPassword}<br>Bitte klicken Sie auf den folgenden Link, 
+      um Ihr Konto zu reaktivieren: <a href="${confirmationUrl}">${confirmationUrl}</a>`,
+    });
+
+    res.status(200).json({
+      success: true,
+      data: "Wir haben Ihnen eine Bestätigungsmail zugesendet",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error,
+    });
+  }
+};
+
+module.exports = {
+  registerUser,
+  verifyUser,
+  loginUser,
+  changePassword,
+  forgotPassword,
+};

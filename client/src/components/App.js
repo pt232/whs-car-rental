@@ -10,6 +10,7 @@ import LoginPage from "../pages/login/LoginPage";
 import AccountPage from "../pages/account/AccountPage";
 import { CarProvider } from "../context/car/CarState";
 import { FilterProvider } from "../context/filter/FilterState";
+import ForgotPasswordPage from "../pages/password/ForgotPasswordPage";
 
 const App = () => {
   return (
@@ -22,7 +23,11 @@ const App = () => {
             <Route path="/listing" exact component={ListingPage} />
             <Route path="/listing/extras" component={CarExtrasPage} />
             <Route path="/listing/checkout/:id" component={CarCheckoutPage} />
-            <Route path="/login" component={LoginPage} />
+            <Route path="/login" exact component={LoginPage} />
+            <Route
+              path="/login/forgot-password"
+              component={ForgotPasswordPage}
+            />
             <Route path="/account" component={AccountPage} />
           </Switch>
           <Footer />

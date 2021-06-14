@@ -13,9 +13,12 @@ const RegistrationForm = () => {
   const [passwordRepeat, setPasswordRepeat] = useState("");
   const [errors, setErrors] = useState([]);
   const [success, setSuccess] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (loading) return;
 
     const phonePattern = /^[0-9]+$/;
     const mailPattern = /\S+@\S+\.\S+/;
@@ -56,6 +59,8 @@ const RegistrationForm = () => {
     }
 
     if (validation) {
+      setLoading(true);
+
       const res = await post("/api/v1/register", {
         firstName,
         lastName,
@@ -69,6 +74,8 @@ const RegistrationForm = () => {
       } else {
         setErrors((prevValue) => [...prevValue, res.data]);
       }
+
+      setLoading(false);
     }
   };
 

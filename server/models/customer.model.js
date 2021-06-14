@@ -35,6 +35,10 @@ const Customer = db.define("customer", {
     type: DataTypes.BOOLEAN,
     defaultValue: false,
   },
+  blocked: {
+    type: DataTypes.BOOLEAN,
+    defaultValu: false,
+  },
 });
 
 module.exports = Customer;

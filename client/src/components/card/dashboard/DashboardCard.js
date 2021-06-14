@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Card from "../Card";
 import DashboardNavbar from "../../nav/dashboard/DashboardNavbar";
 import "./DashboardCard.css";
-import ChangePassword from "../../form/password/ChangePassword";
+import ChangePasswordForm from "../../form/password/ChangePasswordForm";
 
 const DashboardCard = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -24,7 +24,7 @@ const DashboardCard = () => {
         {activeTab === 2 ? (
           <>
             <h4 className="dashboard-content__title">Passwort neu vergeben</h4>{" "}
-            <ChangePassword />
+            <ChangePasswordForm />
           </>
         ) : null}
       </div>

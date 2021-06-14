@@ -28,8 +28,6 @@ const DeliverInformationCard = ({ partner }) => {
     },
   ];
 
-  console.log(partner);
-
   return (
     <Card>
       <div className="deliver-card">

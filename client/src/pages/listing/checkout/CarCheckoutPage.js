@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { CarContext } from "../../../context/car/CarState";
 import DeliverInformationCard from "../../../components/card/deliver/DeliverInformationCard";
 import OverviewCard from "../../../components/card/overview/OverviewCard";
-import CheckoutForm from "../../../components/form/checkout/CheckoutForm";
+import LoginForm from "../../../components/form/login/LoginForm";
 import "./CarCheckoutPage.css";
 import { LoadingSpinner } from "../../../components/spinner/LoadingSpinner";
 
@@ -38,7 +38,9 @@ const CarCheckoutPage = () => {
               <OverviewCard displayBtn={false} />
             </aside>
             <div className="checkout__form">
-              <CheckoutForm />
+              {!localStorage.getItem("token") ? (
+                <LoginForm title="Zum Fortfahren einloggen" />
+              ) : null}
             </div>
           </div>
         </div>

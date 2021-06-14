@@ -1,3 +1,9 @@
+.login-form__title {
+  margin-bottom: 4rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
 .login-form > *:not(:last-child) {
   margin-bottom: 3rem;
 }
@@ -7,22 +13,20 @@
   flex-direction: column;
 }
 
-.login-form__options {
+.login-form__wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.login-form__option {
-  display: flex;
-  align-items: center;
-}
-
-.login-form__forgot {
+.login-form__link {
+  font-size: 1.2rem;
+  text-decoration: underline;
+  cursor: pointer;
   transition: color 350ms;
 }
 
-.login-form__forgot:hover {
+.login-form__link:hover {
   color: var(--color-blue);
 }
 

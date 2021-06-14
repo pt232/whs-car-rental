@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { post } from "../../../utils/rest";
 import MessageList from "../../list/message/MessageList";
-import "./ChangePassword.css";
+import "./ChangePasswordForm.css";
 
-const ChangePassword = () => {
+const ChangePasswordForm = () => {
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordRepeat, setNewPasswordRepeat] = useState("");
   const [errors, setErrors] = useState([]);
   const [success, setSuccess] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (loading) return;
 
     let validation = true;
 
@@ -33,6 +36,8 @@ const ChangePassword = () => {
     }
 
     if (validation) {
+      setLoading(true);
+
       const res = await post("/api/v1/change-password", {
         token: localStorage.getItem("token"),
         newPassword,
@@ -46,6 +51,8 @@ const ChangePassword = () => {
       } else {
         setErrors((prevValue) => [...prevValue, res.data]);
       }
+
+      setLoading(false);
     }
   };
 
@@ -78,4 +85,4 @@ const ChangePassword = () => {
   );
 };
 
-export default ChangePassword;
+export default ChangePasswordForm;

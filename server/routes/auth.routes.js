@@ -4,6 +4,7 @@ const {
   verifyUser,
   loginUser,
   changePassword,
+  forgotPassword,
 } = require("../controllers/auth.controller");
 
 const router = express.Router();
@@ -15,5 +16,7 @@ router.get("/confirmation/:token", verifyUser);
 router.post("/login", loginUser);
 
 router.post("/change-password", changePassword);
+
+router.post("/forgot-password", forgotPassword);
 
 module.exports = router;
