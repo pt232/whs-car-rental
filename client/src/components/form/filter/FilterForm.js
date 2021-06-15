@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 import { get } from "../../../utils/rest";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarAlt } from "@fortawesome/free-regular-svg-icons";
 import { faMapMarkerAlt, faSearch } from "@fortawesome/free-solid-svg-icons";
 import "./FilterForm.css";
 
@@ -93,12 +92,11 @@ const FilterForm = ({ columnOrientation }) => {
           columnOrientation ? "filter-form__container--column" : ""
         }`}
       >
-        <FontAwesomeIcon className="filter-form__icon" icon={faCalendarAlt} />
         <input
           className={`filter-form__input ${
             columnOrientation ? "filter-form__input--column" : ""
           }`}
-          type="date"
+          type="datetime-local"
           placeholder="Abholdatum"
           value={startDate}
           onChange={(e) => setStartDate(e.target.value)}
@@ -111,12 +109,11 @@ const FilterForm = ({ columnOrientation }) => {
           columnOrientation ? "filter-form__container--column" : ""
         }`}
       >
-        <FontAwesomeIcon className="filter-form__icon" icon={faCalendarAlt} />
         <input
           className={`filter-form__input ${
             columnOrientation ? "filter-form__input--column" : ""
           }`}
-          type="date"
+          type="datetime-local"
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}
           placeholder="Rückgabedatum"
