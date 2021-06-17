@@ -1,17 +1,18 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { post } from "../../../utils/rest";
 import Card from "../../card/Card";
 import MessageList from "../../list/message/MessageList";
 import "./LoginForm.css";
 
-const LoginForm = ({ title }) => {
+const LoginForm = ({ title, handler }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const [loading, setLoading] = useState(false);
   const [attemptNumber, setAttemptNumber] = useState(0);
   const history = useHistory();
+  const location = useLocation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,7 +43,9 @@ const LoginForm = ({ title }) => {
 
       if (res.success === true) {
         localStorage.setItem("token", res.data);
-        history.push("/account");
+
+        if (location.pathname === "/login") history.push("/account");
+        else handler();
       } else {
         setAttemptNumber((prevValue) => prevValue + 1);
         setErrors((prevValues) => [...prevValues, res.data]);

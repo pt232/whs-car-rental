@@ -26,7 +26,7 @@ const RegistrationForm = () => {
 
     setErrors([]);
 
-    if (!phonePattern.test(phone)) {
+    if (phone && !phonePattern.test(phone)) {
       setErrors((prevValue) => [
         ...prevValue,
         "Die angegebene Telefonnummer ist ungültig",

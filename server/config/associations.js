@@ -5,6 +5,7 @@ const CarClass = require("../models/carClass.mode");
 const Partner = require("../models/partner.model");
 const Station = require("../models/station.model");
 const Customer = require("../models/customer.model");
+const Reservation = require("../models/reservation.model");
 
 const tables = {
   Car,
@@ -14,6 +15,7 @@ const tables = {
   Partner,
   Station,
   Customer,
+  Reservation,
 };
 
 tables.Car.hasOne(tables.CarBrand, {
@@ -35,10 +37,20 @@ tables.Car.hasOne(tables.Station, {
   foreignKey: "id",
   sourceKey: "stationId",
 });
+
 tables.CarType.hasOne(tables.CarClass, {
   as: "carClass",
   foreignKey: "id",
   sourceKey: "classId",
+});
+
+tables.Reservation.hasOne(tables.Car, {
+  foreignKey: "id",
+  sourceKey: "carId",
+});
+tables.Reservation.hasOne(tables.Customer, {
+  foreignKey: "id",
+  sourceKey: "customerId",
 });
 
 module.exports = tables;

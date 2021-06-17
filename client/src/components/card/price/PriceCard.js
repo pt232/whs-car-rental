@@ -7,9 +7,10 @@ import "./PriceCard.css";
 import { dateDifferenceInDays } from "../../../utils/helpers";
 
 const PriceCard = ({ id }) => {
-  const { timeFilter } = useContext(FilterContext);
+  const { locationFilter, timeFilter } = useContext(FilterContext);
   const { addErrorMessage, removeErrorMessage } = useContext(MessageContext);
   const [price, setPrice] = useState(0);
+  const [priceListTotal, setPriceListTotal] = useState(0);
   const history = useHistory();
   const days = dateDifferenceInDays(timeFilter.startDate, timeFilter.endDate);
 
@@ -18,7 +19,10 @@ const PriceCard = ({ id }) => {
 
     const fetchPrice = async () => {
       const res = await get(`/api/v1/car/price/${id}`);
-      if (isMounted) setPrice(res.price);
+      if (isMounted) {
+        setPrice(res.price);
+        setPriceListTotal(res.priceListTotal);
+      }
     };
 
     fetchPrice();
@@ -32,10 +36,12 @@ const PriceCard = ({ id }) => {
   const handleClick = () => {
     removeErrorMessage();
 
-    if (timeFilter.startDate && timeFilter.endDate)
+    if (timeFilter.startDate && timeFilter.endDate && locationFilter)
       history.push(`/listing/checkout/${id}`);
     else {
-      addErrorMessage("Es wurde kein Abhol- oder Rückgabedatum ausgewählt");
+      addErrorMessage(
+        "Es wurde keine Abholstation oder kein Abhol- oder Rückgabedatum ausgewählt"
+      );
     }
   };
 
@@ -46,7 +52,7 @@ const PriceCard = ({ id }) => {
           Insgesamt {days > 1 ? days + " Tage" : days + " Tag"}
         </h5>
         <h3 className="price-card__price">
-          <span>&#8364;</span> {price * days}
+          <span>&#8364;</span> {price * days + priceListTotal}
         </h3>
         <span className="price-card__day">&#8364;{price}/Tag</span>
       </div>

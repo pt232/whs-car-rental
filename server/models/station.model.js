@@ -12,6 +12,15 @@ const Station = db.define("rental_station", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  zipCode: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    field: "zip_code",
+  },
+  street: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
 });
 
 module.exports = Station;

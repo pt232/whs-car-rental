@@ -12,6 +12,11 @@
   font-weight: normal;
 }
 
+.overview-card__image {
+  width: 30rem;
+  object-fit: contain;
+}
+
 .overview-card__btn {
   padding: 1rem;
   font-size: 1.4rem !important;

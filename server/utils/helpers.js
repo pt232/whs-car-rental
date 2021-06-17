@@ -1,15 +1,15 @@
 const getPriceInformation = (car) => {
-  const basePrice = parseFloat(car["price"]);
+  const basePrice = parseInt(car["price"]);
   const featurePrice = [
-    { name: "navigation", price: 25 },
-    { name: "airConditioner", price: 15 },
-    { name: "winterTires", price: 40 },
-    { name: "insurance", price: 12 },
-    { name: "protection", price: 23 },
-    { name: "twoDrivers", price: 32 },
+    { fittingName: "Navigation", name: "navigation", price: 25 },
+    { fittingName: "Klimaanlage", name: "airConditioner", price: 15 },
+    { fittingName: "Winterreifen", name: "winterTires", price: 40 },
+    { fittingName: "Haftpflichtversicherung", name: "insurance", price: 12 },
+    { fittingName: "Glas- & Reifenschutz", name: "protection", price: 23 },
+    { fittingName: "Zweifahreroption", name: "twoDrivers", price: 32 },
   ];
   const carPriceList = [];
-  let finalPricePerDay;
+  let priceListTotal;
 
   featurePrice.forEach((feature) => {
     if (car["carType"][feature.name] === true) {
@@ -17,13 +17,14 @@ const getPriceInformation = (car) => {
     }
   });
 
-  finalPricePerDay = carPriceList.reduce((total, val) => {
+  priceListTotal = carPriceList.reduce((total, val) => {
     return total + val.price;
-  }, basePrice);
+  }, 0);
 
   return {
-    price: finalPricePerDay,
+    price: basePrice,
     priceList: carPriceList,
+    priceListTotal,
   };
 };
 

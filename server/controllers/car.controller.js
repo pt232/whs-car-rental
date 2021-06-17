@@ -101,12 +101,13 @@ const getCarPrice = async (req, res) => {
       ],
     });
 
-    const { price, priceList } = getPriceInformation(car);
+    const { price, priceList, priceListTotal } = getPriceInformation(car);
 
     res.status(200).json({
       success: true,
       price,
       priceList,
+      priceListTotal,
     });
   } catch (error) {
     res.status(500).json({

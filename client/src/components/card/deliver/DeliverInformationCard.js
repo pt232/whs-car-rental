@@ -1,30 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   faMapMarkerAlt,
   faCalendarAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import { FilterContext } from "../../../context/filter/FilterState";
 import Card from "../Card";
 import CarPartnerItem from "../car/item/CarPartnerItem";
 import "./DeliverInformationCard.css";
 import DeliverInformationList from "../../list/deliver/DeliverInformationList";
+import { formatDate } from "../../../utils/helpers";
 
-const DeliverInformationCard = ({ partner }) => {
+const DeliverInformationCard = ({ partner, station }) => {
+  const { locationFilter, timeFilter } = useContext(FilterContext);
   const items = [
     {
       icon: faMapMarkerAlt,
       title: "Abholstation",
-      content: "Neidenburger Str. 43, 45897 Gelsenkirchen",
+      content: station
+        ? station.zipCode + " " + locationFilter + ", " + station.street
+        : "",
     },
     {
       icon: faCalendarAlt,
       title: "Abholdatum",
-      content: "Dienstag, 01.04.2055, 15:30 Uhr",
+      content: formatDate(timeFilter.startDate),
     },
 
     {
       icon: faCalendarAlt,
       title: "Rückgabedatum",
-      content: "Montag, 01.04.2095, 12:30 Uhr",
+      content: formatDate(timeFilter.endDate),
     },
   ];
 

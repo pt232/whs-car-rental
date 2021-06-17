@@ -28,6 +28,22 @@ export const dateDifferenceInDays = (startDate, endDate) => {
   );
 };
 
+export const formatDate = (dateString) => {
+  const date = new Date(dateString);
+  return (
+    ("0" + date.getDate()).slice(-2) +
+    "." +
+    ("0" + (date.getMonth() + 1)).slice(-2) +
+    "." +
+    date.getFullYear() +
+    ", " +
+    ("0" + date.getHours()).slice(-2) +
+    ":" +
+    ("0" + date.getMinutes()).slice(-2) +
+    " Uhr"
+  );
+};
+
 export const handleFilter = (car, filter) => {
   let carClass =
     (filter.includes("Kleinwagen") &&

@@ -1,0 +1,16 @@
+.booking-card__title {
+  margin-bottom: 3.5rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.booking-card__text {
+  margin-bottom: 3.5rem;
+  color: var(--color-gray);
+  font-size: 1.4rem;
+}
+
+.booking-card__btn {
+  padding: 0.8rem 1.2rem;
+  font-size: 1.4rem !important;
+}
