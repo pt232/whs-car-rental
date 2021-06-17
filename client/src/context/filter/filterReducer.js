@@ -1,8 +1,8 @@
 import {
   ADD_FILTER,
-  ADD_STATION_FILTER,
+  ADD_LOCATION_FILTER,
+  ADD_TIME_FILTER,
   REMOVE_FILTER,
-  REMOVE_STATION_FILTER,
 } from "../types";
 
 export const filterReducer = (state, action) => {
@@ -19,15 +19,18 @@ export const filterReducer = (state, action) => {
           (item) => item !== action.payload
         ),
       };
-    case ADD_STATION_FILTER:
+    case ADD_LOCATION_FILTER:
       return {
         ...state,
-        stationFilter: [...state.stationFilter, action.payload],
+        locationFilter: action.payload,
       };
-    case REMOVE_STATION_FILTER:
+    case ADD_TIME_FILTER:
       return {
         ...state,
-        stationFilter: [],
+        timeFilter: {
+          startDate: action.payload.startDate,
+          endDate: action.payload.endDate,
+        },
       };
     default:
       return state;

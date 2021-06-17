@@ -14,6 +14,7 @@ export const CarContext = createContext();
 export const CarProvider = ({ children }) => {
   const initialState = {
     cars: [],
+    filteredCars: [],
     currentCar: {},
     loading: false,
     error: null,
@@ -21,7 +22,7 @@ export const CarProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(carReducer, initialState);
 
-  const getCars = async (activeFilter) => {
+  const getCars = async (activeFilter, locationFilter, timeFilter) => {
     dispatch({ type: SET_LOADING });
 
     try {
@@ -32,18 +33,33 @@ export const CarProvider = ({ children }) => {
         payload: res.data,
       });
 
-      if (activeFilter.length !== 0) {
-        dispatch({
-          type: FILTER_CARS,
-          payload: { cars: res.data, filter: activeFilter },
-        });
-      }
+      dispatch({
+        type: FILTER_CARS,
+        payload: {
+          cars: res.data,
+          filter: activeFilter,
+          locationFilter: locationFilter,
+          timeFilter: timeFilter,
+        },
+      });
     } catch (error) {
       dispatch({
         type: CAR_ERROR,
         payload: error,
       });
     }
+  };
+
+  const filterCars = (activeFilter, locationFilter, timeFilter) => {
+    dispatch({
+      type: FILTER_CARS,
+      payload: {
+        cars: state.cars,
+        filter: activeFilter,
+        locationFilter: locationFilter,
+        timeFilter: timeFilter,
+      },
+    });
   };
 
   const getCar = async (id) => {
@@ -68,10 +84,12 @@ export const CarProvider = ({ children }) => {
     <CarContext.Provider
       value={{
         cars: state.cars,
+        filteredCars: state.filteredCars,
         currentCar: state.currentCar,
         loading: state.loading,
         error: state.error,
         getCars,
+        filterCars,
         getCar,
       }}
     >

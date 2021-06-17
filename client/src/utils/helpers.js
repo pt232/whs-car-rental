@@ -8,8 +8,17 @@ export const blobToImageSrc = (blob) => {
   return URL.createObjectURL(new Blob([binary]));
 };
 
-export const handleFilters = (car, filter) => {
-  // Who wants some 🍝-Code?
+export const minDate = () => {
+  const tomorrow = new Date().getTime() + 24 * 60 * 60 * 1000;
+  const dateString = new Date(tomorrow).toISOString().split(".")[0];
+  const dateStringWithoutMinutes = dateString.substring(
+    0,
+    dateString.length - 3
+  );
+  return dateStringWithoutMinutes;
+};
+
+export const handleFilter = (car, filter) => {
   let carClass =
     (filter.includes("Kleinwagen") &&
       car["carType"]["carClass"]["name"] === "Kleinwagen") ||
@@ -123,4 +132,21 @@ export const handleFilters = (car, filter) => {
     protection &&
     freeKilometers
   );
+};
+
+export const handleLocationFilter = (car, locationFilter) => {
+  if (!locationFilter) return true;
+  return locationFilter === car["rentalStation"]["city"];
+};
+
+export const handleTimeFilter = (car, timeFilter) => {
+  const { startDate, endDate } = timeFilter;
+
+  if (!startDate || !endDate) return true;
+
+  const availableFrom =
+    Date.parse(startDate) >= Date.parse(car["availableFrom"]);
+  const availableTo = Date.parse(endDate) <= Date.parse(car["availableTo"]);
+
+  return availableFrom && availableTo;
 };

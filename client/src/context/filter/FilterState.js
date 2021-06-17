@@ -1,5 +1,10 @@
 import { createContext, useReducer } from "react";
-import { ADD_FILTER, REMOVE_FILTER } from "../types";
+import {
+  ADD_FILTER,
+  ADD_LOCATION_FILTER,
+  ADD_TIME_FILTER,
+  REMOVE_FILTER,
+} from "../types";
 import { filterReducer } from "./filterReducer";
 
 export const FilterContext = createContext();
@@ -41,6 +46,8 @@ export const FilterProvider = ({ children }) => {
       },
     ],
     activeFilter: [],
+    locationFilter: "",
+    timeFilter: {},
     error: null,
   };
 
@@ -60,13 +67,31 @@ export const FilterProvider = ({ children }) => {
     });
   };
 
+  const addLocationFilter = (filterToAdd) => {
+    dispatch({
+      type: ADD_LOCATION_FILTER,
+      payload: filterToAdd,
+    });
+  };
+
+  const addTimeFilter = (startDate, endDate) => {
+    dispatch({
+      type: ADD_TIME_FILTER,
+      payload: { startDate, endDate },
+    });
+  };
+
   return (
     <FilterContext.Provider
       value={{
         filterCards: state.filterCards,
         activeFilter: state.activeFilter,
+        locationFilter: state.locationFilter,
+        timeFilter: state.timeFilter,
         addActiveFilter,
         removeActiveFilter,
+        addLocationFilter,
+        addTimeFilter,
       }}
     >
       {children}

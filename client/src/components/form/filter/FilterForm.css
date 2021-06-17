@@ -1,7 +1,4 @@
 .filter-form {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 2rem 2rem 2rem 3.5rem;
   background-color: #fff;
   border-radius: var(--border-radius);
@@ -9,12 +6,22 @@
   transform: translateY(50%);
 }
 
+.filter-form__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .filter-form--column {
-  flex-direction: column;
+  max-width: 22.48rem;
   padding: 0;
   background-color: transparent;
   box-shadow: none;
   transform: none;
+}
+
+.filter-form__wrapper--column {
+  flex-direction: column;
 }
 
 .filter-form__container {

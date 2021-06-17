@@ -1,4 +1,8 @@
-import { handleFilters } from "../../utils/helpers";
+import {
+  handleFilter,
+  handleLocationFilter,
+  handleTimeFilter,
+} from "../../utils/helpers";
 import {
   CAR_ERROR,
   FILTER_CARS,
@@ -18,13 +22,18 @@ export const carReducer = (state, action) => {
       return {
         ...state,
         cars: action.payload,
+        filteredCars: action.payload,
         loading: false,
       };
     case FILTER_CARS:
       return {
         ...state,
-        cars: action.payload.cars.filter((car) => {
-          return handleFilters(car, action.payload.filter);
+        filteredCars: action.payload.cars.filter((car) => {
+          return (
+            handleTimeFilter(car, action.payload.timeFilter) &&
+            handleLocationFilter(car, action.payload.locationFilter) &&
+            handleFilter(car, action.payload.filter)
+          );
         }),
       };
     case GET_CAR:

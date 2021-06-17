@@ -1,9 +1,9 @@
 import React from "react";
 import "./MessageList.css";
 
-const MessageList = ({ items, type }) => {
+const MessageList = ({ items, type, margin }) => {
   return (
-    <ul className="message-list">
+    <ul style={{ marginBottom: margin }} className="message-list">
       {items.map((item, index) => {
         return (
           <li

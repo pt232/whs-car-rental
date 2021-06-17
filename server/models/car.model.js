@@ -1,4 +1,4 @@
-const { DataTypes } = require("sequelize");
+const { DataTypes, Sequelize } = require("sequelize");
 const db = require("../config/db");
 
 const Car = db.define("car", {
@@ -39,6 +39,18 @@ const Car = db.define("car", {
     type: DataTypes.INTEGER,
     allowNull: false,
     field: "station_id",
+  },
+  availableFrom: {
+    type: "TIMESTAMP",
+    defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+    allowNull: false,
+    field: "available_from",
+  },
+  availableTo: {
+    type: "TIMESTAMP",
+    defaultValue: "2038-01-01 00:00:00",
+    allowNull: false,
+    field: "available_to",
   },
 });
 

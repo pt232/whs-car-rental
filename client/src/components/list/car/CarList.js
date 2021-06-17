@@ -5,13 +5,19 @@ import CarCard from "../../card/car/CarCard";
 import { LoadingSpinner } from "../../spinner/LoadingSpinner";
 
 const CarList = () => {
-  const { cars, loading, getCars } = useContext(CarContext);
-  const { activeFilter } = useContext(FilterContext);
+  const { filteredCars, loading, getCars, filterCars } = useContext(CarContext);
+  const { activeFilter, locationFilter, timeFilter } =
+    useContext(FilterContext);
 
   useEffect(() => {
-    getCars(activeFilter);
+    getCars(activeFilter, locationFilter, timeFilter);
     // eslint-disable-next-line
-  }, [activeFilter]);
+  }, []);
+
+  useEffect(() => {
+    filterCars(activeFilter, locationFilter, timeFilter);
+    // eslint-disable-next-line
+  }, [activeFilter, locationFilter, timeFilter]);
 
   return (
     <>
@@ -25,8 +31,8 @@ const CarList = () => {
         >
           <LoadingSpinner />
         </div>
-      ) : cars.length !== 0 ? (
-        cars.map((car) => {
+      ) : filteredCars.length !== 0 ? (
+        filteredCars.map((car) => {
           return (
             <CarCard
               key={car.id}
