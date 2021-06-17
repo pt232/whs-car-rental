@@ -61,6 +61,17 @@ const FilterForm = ({ columnOrientation }) => {
       return;
     }
 
+    if (
+      Date.parse(endDate) >=
+      Date.parse(startDate) + 30 * 24 * 60 * 60 * 1000
+    ) {
+      setErrors((prevValue) => [
+        ...prevValue,
+        "Die Maximalmietdauer beträgt 30 Tage",
+      ]);
+      return;
+    }
+
     addTimeFilter(startDate, endDate);
     addLocationFilter(rentalStation);
 
@@ -139,7 +150,6 @@ const FilterForm = ({ columnOrientation }) => {
               columnOrientation ? "filter-form__input--column" : ""
             }`}
             type="datetime-local"
-            placeholder="Abholdatum"
             value={startDate}
             onChange={(e) => setStartDate(e.target.value)}
             min={minDate()}
@@ -159,7 +169,6 @@ const FilterForm = ({ columnOrientation }) => {
             type="datetime-local"
             value={endDate}
             onChange={(e) => setEndDate(e.target.value)}
-            placeholder="Rückgabedatum"
             min={minDate()}
             required
           />

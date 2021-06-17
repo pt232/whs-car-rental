@@ -18,6 +18,16 @@ export const minDate = () => {
   return dateStringWithoutMinutes;
 };
 
+export const dateDifferenceInDays = (startDate, endDate) => {
+  if (!startDate && !endDate) return 1;
+
+  return Math.floor(
+    (Date.parse(new Date(endDate).toISOString().split("T")[0]) -
+      Date.parse(new Date(startDate).toISOString().split("T")[0])) /
+      (24 * 60 * 60 * 1000)
+  );
+};
+
 export const handleFilter = (car, filter) => {
   let carClass =
     (filter.includes("Kleinwagen") &&
