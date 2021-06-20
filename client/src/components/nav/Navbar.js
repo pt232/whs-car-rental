@@ -43,13 +43,18 @@ const Navbar = () => {
                 </Link>
               </>
             ) : (
-              <Link
-                to="/login"
-                className="btn btn--transparent"
-                onClick={() => localStorage.removeItem("token")}
-              >
-                Abmelden
-              </Link>
+              <>
+                <Link to="/account" className="nav__link">
+                  Dashboard
+                </Link>
+                <Link
+                  to="/login"
+                  className="btn btn--transparent"
+                  onClick={() => localStorage.removeItem("token")}
+                >
+                  Abmelden
+                </Link>
+              </>
             )}
           </div>
         </nav>

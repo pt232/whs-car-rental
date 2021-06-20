@@ -25,6 +25,7 @@ const RegistrationForm = () => {
     let validation = true;
 
     setErrors([]);
+    setSuccess([]);
 
     if (phone && !phonePattern.test(phone)) {
       setErrors((prevValue) => [

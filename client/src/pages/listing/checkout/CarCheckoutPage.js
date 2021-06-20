@@ -63,9 +63,12 @@ const CarCheckoutPage = () => {
                     render={render}
                     handler={handler}
                   />
-                ) : (
-                  <BookingCard carId={currentCar.id} />
-                )}
+                ) : currentCar.partner ? (
+                  <BookingCard
+                    carId={currentCar.id}
+                    partnerId={currentCar.partner.id}
+                  />
+                ) : null}
               </div>
             </div>
           </div>

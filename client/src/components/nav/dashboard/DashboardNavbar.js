@@ -29,7 +29,12 @@ const DashboardNavbar = ({ handler, activeTab }) => {
         <FontAwesomeIcon icon={faThLarge} className="dashboard-nav__icon" />
         <span className="dashboard-nav__link">Dashboard</span>
       </li>
-      <li className="dashboard-nav__item">
+      <li
+        className={`dashboard-nav__item ${
+          activeTab === 1 ? "dashboard-nav__item--selected" : ""
+        }`}
+        onClick={() => handler(1)}
+      >
         <FontAwesomeIcon icon={faCheckCircle} className="dashboard-nav__icon" />
         <span className="dashboard-nav__link">Reservierungen</span>
       </li>

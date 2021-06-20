@@ -170,9 +170,5 @@ export const handleTimeFilter = (car, timeFilter) => {
 
   if (!startDate || !endDate) return true;
 
-  const availableFrom =
-    Date.parse(startDate) >= Date.parse(car["availableFrom"]);
-  const availableTo = Date.parse(endDate) <= Date.parse(car["availableTo"]);
-
-  return availableFrom && availableTo;
+  return car["available"];
 };

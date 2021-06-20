@@ -52,5 +52,9 @@ tables.Reservation.hasOne(tables.Customer, {
   foreignKey: "id",
   sourceKey: "customerId",
 });
+tables.Reservation.hasOne(tables.Partner, {
+  foreignKey: "id",
+  sourceKey: "partnerId",
+});
 
 module.exports = tables;

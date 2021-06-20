@@ -4,6 +4,7 @@ const { getPriceInformation } = require("../utils/helpers");
 const getCars = async (req, res) => {
   try {
     const cars = await tables.Car.findAll({
+      where: { available: true },
       include: [
         {
           model: tables.CarBrand,

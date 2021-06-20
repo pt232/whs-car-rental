@@ -4,6 +4,7 @@ import {
   ADD_LOCATION_FILTER,
   ADD_TIME_FILTER,
   REMOVE_FILTER,
+  REMOVE_LOCATION_FILTER,
 } from "../types";
 import { filterReducer } from "./filterReducer";
 
@@ -74,6 +75,12 @@ export const FilterProvider = ({ children }) => {
     });
   };
 
+  const removeLocationFilter = () => {
+    dispatch({
+      type: REMOVE_LOCATION_FILTER,
+    });
+  };
+
   const addTimeFilter = (startDate, endDate) => {
     dispatch({
       type: ADD_TIME_FILTER,
@@ -91,6 +98,7 @@ export const FilterProvider = ({ children }) => {
         addActiveFilter,
         removeActiveFilter,
         addLocationFilter,
+        removeLocationFilter,
         addTimeFilter,
       }}
     >

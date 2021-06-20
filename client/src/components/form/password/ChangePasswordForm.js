@@ -18,6 +18,7 @@ const ChangePasswordForm = () => {
     let validation = true;
 
     setErrors([]);
+    setSuccess([]);
 
     if (newPassword !== newPasswordRepeat) {
       setErrors((prevValue) => [

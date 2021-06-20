@@ -1,0 +1,48 @@
+.reservation-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 2rem 2rem 0;
+  border-bottom: 1px solid var(--color-gray);
+}
+
+.reservation-card__title {
+  font-size: 1.6rem;
+  font-weight: 500;
+}
+
+.reservation-card__subtitle {
+  font-size: 1.2rem;
+  font-weight: normal;
+  margin-bottom: 1.5rem;
+}
+
+.reservation-card__options {
+  display: flex;
+  align-items: center;
+}
+
+.reservation-card__btn {
+  padding: 0.8rem 1.2rem;
+  font-size: 1.4rem !important;
+}
+
+.reservation-card__btn--accept {
+  margin-right: 1.5rem;
+  background-color: var(--color-success-light);
+  color: var(--color-success);
+}
+
+.reservation-card__btn--accept:only-child {
+  margin-right: 0;
+}
+
+.reservation-card__btn--cancel {
+  background-color: var(--color-error-light);
+  color: var(--color-error);
+}
+
+.reservation-card__btn--download {
+  background-color: var(--color-gray-light);
+  color: var(--color-gray);
+}

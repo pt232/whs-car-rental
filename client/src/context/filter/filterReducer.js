@@ -3,6 +3,7 @@ import {
   ADD_LOCATION_FILTER,
   ADD_TIME_FILTER,
   REMOVE_FILTER,
+  REMOVE_LOCATION_FILTER,
 } from "../types";
 
 export const filterReducer = (state, action) => {
@@ -23,6 +24,12 @@ export const filterReducer = (state, action) => {
       return {
         ...state,
         locationFilter: action.payload,
+      };
+    case REMOVE_LOCATION_FILTER:
+      return {
+        ...state,
+        locationFilter: "",
+        timeFilter: { startDate: "", endDate: "" },
       };
     case ADD_TIME_FILTER:
       return {

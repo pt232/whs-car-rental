@@ -18,6 +18,11 @@ const Reservation = db.define("reservation", {
     allowNull: false,
     field: "customer_id",
   },
+  partnerId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    field: "partner_id",
+  },
   status: {
     type: DataTypes.ENUM,
     values: ["pending", "accepted", "canceled"],
@@ -27,6 +32,16 @@ const Reservation = db.define("reservation", {
     type: "TIMESTAMP",
     allowNull: true,
     field: "cancelable_to",
+  },
+  reservationFrom: {
+    type: "TIMESTAMP",
+    allowNull: true,
+    field: "reservation_from",
+  },
+  reservationTo: {
+    type: "TIMESTAMP",
+    allowNull: true,
+    field: "reservation_to",
   },
 });
 

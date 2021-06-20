@@ -1,13 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useHistory } from "react-router-dom";
+import { FilterContext } from "../../../context/filter/FilterState";
 import { post } from "../../../utils/rest";
 import Card from "../Card";
 import MessageList from "../../list/message/MessageList";
 import "./BookingCard.css";
 
-const BookingCard = ({ carId }) => {
+const BookingCard = ({ carId, partnerId }) => {
+  const { timeFilter, removeLocationFilter } = useContext(FilterContext);
   const [errors, setErrors] = useState([]);
   const [success, setSuccess] = useState([]);
   const [loading, setLoading] = useState(false);
+  const history = useHistory();
 
   const handleClick = async () => {
     setErrors([]);
@@ -21,6 +25,9 @@ const BookingCard = ({ carId }) => {
     const res = await post("/api/v1/reservation", {
       token,
       carId,
+      partnerId,
+      reservationFrom: timeFilter.startDate,
+      reservationTo: timeFilter.endDate,
     });
 
     if (res.success) {
@@ -48,12 +55,24 @@ const BookingCard = ({ carId }) => {
         Stunden stornieren. Danach betrachten wir die Reservierung als
         verbindlich.
       </p>
-      <button
-        className="booking-card__btn btn btn--filled"
-        onClick={() => handleClick()}
-      >
-        Reservierung abschließen
-      </button>
+      {success.length > 0 ? (
+        <button
+          className="booking-card__btn btn btn--transparent"
+          onClick={() => {
+            removeLocationFilter();
+            history.push("/account");
+          }}
+        >
+          Reservierung einsehen
+        </button>
+      ) : (
+        <button
+          className="booking-card__btn btn btn--filled"
+          onClick={() => handleClick()}
+        >
+          Reservierung abschließen
+        </button>
+      )}
     </Card>
   );
 };

@@ -40,17 +40,10 @@ const Car = db.define("car", {
     allowNull: false,
     field: "station_id",
   },
-  availableFrom: {
-    type: "TIMESTAMP",
-    defaultValue: Sequelize.literal("CURRENT_TIMESTAMP"),
+  available: {
+    type: DataTypes.BOOLEAN,
+    defaultValue: true,
     allowNull: false,
-    field: "available_from",
-  },
-  availableTo: {
-    type: "TIMESTAMP",
-    defaultValue: "2038-01-01 00:00:00",
-    allowNull: false,
-    field: "available_to",
   },
 });
 

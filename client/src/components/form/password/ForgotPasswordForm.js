@@ -19,6 +19,7 @@ const ForgotPasswordForm = ({ title }) => {
     let validation = true;
 
     setErrors([]);
+    setSuccess([]);
 
     if (!mailPattern.test(email)) {
       setErrors((prevValue) => [

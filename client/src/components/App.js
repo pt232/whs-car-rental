@@ -12,30 +12,36 @@ import { CarProvider } from "../context/car/CarState";
 import { FilterProvider } from "../context/filter/FilterState";
 import { MessageProvider } from "../context/message/MessageState";
 import ForgotPasswordPage from "../pages/password/ForgotPasswordPage";
+import { ReservationProvider } from "../context/reservation/ReservationState";
 
 const App = () => {
   return (
     <MessageProvider>
-      <FilterProvider>
-        <CarProvider>
-          <Router>
-            <Navbar />
-            <Switch>
-              <Route path="/" exact component={HomePage} />
-              <Route path="/listing" exact component={ListingPage} />
-              <Route path="/listing/extras" component={CarExtrasPage} />
-              <Route path="/listing/checkout/:id" component={CarCheckoutPage} />
-              <Route path="/login" exact component={LoginPage} />
-              <Route
-                path="/login/forgot-password"
-                component={ForgotPasswordPage}
-              />
-              <Route path="/account" component={AccountPage} />
-            </Switch>
-            <Footer />
-          </Router>
-        </CarProvider>
-      </FilterProvider>
+      <ReservationProvider>
+        <FilterProvider>
+          <CarProvider>
+            <Router>
+              <Navbar />
+              <Switch>
+                <Route path="/" exact component={HomePage} />
+                <Route path="/listing" exact component={ListingPage} />
+                <Route path="/listing/extras" component={CarExtrasPage} />
+                <Route
+                  path="/listing/checkout/:id"
+                  component={CarCheckoutPage}
+                />
+                <Route path="/login" exact component={LoginPage} />
+                <Route
+                  path="/login/forgot-password"
+                  component={ForgotPasswordPage}
+                />
+                <Route path="/account" component={AccountPage} />
+              </Switch>
+              <Footer />
+            </Router>
+          </CarProvider>
+        </FilterProvider>
+      </ReservationProvider>
     </MessageProvider>
   );
 };

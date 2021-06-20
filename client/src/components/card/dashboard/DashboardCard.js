@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Card from "../Card";
 import DashboardNavbar from "../../nav/dashboard/DashboardNavbar";
-import "./DashboardCard.css";
 import ChangePasswordForm from "../../form/password/ChangePasswordForm";
+import ReservationList from "../../list/reservation/ReservationList";
+import "./DashboardCard.css";
 
 const DashboardCard = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -20,6 +21,17 @@ const DashboardCard = () => {
             Durch dieses Dashboard bekommst du Einsicht in deine Account
             Details...
           </p>
+        ) : null}
+        {activeTab === 1 ? (
+          <>
+            <h4
+              style={{ marginBottom: 0 }}
+              className="dashboard-content__title"
+            >
+              Ihre Reservierungen im Überblick
+            </h4>
+            <ReservationList />
+          </>
         ) : null}
         {activeTab === 2 ? (
           <>
