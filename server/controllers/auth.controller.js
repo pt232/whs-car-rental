@@ -66,7 +66,7 @@ const verifyUser = async (req, res) => {
 
   try {
     const user = jwt.verify(token, process.env.EMAIL_TOKEN_SECRET);
-    console.log(user);
+
     await tables.Customer.update(
       { confirmed: true, blocked: false },
       {
@@ -91,6 +91,26 @@ const loginUser = async (req, res) => {
   const user = await tables.Customer.findOne({ where: { email } });
 
   if (!user) {
+    const partnerUser = await tables.Partner.findOne({ where: { email } });
+
+    if (partnerUser) {
+      if (await bcrypt.compare(password, partnerUser.password)) {
+        const token = jwt.sign(
+          {
+            id: partnerUser.id,
+            email: partnerUser.email,
+          },
+          process.env.ACCESS_TOKEN_SECRET
+        );
+
+        return res.status(200).json({
+          success: true,
+          data: token,
+          role: partnerUser.userRole,
+        });
+      }
+    }
+
     return res.status(409).json({
       success: false,
       data: "Ungültige E-Mail oder ungültiges Passwort",
@@ -132,6 +152,7 @@ const loginUser = async (req, res) => {
     res.status(200).json({
       success: true,
       data: token,
+      role: user.userRole,
     });
   } else {
     res.status(409).json({

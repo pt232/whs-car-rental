@@ -30,18 +30,22 @@ const Reservation = db.define("reservation", {
   },
   cancelableTo: {
     type: "TIMESTAMP",
-    allowNull: true,
+    allowNull: false,
     field: "cancelable_to",
   },
   reservationFrom: {
     type: "TIMESTAMP",
-    allowNull: true,
+    allowNull: false,
     field: "reservation_from",
   },
   reservationTo: {
     type: "TIMESTAMP",
-    allowNull: true,
+    allowNull: false,
     field: "reservation_to",
+  },
+  contract: {
+    type: DataTypes.BLOB("long"),
+    allowNull: true,
   },
 });
 

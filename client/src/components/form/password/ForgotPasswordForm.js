@@ -67,8 +67,12 @@ const ForgotPasswordForm = ({ title }) => {
             required
           />
         </div>
-        <button type="submit" className="forgot-form__btn btn btn--filled">
-          Passwort anfordern
+        <button
+          type="submit"
+          style={loading ? { backgroundColor: "#91b2f9" } : null}
+          className="forgot-form__btn btn btn--filled"
+        >
+          {loading ? "Passwort anfordern..." : "Passwort anfordern"}
         </button>
       </form>
     </Card>

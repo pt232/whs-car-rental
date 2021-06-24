@@ -68,9 +68,10 @@ const BookingCard = ({ carId, partnerId }) => {
       ) : (
         <button
           className="booking-card__btn btn btn--filled"
+          style={loading ? { backgroundColor: "#91b2f9" } : null}
           onClick={() => handleClick()}
         >
-          Reservierung abschließen
+          {loading ? "Reservieren..." : "Reservierung abschließen"}
         </button>
       )}
     </Card>

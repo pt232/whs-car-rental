@@ -74,12 +74,17 @@ const ChangePasswordForm = () => {
         <input
           type="password"
           placeholder="Neues Passwort wiederholen"
+          style={loading ? { backgroundColor: "#91b2f9" } : null}
           className="input password-form__input"
           value={newPasswordRepeat}
           onChange={(e) => setNewPasswordRepeat(e.target.value)}
         />
-        <button type="submit" className="password-form__btn btn btn--filled">
-          Passwort ändern
+        <button
+          type="submit"
+          style={loading ? { backgroundColor: "#91b2f9" } : null}
+          className="password-form__btn btn btn--filled"
+        >
+          {loading ? "Passwort ändern..." : "Passwort ändern"}
         </button>
       </form>
     </>

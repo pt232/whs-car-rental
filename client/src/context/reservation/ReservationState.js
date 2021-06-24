@@ -20,11 +20,14 @@ export const ReservationProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(reservationReducer, initialState);
 
-  const getReservations = async (token) => {
+  const getReservations = async (token, role) => {
     dispatch({ type: SET_LOADING });
 
     try {
-      const res = await get(`/api/v1/reservation/${token}`);
+      let res;
+
+      if (role === "customer") res = await get(`/api/v1/reservation/${token}`);
+      else res = await get(`/api/v1/reservation/partner/${token}`);
 
       dispatch({
         type: GET_RESERVATIONS,

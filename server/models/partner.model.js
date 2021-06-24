@@ -8,6 +8,12 @@ const Partner = db.define("partner", {
     autoIncrement: true,
     primaryKey: true,
   },
+  userRole: {
+    type: DataTypes.STRING,
+    defaultValue: "partner",
+    allowNull: false,
+    field: "user_role",
+  },
   name: {
     type: DataTypes.STRING,
     allowNull: false,

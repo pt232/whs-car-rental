@@ -2,22 +2,19 @@ import React, { useState } from "react";
 import {
   faThLarge,
   faCheckCircle,
-  faUserCircle,
-  faCog,
+  faFileSignature,
 } from "@fortawesome/free-solid-svg-icons";
 import Card from "../Card";
 import DashboardNavbar from "../../nav/dashboard/DashboardNavbar";
-import ChangePasswordForm from "../../form/password/ChangePasswordForm";
-import ReservationList from "../../list/reservation/ReservationList";
 import "./DashboardCard.css";
+import ReservationList from "../../list/reservation/ReservationList";
 
-const DashboardCard = () => {
+const PartnerDashboardCard = () => {
   const [activeTab, setActiveTab] = useState(0);
   const items = [
     { icon: faThLarge, name: "Dashboard" },
     { icon: faCheckCircle, name: "Reservierungen" },
-    { icon: faUserCircle, name: "Account" },
-    { icon: faCog, name: "Einstellungen" },
+    { icon: faFileSignature, name: "Rücknahmen" },
   ];
 
   const handleTabChange = (tabNumber) => {
@@ -44,15 +41,16 @@ const DashboardCard = () => {
               style={{ marginBottom: 0 }}
               className="dashboard-content__title"
             >
-              Ihre Reservierungen im Überblick
+              Die Reservierungen Ihrer Kunden im Überblick
             </h4>
             <ReservationList />
           </>
         ) : null}
         {activeTab === 2 ? (
           <>
-            <h4 className="dashboard-content__title">Passwort neu vergeben</h4>{" "}
-            <ChangePasswordForm />
+            <h4 className="dashboard-content__title">
+              Ihre Rücknahmeprotokolle im Überblick
+            </h4>
           </>
         ) : null}
       </div>
@@ -60,4 +58,4 @@ const DashboardCard = () => {
   );
 };
 
-export default DashboardCard;
+export default PartnerDashboardCard;

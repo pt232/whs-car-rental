@@ -43,6 +43,7 @@ const LoginForm = ({ title, handler }) => {
 
       if (res.success === true) {
         localStorage.setItem("token", res.data);
+        localStorage.setItem("role", res.role);
 
         if (location.pathname === "/login") history.push("/account");
         else handler();
@@ -96,8 +97,12 @@ const LoginForm = ({ title, handler }) => {
             </Link>
           </div>
         </div>
-        <button type="submit" className="login-form__btn btn btn--filled">
-          Anmelden
+        <button
+          type="submit"
+          style={loading ? { backgroundColor: "#91b2f9" } : null}
+          className="login-form__btn btn btn--filled"
+        >
+          {loading ? "Anmelden..." : "Anmelden"}
         </button>
       </form>
     </Card>

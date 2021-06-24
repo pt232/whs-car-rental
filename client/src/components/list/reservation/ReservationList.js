@@ -9,7 +9,10 @@ const ReservationList = () => {
     useContext(ReservationContext);
 
   useEffect(() => {
-    getReservations(localStorage.getItem("token"));
+    getReservations(
+      localStorage.getItem("token"),
+      localStorage.getItem("role")
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updateTrigger]);
 
@@ -27,15 +30,7 @@ const ReservationList = () => {
         </div>
       ) : reservations.length !== 0 ? (
         reservations.map((reservation, index) => {
-          return (
-            <ReservationCard
-              key={index}
-              id={reservation.id}
-              status={reservation.status}
-              car={reservation.car}
-              partner={reservation.partner}
-            />
-          );
+          return <ReservationCard key={index} reservation={reservation} />;
         })
       ) : (
         <p
@@ -44,7 +39,9 @@ const ReservationList = () => {
             fontSize: "1.4rem",
           }}
         >
-          Bis jetzt haben Sie noch keine Reservierungen getätigt.
+          {localStorage.getItem("role") === "customer"
+            ? "Bis jetzt haben Sie noch keine Reservierungen getätigt."
+            : "Bis jetzt wurde noch keine Reservierung bei Ihnen getätigt"}
         </p>
       )}
     </div>

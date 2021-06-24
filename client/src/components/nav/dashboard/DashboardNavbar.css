@@ -6,6 +6,7 @@
 
 .dashboard-nav__item {
   display: flex;
+  justify-content: center;
   align-items: center;
   flex: 1;
   padding: 1.5rem 2.5rem;

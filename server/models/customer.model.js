@@ -8,6 +8,12 @@ const Customer = db.define("customer", {
     autoIncrement: true,
     primaryKey: true,
   },
+  userRole: {
+    type: DataTypes.STRING,
+    defaultValue: "customer",
+    allowNull: false,
+    field: "user_role",
+  },
   firstName: {
     type: DataTypes.STRING,
     allowNull: false,

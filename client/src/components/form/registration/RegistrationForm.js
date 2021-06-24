@@ -178,9 +178,10 @@ const RegistrationForm = () => {
         </div>
         <button
           type="submit"
+          style={loading ? { backgroundColor: "#91b2f9" } : null}
           className="registration-form__btn btn btn--filled"
         >
-          Jetzt Registrieren!
+          {loading ? "Registrieren..." : "Jetzt Registrieren!"}
         </button>
       </form>
     </Card>
