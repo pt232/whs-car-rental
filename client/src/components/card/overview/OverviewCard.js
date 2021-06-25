@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { FilterContext } from "../../../context/filter/FilterState";
 import Card from "../Card";
-import PriceTable from "../../table/price/PriceTable";
+import PriceTable from "../../table/PriceTable";
 import "./OverviewCard.css";
 import TotalPriceItem from "./item/TotalPriceItem";
 import { blobToImageSrc, dateDifferenceInDays } from "../../../utils/helpers";

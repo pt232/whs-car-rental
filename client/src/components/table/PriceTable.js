@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { FilterContext } from "../../../context/filter/FilterState";
-import { dateDifferenceInDays } from "../../../utils/helpers";
+import { FilterContext } from "./../../context/filter/FilterState";
+import { dateDifferenceInDays } from "./../../utils/helpers";
 import "./PriceTable.css";
 
 const PriceTable = ({ title, price, list, listTotal }) => {

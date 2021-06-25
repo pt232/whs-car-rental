@@ -3,6 +3,12 @@ export const containerSizeAtLocation = (location) => {
   return pathname === "/" ? "container--large" : "container--small";
 };
 
+export const bufferToBlob = (buffer, type) => {
+  return new Blob([new Uint8Array(buffer.data, 0, buffer.data.length).buffer], {
+    type: type,
+  });
+};
+
 export const blobToImageSrc = (blob) => {
   let binary = new Uint8Array(blob);
   return URL.createObjectURL(new Blob([binary]));

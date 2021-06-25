@@ -1,4 +1,6 @@
 import React, { useState, useContext } from "react";
+import { saveAs } from "file-saver";
+import { bufferToBlob } from "../../../utils/helpers";
 import { ReservationContext } from "../../../context/reservation/ReservationState";
 import Modal from "../../modal/Modal";
 import ContractForm from "../../form/contract/ContractForm";
@@ -9,6 +11,11 @@ const ReservationCard = ({ reservation }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { updateReservationStatus } = useContext(ReservationContext);
   const { id, status, car, partner, contract } = reservation;
+
+  const downloadPdf = () => {
+    const pdfBlob = bufferToBlob(contract, "application/pdf");
+    saveAs(pdfBlob, "Mietvertrag.pdf");
+  };
 
   return (
     <>
@@ -68,6 +75,7 @@ const ReservationCard = ({ reservation }) => {
                     ? "btn--filled"
                     : "reservation-card__btn--download"
                 } btn`}
+                onClick={() => downloadPdf()}
               >
                 Mietvertrag herunterladen
               </button>
