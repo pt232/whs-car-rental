@@ -13,6 +13,7 @@ const ReservationCard = ({ reservation }) => {
   const { id, status, car, partner, contract } = reservation;
 
   const downloadPdf = () => {
+    if (contract == null) return;
     const pdfBlob = bufferToBlob(contract, "application/pdf");
     saveAs(pdfBlob, "Mietvertrag.pdf");
   };

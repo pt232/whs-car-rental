@@ -1,4 +1,14 @@
-const pdfTemplate = () => {
+const pdfTemplate = ({
+  name,
+  email,
+  dateFrom,
+  dateTo,
+  address,
+  fuel,
+  mileage,
+  annotation,
+  prices,
+}) => {
   return `<!DOCTYPE html>
   <html lang="en">
     <head>
@@ -137,7 +147,7 @@ const pdfTemplate = () => {
       <div class="contract">
         <header class="contract__header">
           <div class="contract__logo">auto<span>vermietung.</span></div>
-          <div>Datum: 25.06.2021</div>
+          <div>Datum: ${new Date().toLocaleDateString()}</div>
         </header>
         <main class="contract__body">
           <div class="information">
@@ -146,28 +156,32 @@ const pdfTemplate = () => {
               <div class="information__row">
                 <div class="information__item">
                   <h4 class="item__title">Name</h4>
-                  <div class="item__content">John Doe</div>
+                  <div class="item__content">${name}</div>
                 </div>
                 <div class="information__item">
                   <h4 class="item__title">Reservierung von</h4>
-                  <div class="item__content">25.06.2021 15:30</div>
+                  <div class="item__content">${
+                    dateFrom.split("T")[0] + " " + dateFrom.split("T")[1]
+                  }</div>
                 </div>
               </div>
               <div class="information__row">
                 <div class="information__item">
                   <h4 class="item__title">E-Mail-Adresse</h4>
-                  <div class="item__content">john.doe@gmail.com</div>
+                  <div class="item__content">${email}</div>
                 </div>
                 <div class="information__item">
                   <h4 class="item__title">Reservierung bis</h4>
-                  <div class="item__content">29.06.2021 18:30</div>
+                  <div class="item__content">${
+                    dateTo.split("T")[0] + " " + dateTo.split("T")[1]
+                  }</div>
                 </div>
               </div>
               <div class="information__row">
                 <div class="information__item">
                   <h4 class="item__title">Mietstation</h4>
                   <div class="item__content">
-                    10115 Berlin, Willy-Brandt-Platz
+                    ${address}
                   </div>
                 </div>
               </div>
@@ -184,31 +198,7 @@ const pdfTemplate = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td class="invoice-table__td">7 Tage</td>
-                  <td class="invoice-table__td">255 &euro;</td>
-                  <td class="invoice-table__td">1575 &euro;</td>
-                </tr>
-                <tr>
-                  <td class="invoice-table__td">7 Tage</td>
-                  <td class="invoice-table__td">255 &euro;</td>
-                  <td class="invoice-table__td">1575 &euro;</td>
-                </tr>
-                <tr>
-                  <td class="invoice-table__td">7 Tage</td>
-                  <td class="invoice-table__td">255 &euro;</td>
-                  <td class="invoice-table__td">1575 &euro;</td>
-                </tr>
-                <tr>
-                  <td class="invoice-table__td">7 Tage</td>
-                  <td class="invoice-table__td">255 &euro;</td>
-                  <td class="invoice-table__td">1575 &euro;</td>
-                </tr>
-                <tr>
-                  <td class="invoice-table__td">7 Tage</td>
-                  <td class="invoice-table__td">255 &euro;</td>
-                  <td class="invoice-table__td">1575 &euro;</td>
-                </tr>
+                ${tableRows(prices.price, prices.priceList, prices.days)}
               </tbody>
               <tfoot>
                 <tr>
@@ -219,7 +209,7 @@ const pdfTemplate = () => {
                     colspan="2"
                     class="invoice-table__td invoice-table__td--total"
                   >
-                    1575 &euro;
+                    ${prices.price * prices.days + prices.priceListTotal} &euro;
                   </td>
                 </tr>
               </tfoot>
@@ -231,17 +221,19 @@ const pdfTemplate = () => {
               <div class="information__row">
                 <div class="information__item">
                   <h4 class="item__title">Füllstand</h4>
-                  <div class="item__content">32 Liter</div>
+                  <div class="item__content">${fuel} Liter</div>
                 </div>
                 <div class="information__item">
                   <h4 class="item__title">Kilometerstand</h4>
-                  <div class="item__content">2355 km</div>
+                  <div class="item__content">${mileage} km</div>
                 </div>
               </div>
               <div class="information__row">
                 <div class="information__item">
                   <h4 class="item__title">Anmerkungen</h4>
-                  <div class="item__content">k.A.</div>
+                  <div class="item__content">${
+                    annotation.trim() === "" ? "k.A." : annotation
+                  }</div>
                 </div>
               </div>
             </div>
@@ -254,6 +246,26 @@ const pdfTemplate = () => {
     </body>
   </html>  
   `;
+};
+
+const tableRows = (price, priceList, days) => {
+  let rows = "";
+
+  rows += `<tr>
+  <td class="invoice-table__td">${days} Tage</td>
+  <td class="invoice-table__td">${price} &euro;</td>
+  <td class="invoice-table__td">${days * price} &euro;</td>
+  </tr>`;
+
+  priceList.forEach((item) => {
+    rows += `<tr>
+    <td class="invoice-table__td">1x ${item.fittingName}</td>
+    <td class="invoice-table__td">${item.price} &euro;</td>
+    <td class="invoice-table__td">${item.price} &euro;</td>
+    </tr>`;
+  });
+
+  return rows;
 };
 
 module.exports = pdfTemplate;

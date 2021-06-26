@@ -38,7 +38,8 @@ a {
 
 input,
 select,
-button {
+button,
+textarea {
   color: var(--color-black);
   font-family: inherit;
   border: none;

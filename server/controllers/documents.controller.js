@@ -3,9 +3,9 @@ const tables = require("../config/associations");
 const contractTemplate = require("../documents/contract");
 
 const createContract = async (req, res) => {
-  const { reservationId } = req.body;
+  const { reservationId, data } = req.body;
 
-  pdf.create(contractTemplate("", {})).toBuffer((err, buffer) => {
+  pdf.create(contractTemplate(data, {})).toBuffer((err, buffer) => {
     if (err) {
       return res
         .status(500)
