@@ -1,0 +1,55 @@
+.protocol-form > *:not(:last-child) {
+  margin-bottom: 3rem;
+}
+
+.protocol-form__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.protocol-form__container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 50%;
+}
+
+.protocol-form__container:not(:only-child):first-child {
+  margin-right: 3rem;
+}
+
+.protocol-form__required {
+  color: #ff0000;
+}
+
+.protocol-form__wrapper {
+  position: relative;
+}
+
+.protocol-form__input[type="datetime-local"] {
+  padding-left: 4rem;
+  padding-right: 0;
+}
+
+.protocol-form__input[type="datetime-local"]::-webkit-calendar-picker-indicator {
+  display: block;
+  position: absolute;
+  left: -2rem;
+  top: 50%;
+  filter: invert(0.4);
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.protocol-form__area {
+  min-height: 8rem;
+  max-height: 15rem;
+  resize: vertical;
+  outline: none;
+}
+
+.protocol-form__btn {
+  width: 100%;
+  padding: 0.8rem 1.2rem;
+  font-size: 1.4rem !important;
+}

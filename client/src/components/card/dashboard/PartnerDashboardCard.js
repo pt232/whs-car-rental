@@ -43,14 +43,18 @@ const PartnerDashboardCard = () => {
             >
               Die Reservierungen Ihrer Kunden im Überblick
             </h4>
-            <ReservationList />
+            <ReservationList back={false} />
           </>
         ) : null}
         {activeTab === 2 ? (
           <>
-            <h4 className="dashboard-content__title">
+            <h4
+              style={{ marginBottom: 0 }}
+              className="dashboard-content__title"
+            >
               Ihre Rücknahmeprotokolle im Überblick
             </h4>
+            <ReservationList back={true} />
           </>
         ) : null}
       </div>

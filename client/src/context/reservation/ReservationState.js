@@ -1,5 +1,6 @@
 import { createContext, useReducer } from "react";
 import {
+  GET_BACK_RESERVATIONS,
   GET_RESERVATIONS,
   RESERVATION_ERROR,
   RESERVATION_UPDATE,
@@ -41,6 +42,24 @@ export const ReservationProvider = ({ children }) => {
     }
   };
 
+  const getBackProtocolReservations = async (token) => {
+    dispatch({ type: SET_LOADING });
+
+    try {
+      const res = await get(`/api/v1/reservation/partner/protocol/${token}`);
+
+      dispatch({
+        type: GET_BACK_RESERVATIONS,
+        payload: res.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: RESERVATION_ERROR,
+        payload: error,
+      });
+    }
+  };
+
   const updateReservationStatus = async (id, newStatus, carId) => {
     dispatch({ type: SET_LOADING });
 
@@ -66,6 +85,7 @@ export const ReservationProvider = ({ children }) => {
         loading: state.loading,
         error: state.error,
         getReservations,
+        getBackProtocolReservations,
         updateReservationStatus,
       }}
     >

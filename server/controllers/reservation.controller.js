@@ -35,7 +35,7 @@ const getReservations = async (req, res) => {
     const reservations = await tables.Reservation.findAll({
       where: {
         [Op.and]: [{ customerId: user.id }],
-        [Op.or]: [{ status: 1 }, { status: 3 }],
+        [Op.or]: [{ status: 1 }, { status: 3 }, { status: 4 }],
       },
       include: [
         {
@@ -85,6 +85,59 @@ const getPartnerReservations = async (req, res) => {
     const reservations = await tables.Reservation.findAll({
       where: {
         [Op.and]: [{ partnerId: user.id }, { status: 3 }],
+      },
+      include: [
+        {
+          model: tables.Car,
+          attributes: { exclude: ["image"] },
+          include: [
+            {
+              model: tables.CarType,
+              as: "carType",
+              include: [{ model: tables.CarClass, as: "carClass" }],
+            },
+            {
+              model: tables.CarBrand,
+              as: "carBrand",
+            },
+            {
+              model: tables.Station,
+              as: "rentalStation",
+            },
+          ],
+        },
+        {
+          model: tables.Customer,
+          attributes: { exclude: ["password"] },
+        },
+        {
+          model: tables.Partner,
+        },
+      ],
+    });
+
+    res.status(200).json({
+      success: true,
+      count: reservations.length,
+      data: reservations,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error,
+    });
+  }
+};
+
+const getPartnerProtocolReservations = async (req, res) => {
+  const { token } = req.params;
+
+  try {
+    const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+
+    const reservations = await tables.Reservation.findAll({
+      where: {
+        [Op.and]: [{ partnerId: user.id }, { status: 4 }],
       },
       include: [
         {
@@ -197,6 +250,7 @@ const updateReservationStatus = async (req, res) => {
 module.exports = {
   getReservations,
   getPartnerReservations,
+  getPartnerProtocolReservations,
   addReservation,
   updateReservationStatus,
 };

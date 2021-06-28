@@ -1,5 +1,6 @@
 const pdfTemplate = ({
   name,
+  carName,
   email,
   dateFrom,
   dateTo,
@@ -91,17 +92,23 @@ const pdfTemplate = ({
           -webkit-box-align: center;
           -ms-flex-align: center;
           align-items: center;
-          width: 40rem;
+          width: 32rem;
           margin-bottom: 2rem;
+        }
+
+        .information__item {
+          max-width: 0rem;
         }
   
         .item__title {
           margin-bottom: 0.5rem;
           font-weight: normal;
+          white-space: nowrap;
         }
   
         .item__content {
           color: #7b7c7d;
+          white-space: nowrap;
         }
   
         .invoice-table {
@@ -180,9 +187,11 @@ const pdfTemplate = ({
               <div class="information__row">
                 <div class="information__item">
                   <h4 class="item__title">Mietstation</h4>
-                  <div class="item__content">
-                    ${address}
-                  </div>
+                  <div class="item__content">${address}</div>
+                </div>
+                <div class="information__item">
+                  <h4 class="item__title">Mietwagen</h4>
+                  <div class="item__content">${carName}</div>
                 </div>
               </div>
             </div>

@@ -4,6 +4,7 @@ const {
   addReservation,
   updateReservationStatus,
   getPartnerReservations,
+  getPartnerProtocolReservations,
 } = require("../controllers/reservation.controller");
 
 const router = express.Router();
@@ -11,6 +12,8 @@ const router = express.Router();
 router.get("/:token", getReservations);
 
 router.get("/partner/:token", getPartnerReservations);
+
+router.get("/partner/protocol/:token", getPartnerProtocolReservations);
 
 router.post("/", addReservation);
 

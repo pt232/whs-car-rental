@@ -1,11 +1,10 @@
 import React, { useState, useContext } from "react";
 import { ReservationContext } from "../../../context/reservation/ReservationState";
-import { get, post } from "../../../utils/rest";
-import { dateDifferenceInDays } from "../../../utils/helpers";
+import { post } from "../../../utils/rest";
 import MessageList from "../../list/message/MessageList";
-import "./ContractForm.css";
+import "./ProtocolForm.css";
 
-const ContractForm = ({ reservation }) => {
+const ProtocolForm = ({ reservation }) => {
   const { id, car, customer, reservationFrom, reservationTo } = reservation;
   const { getReservations } = useContext(ReservationContext);
   const [name, setName] = useState(
@@ -53,11 +52,9 @@ const ContractForm = ({ reservation }) => {
     if (validation) {
       setLoading(true);
 
-      const resPrice = await get(`/api/v1/car/price/${car.id}`);
-      const days = dateDifferenceInDays(dateFrom, dateTo);
-
-      const res = await post("/api/v1/document/contract", {
+      const res = await post("/api/v1/document/protocol", {
         reservationId: id,
+        carId: car.id,
         data: {
           name,
           carName,
@@ -68,12 +65,6 @@ const ContractForm = ({ reservation }) => {
           fuel,
           mileage,
           annotation,
-          prices: {
-            price: resPrice.price,
-            priceList: resPrice.priceList,
-            priceListTotal: resPrice.priceListTotal,
-            days,
-          },
         },
       });
 
@@ -85,81 +76,79 @@ const ContractForm = ({ reservation }) => {
       } else {
         setErrors((prevValue) => [...prevValue, res.data]);
       }
-
-      setLoading(false);
     }
   };
 
   return (
     <>
       {errors.length > 0 ? <MessageList items={errors} type="error" /> : null}
-      <form className="contract-form" onSubmit={(e) => handleSubmit(e)}>
-        <div className="contract-form__row">
-          <div className="contract-form__container">
-            <label htmlFor="conName" className="label">
-              Name <span className="contract-form__required">*</span>
+      <form className="protocol-form" onSubmit={(e) => handleSubmit(e)}>
+        <div className="protocol-form__row">
+          <div className="protocol-form__container">
+            <label htmlFor="prName" className="label">
+              Name <span className="protocol-form__required">*</span>
             </label>
             <input
               type="text"
               className="input"
-              id="conName"
+              id="prName"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
             />
           </div>
-          <div className="contract-form__container">
-            <label htmlFor="conLastName" className="label">
-              Mietwagen <span className="contract-form__required">*</span>
+          <div className="protocol-form__container">
+            <label htmlFor="prLastName" className="label">
+              Mietwagen <span className="protocol-form__required">*</span>
             </label>
             <input
               type="text"
               className="input"
-              id="conLastName"
+              id="prLastName"
               value={carName}
               onChange={(e) => setCarName(e.target.value)}
               required
             />
           </div>
         </div>
-        <div className="contract-form__row">
-          <div className="contract-form__container">
-            <label htmlFor="conMail" className="label">
-              E-Mail-Adresse <span className="contract-form__required">*</span>
+        <div className="protocol-form__row">
+          <div className="protocol-form__container">
+            <label htmlFor="prMail" className="label">
+              E-Mail-Adresse <span className="protocol-form__required">*</span>
             </label>
             <input
               type="email"
               className="input"
-              id="conMail"
+              id="prMail"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
             />
           </div>
-          <div className="contract-form__container">
-            <label htmlFor="conAddress" className="label">
-              Adresse <span className="contract-form__required">*</span>
+          <div className="protocol-form__container">
+            <label htmlFor="prAddress" className="label">
+              Adresse <span className="protocol-form__required">*</span>
             </label>
             <input
               type="text"
               className="input"
-              id="conAddress"
+              id="prAddress"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               required
             />
           </div>
         </div>
-        <div className="contract-form__row">
-          <div className="contract-form__container">
+        <div className="protocol-form__row">
+          <div className="protocol-form__container">
             <label htmlFor="conResFrom" className="label">
               Reservierung von{" "}
-              <span className="contract-form__required">*</span>
+              <span className="protocol-form__required">*</span>
             </label>
-            <div className="contract-form__wrapper">
+            <div className="protocol-form__wrapper">
               <input
                 type="datetime-local"
-                className="contract-form__input input"
+                className="protocol-form__input input"
                 id="conResFrom"
                 value={dateFrom}
                 onChange={(e) => setDateFrom(e.target.value)}
@@ -167,15 +156,15 @@ const ContractForm = ({ reservation }) => {
               />
             </div>
           </div>
-          <div className="contract-form__container">
+          <div className="protocol-form__container">
             <label htmlFor="conResTo" className="label">
               Reservierung bis{" "}
-              <span className="contract-form__required">*</span>
+              <span className="protocol-form__required">*</span>
             </label>
-            <div className="contract-form__wrapper">
+            <div className="protocol-form__wrapper">
               <input
                 type="datetime-local"
-                className="contract-form__input input"
+                className="protocol-form__input input"
                 id="conResTo"
                 value={dateTo}
                 onChange={(e) => setDateTo(e.target.value)}
@@ -184,11 +173,11 @@ const ContractForm = ({ reservation }) => {
             </div>
           </div>
         </div>
-        <div className="contract-form__row">
-          <div className="contract-form__container">
+        <div className="protocol-form__row">
+          <div className="protocol-form__container">
             <label htmlFor="conFuel" className="label">
               Füllstand in Liter{" "}
-              <span className="contract-form__required">*</span>
+              <span className="protocol-form__required">*</span>
             </label>
             <input
               type="number"
@@ -200,9 +189,10 @@ const ContractForm = ({ reservation }) => {
               required
             />
           </div>
-          <div className="contract-form__container">
+          <div className="protocol-form__container">
             <label htmlFor="conMileage" className="label">
-              Kilometerstand <span className="contract-form__required">*</span>
+              Gefahrene Kilometer{" "}
+              <span className="protocol-form__required">*</span>
             </label>
             <input
               type="number"
@@ -215,14 +205,14 @@ const ContractForm = ({ reservation }) => {
             />
           </div>
         </div>
-        <div className="contract-form__row">
-          <div className="contract-form__container">
-            <label htmlFor="conAnnotation" className="label">
+        <div className="protocol-form__row">
+          <div className="protocol-form__container">
+            <label htmlFor="prAnnotation" className="label">
               Anmerkungen
             </label>
             <textarea
-              className="contract-form__area input"
-              id="conAnnotation"
+              className="protocol-form__area input"
+              id="prAnnotation"
               value={annotation}
               onChange={(e) => setAnnotation(e.target.value)}
             />
@@ -231,13 +221,15 @@ const ContractForm = ({ reservation }) => {
         <button
           type="submit"
           style={loading ? { backgroundColor: "#91b2f9" } : null}
-          className="contract-form__btn btn btn--filled"
+          className="protocol-form__btn btn btn--filled"
         >
-          {loading ? "Mietvertrag erstellen..." : "Mietvertrag erstellen"}
+          {loading
+            ? "Rücknahmeprotokoll erstellen..."
+            : "Rücknahmeprotokoll erstellen"}
         </button>
       </form>
     </>
   );
 };
 
-export default ContractForm;
+export default ProtocolForm;

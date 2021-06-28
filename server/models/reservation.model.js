@@ -25,7 +25,7 @@ const Reservation = db.define("reservation", {
   },
   status: {
     type: DataTypes.ENUM,
-    values: ["pending", "accepted", "canceled"],
+    values: ["pending", "accepted", "canceled", "back"],
     allowNull: false,
   },
   cancelableTo: {
@@ -46,6 +46,11 @@ const Reservation = db.define("reservation", {
   contract: {
     type: DataTypes.BLOB("long"),
     allowNull: true,
+  },
+  backProtocol: {
+    type: DataTypes.BLOB("long"),
+    allowNull: true,
+    field: "back_protocol",
   },
 });
 

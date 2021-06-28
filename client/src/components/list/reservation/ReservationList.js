@@ -4,15 +4,24 @@ import { LoadingSpinner } from "../../spinner/LoadingSpinner";
 import ReservationCard from "../../card/reservation/ReservationCard";
 import "./ReservationList.css";
 
-const ReservationList = () => {
-  const { reservations, updateTrigger, loading, getReservations } =
-    useContext(ReservationContext);
+const ReservationList = ({ back }) => {
+  const {
+    reservations,
+    updateTrigger,
+    loading,
+    getReservations,
+    getBackProtocolReservations,
+  } = useContext(ReservationContext);
 
   useEffect(() => {
-    getReservations(
-      localStorage.getItem("token"),
-      localStorage.getItem("role")
-    );
+    if (!back) {
+      getReservations(
+        localStorage.getItem("token"),
+        localStorage.getItem("role")
+      );
+    } else {
+      getBackProtocolReservations(localStorage.getItem("token"));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updateTrigger]);
 
@@ -30,7 +39,13 @@ const ReservationList = () => {
         </div>
       ) : reservations.length !== 0 ? (
         reservations.map((reservation, index) => {
-          return <ReservationCard key={index} reservation={reservation} />;
+          return (
+            <ReservationCard
+              key={index}
+              reservation={reservation}
+              back={back}
+            />
+          );
         })
       ) : (
         <p
@@ -41,7 +56,9 @@ const ReservationList = () => {
         >
           {localStorage.getItem("role") === "customer"
             ? "Bis jetzt haben Sie noch keine Reservierungen getätigt."
-            : "Bis jetzt wurde noch keine Reservierung bei Ihnen getätigt"}
+            : back
+            ? "Bis jetzt wurden noch keine Rücknahmeprotokolle von Ihnen erstellt"
+            : "Bis jetzt wurden noch keine Reservierung bei Ihnen getätigt"}
         </p>
       )}
     </div>

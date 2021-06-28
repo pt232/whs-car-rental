@@ -1,4 +1,5 @@
 import {
+  GET_BACK_RESERVATIONS,
   GET_RESERVATIONS,
   RESERVATION_ERROR,
   RESERVATION_UPDATE,
@@ -8,6 +9,12 @@ import {
 export const reservationReducer = (state, action) => {
   switch (action.type) {
     case GET_RESERVATIONS:
+      return {
+        ...state,
+        reservations: action.payload,
+        loading: false,
+      };
+    case GET_BACK_RESERVATIONS:
       return {
         ...state,
         reservations: action.payload,
