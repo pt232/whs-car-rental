@@ -26,6 +26,7 @@ const registerUser = async (req, res) => {
       phone,
       email,
       password,
+      kilometersDriven: 0,
     });
 
     const emailToken = jwt.sign(
@@ -54,6 +55,7 @@ const registerUser = async (req, res) => {
         data: "Ein Benutzer mit dieser E-Mail existiert bereits",
       });
     }
+
     res.status(500).json({
       success: false,
       error,
@@ -99,6 +101,7 @@ const loginUser = async (req, res) => {
           {
             id: partnerUser.id,
             email: partnerUser.email,
+            role: partnerUser.userRole,
           },
           process.env.ACCESS_TOKEN_SECRET
         );
@@ -145,6 +148,7 @@ const loginUser = async (req, res) => {
       {
         id: user.id,
         email: user.email,
+        role: user.userRole,
       },
       process.env.ACCESS_TOKEN_SECRET
     );
@@ -246,7 +250,41 @@ const forgotPassword = async (req, res) => {
   }
 };
 
+const getUsername = async (req, res) => {
+  const { token } = req.params;
+
+  try {
+    const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+
+    if (user.role === "customer") {
+      const customer = await tables.Customer.findOne({
+        where: { id: user.id },
+      });
+
+      return res.status(200).json({
+        success: true,
+        data: customer.firstName + " " + customer.lastName,
+      });
+    } else if (user.role === "partner") {
+      const partner = await tables.Partner.findOne({
+        where: { id: user.id },
+      });
+
+      return res.status(200).json({
+        success: true,
+        data: partner.name,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      data: "Etwas ist schiefgelaufen 😧",
+    });
+  }
+};
+
 module.exports = {
+  getUsername,
   registerUser,
   verifyUser,
   loginUser,

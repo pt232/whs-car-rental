@@ -42,7 +42,7 @@
   left: 50%;
   width: 103%;
   height: 1rem;
-  background-color: var(--color-blue-light);
+  background-color: var(--color-blue-lighter);
   transform: translateX(-50%);
   z-index: -1;
 }

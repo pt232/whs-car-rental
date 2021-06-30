@@ -207,7 +207,13 @@ const pdfTemplate = ({
                 </tr>
               </thead>
               <tbody>
-                ${tableRows(prices.price, prices.priceList, prices.days)}
+                ${tableRows(
+                  prices.price,
+                  prices.priceList,
+                  prices.priceListTotal,
+                  prices.days,
+                  prices.discount
+                )}
               </tbody>
               <tfoot>
                 <tr>
@@ -218,7 +224,12 @@ const pdfTemplate = ({
                     colspan="2"
                     class="invoice-table__td invoice-table__td--total"
                   >
-                    ${prices.price * prices.days + prices.priceListTotal} &euro;
+                    ${
+                      prices.discount
+                        ? (prices.price * prices.days + prices.priceListTotal) *
+                          (1 - prices.discount.discount)
+                        : prices.price * prices.days + prices.priceListTotal
+                    } &euro;
                   </td>
                 </tr>
               </tfoot>
@@ -257,7 +268,7 @@ const pdfTemplate = ({
   `;
 };
 
-const tableRows = (price, priceList, days) => {
+const tableRows = (price, priceList, priceListTotal, days, discount) => {
   let rows = "";
 
   rows += `<tr>
@@ -273,6 +284,16 @@ const tableRows = (price, priceList, days) => {
     <td class="invoice-table__td">${item.price} &euro;</td>
     </tr>`;
   });
+
+  if (discount) {
+    rows += `<tr>
+    <td class="invoice-table__td">${discount.fittingName}</td>
+    <td class="invoice-table__td">${discount.discountText}</td>
+    <td class="invoice-table__td">-${
+      (days * price + priceListTotal) * discount.discount
+    } &euro;</td>
+    </tr>`;
+  }
 
   return rows;
 };

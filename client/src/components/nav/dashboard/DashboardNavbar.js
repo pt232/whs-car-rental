@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { UserContext } from "../../../context/user/UserState";
 import "./DashboardNavbar.css";
 
 const DashboardNavbar = ({ items, handler, activeTab }) => {
+  const { removeCredentials } = useContext(UserContext);
   const history = useHistory();
 
   const logout = () => {
-    localStorage.removeItem("token");
+    removeCredentials();
     history.push("/login");
   };
 

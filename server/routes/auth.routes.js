@@ -5,13 +5,16 @@ const {
   loginUser,
   changePassword,
   forgotPassword,
+  getUsername,
 } = require("../controllers/auth.controller");
 
 const router = express.Router();
 
-router.post("/register", registerUser);
+router.get("/name/:token", getUsername);
 
 router.get("/confirmation/:token", verifyUser);
+
+router.post("/register", registerUser);
 
 router.post("/login", loginUser);
 

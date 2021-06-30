@@ -1,5 +1,6 @@
 import React, { useEffect, useContext } from "react";
 import { ReservationContext } from "../../../context/reservation/ReservationState";
+import { UserContext } from "../../../context/user/UserState";
 import { LoadingSpinner } from "../../spinner/LoadingSpinner";
 import ReservationCard from "../../card/reservation/ReservationCard";
 import "./ReservationList.css";
@@ -12,15 +13,13 @@ const ReservationList = ({ back }) => {
     getReservations,
     getBackProtocolReservations,
   } = useContext(ReservationContext);
+  const { token, role } = useContext(UserContext);
 
   useEffect(() => {
     if (!back) {
-      getReservations(
-        localStorage.getItem("token"),
-        localStorage.getItem("role")
-      );
+      getReservations(token, role);
     } else {
-      getBackProtocolReservations(localStorage.getItem("token"));
+      getBackProtocolReservations(token);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [updateTrigger]);
@@ -54,7 +53,7 @@ const ReservationList = ({ back }) => {
             fontSize: "1.4rem",
           }}
         >
-          {localStorage.getItem("role") === "customer"
+          {role === "customer"
             ? "Bis jetzt haben Sie noch keine Reservierungen getätigt."
             : back
             ? "Bis jetzt wurden noch keine Rücknahmeprotokolle von Ihnen erstellt"

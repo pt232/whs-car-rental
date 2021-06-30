@@ -39,7 +39,7 @@ const createContract = async (req, res) => {
 };
 
 const createProtocol = async (req, res) => {
-  const { reservationId, carId, data } = req.body;
+  const { reservationId, carId, customerId, data } = req.body;
 
   pdf.create(protocolTemplate(data, {})).toBuffer((err, buffer) => {
     if (err) {
@@ -50,6 +50,11 @@ const createProtocol = async (req, res) => {
 
     const updateProtocol = async () => {
       try {
+        await tables.Customer.increment("kilometers_driven", {
+          by: data.mileage,
+          where: { id: customerId },
+        });
+
         await tables.Car.update({ available: true }, { where: { id: carId } });
 
         await tables.Reservation.update(

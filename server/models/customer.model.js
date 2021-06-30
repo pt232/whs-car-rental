@@ -37,6 +37,11 @@ const Customer = db.define("customer", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  kilometersDriven: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    field: "kilometers_driven",
+  },
   confirmed: {
     type: DataTypes.BOOLEAN,
     defaultValue: false,

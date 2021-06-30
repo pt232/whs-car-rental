@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Redirect } from "react-router-dom";
 import {
   faAddressCard,
@@ -6,15 +6,20 @@ import {
   faChartLine,
   faCalendarAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import { UserContext } from "../../context/user/UserState";
 import Card from "../../components/card/Card";
 import DashboardCard from "../../components/card/dashboard/DashboardCard";
 import DeliverInformationList from "../../components/list/deliver/DeliverInformationList";
 import "./AccountPage.css";
 import PartnerDashboardCard from "../../components/card/dashboard/PartnerDashboardCard";
+import { get } from "../../utils/rest";
 
 const AccountPage = () => {
+  const { token, role } = useContext(UserContext);
+
   const [userRole, setUserRole] = useState("");
-  const token = localStorage.getItem("token");
+  const [name, setName] = useState("");
+
   const customerItems = [
     {
       icon: faAddressCard,
@@ -54,13 +59,25 @@ const AccountPage = () => {
   ];
 
   useEffect(() => {
-    const userRole = localStorage.getItem("role");
-
-    if (userRole === "customer") {
+    if (role === "customer") {
       setUserRole("customer");
     } else {
       setUserRole("partner");
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await get(`/api/v1/name/${token}`);
+
+      if (res.success === true) {
+        setName(res.data);
+      }
+    };
+
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -68,7 +85,7 @@ const AccountPage = () => {
       {!token ? <Redirect to="/login" /> : null}
       <section className="account">
         <div className="container container--small">
-          <h1 className="account__title">Herzlich Willkommen, John Doe!</h1>
+          <h1 className="account__title">Herzlich Willkommen, {name}!</h1>
           {userRole === "customer" ? (
             <div className="account__content">
               <aside className="account__information">

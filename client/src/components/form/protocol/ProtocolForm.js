@@ -1,12 +1,16 @@
 import React, { useState, useContext } from "react";
 import { ReservationContext } from "../../../context/reservation/ReservationState";
+import { UserContext } from "../../../context/user/UserState";
 import { post } from "../../../utils/rest";
 import MessageList from "../../list/message/MessageList";
 import "./ProtocolForm.css";
 
 const ProtocolForm = ({ reservation }) => {
   const { id, car, customer, reservationFrom, reservationTo } = reservation;
+
   const { getReservations } = useContext(ReservationContext);
+  const { token, role } = useContext(UserContext);
+
   const [name, setName] = useState(
     customer.firstName + " " + customer.lastName
   );
@@ -55,6 +59,7 @@ const ProtocolForm = ({ reservation }) => {
       const res = await post("/api/v1/document/protocol", {
         reservationId: id,
         carId: car.id,
+        customerId: customer.id,
         data: {
           name,
           carName,
@@ -69,12 +74,11 @@ const ProtocolForm = ({ reservation }) => {
       });
 
       if (res.success === true) {
-        getReservations(
-          localStorage.getItem("token"),
-          localStorage.getItem("role")
-        );
+        getReservations(token, role);
+        setLoading(false);
       } else {
         setErrors((prevValue) => [...prevValue, res.data]);
+        setLoading(false);
       }
     }
   };

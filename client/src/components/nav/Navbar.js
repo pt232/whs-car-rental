@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../../context/user/UserState";
 import { Link, useLocation } from "react-router-dom";
 import { containerSizeAtLocation } from "../../utils/helpers";
 import "./Navbar.css";
 
 const Navbar = () => {
+  const { token, removeCredentials } = useContext(UserContext);
   const location = useLocation();
 
   return (
@@ -33,7 +35,7 @@ const Navbar = () => {
             </li>
           </ul>
           <div className="nav__login">
-            {!localStorage.getItem("token") ? (
+            {!token ? (
               <>
                 <Link to="/login" className="nav__link">
                   Anmelden
@@ -50,7 +52,7 @@ const Navbar = () => {
                 <Link
                   to="/login"
                   className="btn btn--transparent"
-                  onClick={() => localStorage.removeItem("token")}
+                  onClick={() => removeCredentials()}
                 >
                   Abmelden
                 </Link>

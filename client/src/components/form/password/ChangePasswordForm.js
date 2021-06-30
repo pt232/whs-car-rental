@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { UserContext } from "../../../context/user/UserState";
 import { post } from "../../../utils/rest";
 import MessageList from "../../list/message/MessageList";
 import "./ChangePasswordForm.css";
 
 const ChangePasswordForm = () => {
+  const { token } = useContext(UserContext);
   const [newPassword, setNewPassword] = useState("");
   const [newPasswordRepeat, setNewPasswordRepeat] = useState("");
   const [errors, setErrors] = useState([]);
@@ -40,7 +42,7 @@ const ChangePasswordForm = () => {
       setLoading(true);
 
       const res = await post("/api/v1/change-password", {
-        token: localStorage.getItem("token"),
+        token: token,
         newPassword,
       });
 

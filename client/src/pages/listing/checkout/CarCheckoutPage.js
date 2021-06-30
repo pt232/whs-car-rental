@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Redirect, useParams } from "react-router-dom";
 import { CarContext } from "../../../context/car/CarState";
 import { FilterContext } from "../../../context/filter/FilterState";
+import { UserContext } from "../../../context/user/UserState";
 import DeliverInformationCard from "../../../components/card/deliver/DeliverInformationCard";
 import OverviewCard from "../../../components/card/overview/OverviewCard";
 import LoginForm from "../../../components/form/login/LoginForm";
@@ -12,6 +13,8 @@ import BookingCard from "../../../components/card/booking/BookingCard";
 const CarCheckoutPage = () => {
   const { getCar, currentCar, loading } = useContext(CarContext);
   const { locationFilter, timeFilter } = useContext(FilterContext);
+  const { token } = useContext(UserContext);
+
   const [render, setRender] = useState("");
   const { id } = useParams();
 
@@ -57,7 +60,7 @@ const CarCheckoutPage = () => {
                 ) : null}
               </aside>
               <div className="checkout__form">
-                {!localStorage.getItem("token") ? (
+                {!token ? (
                   <LoginForm
                     title="Zum Fortfahren einloggen"
                     render={render}
@@ -65,6 +68,7 @@ const CarCheckoutPage = () => {
                   />
                 ) : currentCar.partner ? (
                   <BookingCard
+                    id={id}
                     carId={currentCar.id}
                     partnerId={currentCar.partner.id}
                   />

@@ -1,3 +1,8 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
+
+const jwt = require("jsonwebtoken");
 const tables = require("../config/associations");
 const { getPriceInformation } = require("../utils/helpers");
 
@@ -78,7 +83,8 @@ const getCar = async (req, res) => {
 
 const getCarPrice = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id, token } = req.params;
+    const { customerId } = req.query;
 
     const car = await tables.Car.findOne({
       where: { id: id },
@@ -102,13 +108,35 @@ const getCarPrice = async (req, res) => {
       ],
     });
 
-    const { price, priceList, priceListTotal } = getPriceInformation(car);
+    let customer;
+
+    try {
+      const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+
+      if (user.role === "customer") {
+        customer = await tables.Customer.findOne({
+          where: { id: user.id },
+        });
+      } else if (user.role === "partner") {
+        if (customerId) {
+          customer = await tables.Customer.findOne({
+            where: { id: customerId },
+          });
+        }
+      }
+    } catch (error) {}
+
+    const { price, priceList, priceListTotal, discount } = getPriceInformation(
+      car,
+      customer
+    );
 
     res.status(200).json({
       success: true,
       price,
       priceList,
       priceListTotal,
+      discount,
     });
   } catch (error) {
     res.status(500).json({

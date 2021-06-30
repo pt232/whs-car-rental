@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { ReservationContext } from "../../../context/reservation/ReservationState";
+import { UserContext } from "../../../context/user/UserState";
 import { get, post } from "../../../utils/rest";
 import { dateDifferenceInDays } from "../../../utils/helpers";
 import MessageList from "../../list/message/MessageList";
@@ -7,7 +8,10 @@ import "./ContractForm.css";
 
 const ContractForm = ({ reservation }) => {
   const { id, car, customer, reservationFrom, reservationTo } = reservation;
+
   const { getReservations } = useContext(ReservationContext);
+  const { token, role } = useContext(UserContext);
+
   const [name, setName] = useState(
     customer.firstName + " " + customer.lastName
   );
@@ -53,7 +57,9 @@ const ContractForm = ({ reservation }) => {
     if (validation) {
       setLoading(true);
 
-      const resPrice = await get(`/api/v1/car/price/${car.id}`);
+      const resPrice = await get(
+        `/api/v1/car/price/${car.id}/${token}/?customerId=${customer.id}`
+      );
       const days = dateDifferenceInDays(dateFrom, dateTo);
 
       const res = await post("/api/v1/document/contract", {
@@ -72,21 +78,19 @@ const ContractForm = ({ reservation }) => {
             price: resPrice.price,
             priceList: resPrice.priceList,
             priceListTotal: resPrice.priceListTotal,
+            discount: resPrice.discount,
             days,
           },
         },
       });
 
       if (res.success === true) {
-        getReservations(
-          localStorage.getItem("token"),
-          localStorage.getItem("role")
-        );
+        getReservations(token, role);
+        setLoading(false);
       } else {
         setErrors((prevValue) => [...prevValue, res.data]);
+        setLoading(false);
       }
-
-      setLoading(false);
     }
   };
 

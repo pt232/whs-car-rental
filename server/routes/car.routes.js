@@ -11,6 +11,6 @@ router.get("/", getCars);
 
 router.get("/:id", getCar);
 
-router.get("/price/:id", getCarPrice);
+router.get("/price/:id/:token", getCarPrice);
 
 module.exports = router;

@@ -3,12 +3,15 @@ import { useHistory } from "react-router-dom";
 import { get } from "../../../utils/rest";
 import { FilterContext } from "../../../context/filter/FilterState";
 import { MessageContext } from "../../../context/message/MessageState";
+import { UserContext } from "../../../context/user/UserState";
 import "./PriceCard.css";
 import { dateDifferenceInDays } from "../../../utils/helpers";
 
 const PriceCard = ({ id }) => {
   const { locationFilter, timeFilter } = useContext(FilterContext);
   const { addErrorMessage, removeErrorMessage } = useContext(MessageContext);
+  const { token } = useContext(UserContext);
+
   const [price, setPrice] = useState(0);
   const [priceListTotal, setPriceListTotal] = useState(0);
   const history = useHistory();
@@ -18,7 +21,7 @@ const PriceCard = ({ id }) => {
     let isMounted = true;
 
     const fetchPrice = async () => {
-      const res = await get(`/api/v1/car/price/${id}`);
+      const res = await get(`/api/v1/car/price/${id}/${token}`);
       if (isMounted) {
         setPrice(res.price);
         setPriceListTotal(res.priceListTotal);

@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
+import { UserContext } from "../../../context/user/UserState";
 import { post } from "../../../utils/rest";
 import Card from "../../card/Card";
 import MessageList from "../../list/message/MessageList";
 import "./LoginForm.css";
 
 const LoginForm = ({ title, handler }) => {
+  const { addCredentials } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
@@ -42,17 +44,16 @@ const LoginForm = ({ title, handler }) => {
       });
 
       if (res.success === true) {
-        localStorage.setItem("token", res.data);
-        localStorage.setItem("role", res.role);
+        setLoading(false);
+        addCredentials(res.data, res.role);
 
         if (location.pathname === "/login") history.push("/account");
         else handler();
       } else {
+        setLoading(false);
         setAttemptNumber((prevValue) => prevValue + 1);
         setErrors((prevValues) => [...prevValues, res.data]);
       }
-
-      setLoading(false);
     }
   };
 

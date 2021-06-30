@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { saveAs } from "file-saver";
 import { bufferToBlob } from "../../../utils/helpers";
 import { ReservationContext } from "../../../context/reservation/ReservationState";
+import { UserContext } from "../../../context/user/UserState";
 import Modal from "../../modal/Modal";
 import ContractForm from "../../form/contract/ContractForm";
 import CarPartnerItem from "../car/item/CarPartnerItem";
@@ -9,6 +10,8 @@ import "./ReservationCard.css";
 import ProtocolForm from "../../form/protocol/ProtocolForm";
 
 const ReservationCard = ({ reservation, back }) => {
+  const { role } = useContext(UserContext);
+
   const [isOpen, setIsOpen] = useState(false);
   const [formType, setFormType] = useState("");
   const { updateReservationStatus } = useContext(ReservationContext);
@@ -34,18 +37,12 @@ const ReservationCard = ({ reservation, back }) => {
             {car.carType.carClass.name}
           </h3>
           <h3
-            style={
-              localStorage.getItem("role") === "partner"
-                ? { marginBottom: "0" }
-                : {}
-            }
+            style={role === "partner" ? { marginBottom: "0" } : {}}
             className="reservation-card__subtitle"
           >
             {car.carBrand.name + " " + car.name}
           </h3>
-          {localStorage.getItem("role") === "customer" ? (
-            <CarPartnerItem partner={partner} />
-          ) : null}
+          {role === "customer" ? <CarPartnerItem partner={partner} /> : null}
         </div>
         <div className="reservation-card__options">
           {status === "pending" ? (
@@ -69,7 +66,7 @@ const ReservationCard = ({ reservation, back }) => {
             </>
           ) : (
             <>
-              {localStorage.getItem("role") === "partner" && !back ? (
+              {role === "partner" && !back ? (
                 <>
                   {contract != null ? (
                     <button
@@ -95,7 +92,7 @@ const ReservationCard = ({ reservation, back }) => {
                   </button>
                 </>
               ) : null}
-              {localStorage.getItem("role") === "customer" || back ? (
+              {role === "customer" || back ? (
                 <button
                   style={{ marginRight: "1.5rem" }}
                   className={`reservation-card__btn ${

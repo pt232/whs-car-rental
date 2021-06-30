@@ -9,10 +9,10 @@ const MessageList = ({ items, type, margin }) => {
           <li
             key={index}
             className={`message-list__item ${
-              type === "error"
-                ? "message-list__item--error"
-                : "message-list__item--success"
-            }`}
+              type === "error" ? "message-list__item--error" : ""
+            }
+              ${type === "success" ? "message-list__item--success" : ""}
+              ${type === "info" ? "message-list__item--info" : ""}`}
           >
             {item}
           </li>

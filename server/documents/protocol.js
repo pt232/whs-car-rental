@@ -170,7 +170,7 @@ const pdfTemplate = ({
                     <div class="item__content">${fuel} Liter</div>
                   </div>
                   <div class="information__item">
-                    <h4 class="item__title">Kilometerstand</h4>
+                    <h4 class="item__title">Gefahrene Kilometer</h4>
                     <div class="item__content">${mileage} km</div>
                   </div>
                 </div>

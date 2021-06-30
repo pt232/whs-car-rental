@@ -3,6 +3,7 @@
 :root {
   --color-blue: #3067da;
   --color-blue-light: #eaf0fb;
+  --color-blue-lighter: rgba(48, 103, 218, 0.3);
   --color-blue-dark: #1144ad;
   --color-black: #111516;
   --color-gray: #7b7c7d;
@@ -13,6 +14,8 @@
   --color-error-light: #ffbaba;
   --color-success: #4f8a10;
   --color-success-light: #dff2bf;
+  --color-info: #31708f;
+  --color-info-light: #d9edf7;
 
   --font-main: "Poppins", sans-serif;
   --font-icon: "Font Awesome 5 Free";
