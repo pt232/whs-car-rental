@@ -56,8 +56,8 @@ export const minAgeToDate = (minAge) => {
   return date.toISOString().split("T")[0];
 };
 
-export const calculateAge = (birthday) => {
-  const ageDifMs = Date.now() - birthday.getTime();
+export const calculateYears = (date) => {
+  const ageDifMs = Date.now() - date.getTime();
   const ageDate = new Date(ageDifMs);
   return Math.abs(ageDate.getUTCFullYear() - 1970);
 };

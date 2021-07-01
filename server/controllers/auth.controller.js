@@ -1,6 +1,4 @@
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
-}
+require("dotenv").config();
 
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -80,7 +78,6 @@ const verifyUser = async (req, res) => {
 
     res.redirect("http://localhost:3000/login");
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       success: false,
       error,
@@ -187,7 +184,6 @@ const changePassword = async (req, res) => {
       data: "Ihr Passwort wurde erfolgreich zurückgesetzt",
     });
   } catch (error) {
-    console.log(error);
     res.status(500).json({
       success: false,
       data: "Etwas ist schiefgelaufen 😞",

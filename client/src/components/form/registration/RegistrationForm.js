@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { minAgeToDate } from "../../../utils/helpers";
+import { calculateYears, minAgeToDate } from "../../../utils/helpers";
 import { post } from "../../../utils/rest";
 import Card from "../../card/Card";
 import MessageList from "../../list/message/MessageList";
@@ -47,6 +47,14 @@ const RegistrationForm = () => {
       setErrors((prevValue) => [
         ...prevValue,
         "Das Passwort sollte mehr als 6 Zeichen haben",
+      ]);
+      validation = false;
+    }
+
+    if (calculateYears(new Date(birthday)) < 25) {
+      setErrors((prevValue) => [
+        ...prevValue,
+        "Das Mindestalter für die Registrierung liegt bei 25 Jahren",
       ]);
       validation = false;
     }

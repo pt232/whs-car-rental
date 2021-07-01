@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { calculateAge, minAgeToDate } from "../../../utils/helpers";
+import { calculateYears, minAgeToDate } from "../../../utils/helpers";
 import "./TwoDriversForm.css";
 
 const TwoDriversForm = ({
   addDriver,
   removeDriver,
   addError,
+  addAgeError,
   removeErrors,
 }) => {
   const [birthday, setBirthday] = useState("");
@@ -22,7 +23,11 @@ const TwoDriversForm = ({
         setBirthday("");
         setDriverAdded(false);
       } else {
-        if (calculateAge(new Date(birthday)) < 25) {
+        if (calculateYears(new Date(birthday)) < 18) {
+          return addAgeError();
+        }
+
+        if (calculateYears(new Date(birthday)) < 25) {
           addDriver();
         }
         setDriverAdded(true);

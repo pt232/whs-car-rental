@@ -37,8 +37,6 @@ const CarCheckoutPage = () => {
       );
 
       if (isMounted) {
-        console.log(res);
-
         if (res.discount) {
           setInfo([
             "Sie haben bereits über unsere Autovermietung 10.000 km zurückgelegt. Dafür gibt es von uns einen Rabatt von 10%! 🎉",

@@ -79,6 +79,12 @@ const BookingCard = ({
               "Bitte tragen Sie ein Geburtsdatum ein",
             ])
           }
+          addAgeError={() =>
+            setErrors((prevValue) => [
+              ...prevValue,
+              "Der Zweitfahrer muss mindestens 18 Jahre alt sein",
+            ])
+          }
           removeErrors={() => setErrors([])}
         />
       ) : null}

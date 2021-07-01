@@ -1,6 +1,4 @@
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
-}
+require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
@@ -27,7 +25,5 @@ app.use("/api/v1/reservation", reservationRouter);
 app.use("/api/v1/document", documentRouter);
 
 app.listen(PORT, () => {
-  console.log(
-    `Server running in ${process.env.NODE_ENV} mode on port ${PORT} 🚀`
-  );
+  console.log(`Server running on port ${PORT} 🚀`);
 });

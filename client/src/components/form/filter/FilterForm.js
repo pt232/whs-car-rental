@@ -72,6 +72,17 @@ const FilterForm = ({ columnOrientation }) => {
       return;
     }
 
+    if (
+      Date.now() > Date.parse(startDate) ||
+      Date.now() > Date.parse(endDate)
+    ) {
+      setErrors((prevValue) => [
+        ...prevValue,
+        "Das Datum kann nicht in der Vergangenheit liegen",
+      ]);
+      return;
+    }
+
     addTimeFilter(startDate, endDate);
     addLocationFilter(rentalStation);
 
