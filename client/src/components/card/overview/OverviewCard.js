@@ -1,43 +1,15 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { FilterContext } from "../../../context/filter/FilterState";
-import { UserContext } from "../../../context/user/UserState";
 import Card from "../Card";
 import PriceTable from "../../table/PriceTable";
 import "./OverviewCard.css";
 import TotalPriceItem from "./item/TotalPriceItem";
 import { blobToImageSrc, dateDifferenceInDays } from "../../../utils/helpers";
-import { get } from "../../../utils/rest";
 
-const OverviewCard = ({ id, car }) => {
+const OverviewCard = ({ car, priceInformation }) => {
   const { timeFilter } = useContext(FilterContext);
-  const { token } = useContext(UserContext);
-
-  const [price, setPrice] = useState(0);
-  const [priceList, setPriceList] = useState([]);
-  const [priceListTotal, setPriceListTotal] = useState(0);
-  const [discount, setDiscount] = useState(0);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    const fetchPrice = async () => {
-      const res = await get(`/api/v1/car/price/${id}/${token}`);
-
-      if (isMounted) {
-        setPrice(res.price);
-        setPriceList(res.priceList);
-        setPriceListTotal(res.priceListTotal);
-        setDiscount(res.discount);
-      }
-    };
-
-    fetchPrice();
-
-    return () => {
-      isMounted = false;
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token]);
+  const { price, priceList, priceListTotal, discount, driversFee } =
+    priceInformation;
 
   return (
     <>
@@ -91,26 +63,54 @@ const OverviewCard = ({ id, car }) => {
                 );
               })}
             </PriceTable>
-            {discount != null ? (
-              <PriceTable title="Rabatte und Aufschläge" discount={discount}>
-                <tr>
-                  <td className="price-table__td">{discount.fittingName}</td>
-                  <td className="price-table__td">{discount.discountText}</td>
-                  <td className="price-table__td">
-                    -
-                    {(price *
-                      dateDifferenceInDays(
-                        timeFilter.startDate,
-                        timeFilter.endDate
-                      ) +
-                      priceListTotal) *
-                      discount.discount}{" "}
-                    &euro;
-                  </td>
-                </tr>
+            {discount != null || driversFee != null ? (
+              <PriceTable
+                title="Rabatte und Aufschläge"
+                price={price}
+                hideTotal={true}
+              >
+                {discount != null ? (
+                  <tr>
+                    <td className="price-table__td">{discount.fittingName}</td>
+                    <td className="price-table__td">{discount.discountText}</td>
+                    <td className="price-table__td">
+                      -
+                      {(price *
+                        dateDifferenceInDays(
+                          timeFilter.startDate,
+                          timeFilter.endDate
+                        ) +
+                        priceListTotal) *
+                        discount.discount}{" "}
+                      &euro;
+                    </td>
+                  </tr>
+                ) : null}
+                {driversFee != null ? (
+                  <tr>
+                    <td className="price-table__td">
+                      {driversFee.fittingName}
+                    </td>
+                    <td className="price-table__td">{driversFee.feeText}</td>
+                    <td className="price-table__td">
+                      +
+                      {price *
+                        dateDifferenceInDays(
+                          timeFilter.startDate,
+                          timeFilter.endDate
+                        ) *
+                        driversFee.fee}{" "}
+                      &euro;
+                    </td>
+                  </tr>
+                ) : null}
               </PriceTable>
             ) : null}
             <TotalPriceItem
+              basePrice={
+                price *
+                dateDifferenceInDays(timeFilter.startDate, timeFilter.endDate)
+              }
               price={
                 price *
                   dateDifferenceInDays(
@@ -120,6 +120,7 @@ const OverviewCard = ({ id, car }) => {
                 priceListTotal
               }
               discount={discount}
+              driversFee={driversFee}
             />
           </div>
         </Card>

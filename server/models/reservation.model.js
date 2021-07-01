@@ -28,6 +28,12 @@ const Reservation = db.define("reservation", {
     values: ["pending", "accepted", "canceled", "back"],
     allowNull: false,
   },
+  driversFee: {
+    type: DataTypes.BOOLEAN,
+    allowNull: false,
+    defaultValue: false,
+    field: "drivers_fee",
+  },
   cancelableTo: {
     type: "TIMESTAMP",
     allowNull: false,

@@ -24,8 +24,8 @@ const Customer = db.define("customer", {
     allowNull: false,
     field: "last_name",
   },
-  phone: {
-    type: DataTypes.STRING,
+  birthday: {
+    type: DataTypes.DATE,
     allowNull: false,
   },
   email: {

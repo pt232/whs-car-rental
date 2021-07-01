@@ -183,7 +183,14 @@ const getPartnerProtocolReservations = async (req, res) => {
 };
 
 const addReservation = async (req, res) => {
-  const { token, carId, partnerId, reservationFrom, reservationTo } = req.body;
+  const {
+    token,
+    carId,
+    partnerId,
+    secondDriver,
+    reservationFrom,
+    reservationTo,
+  } = req.body;
 
   try {
     const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
@@ -196,6 +203,7 @@ const addReservation = async (req, res) => {
       customerId: user.id,
       partnerId,
       status: 1,
+      driversFee: secondDriver,
       cancelableTo,
       reservationFrom,
       reservationTo,

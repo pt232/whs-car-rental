@@ -50,6 +50,18 @@ export const formatDate = (dateString) => {
   );
 };
 
+export const minAgeToDate = (minAge) => {
+  const date = new Date();
+  date.setFullYear(date.getFullYear() - minAge);
+  return date.toISOString().split("T")[0];
+};
+
+export const calculateAge = (birthday) => {
+  const ageDifMs = Date.now() - birthday.getTime();
+  const ageDate = new Date(ageDifMs);
+  return Math.abs(ageDate.getUTCFullYear() - 1970);
+};
+
 export const handleFilter = (car, filter) => {
   let carClass =
     (filter.includes("Kleinwagen") &&

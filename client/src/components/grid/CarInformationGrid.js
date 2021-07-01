@@ -6,7 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./CarInformationGrid.css";
 
-const CarInformationGrid = ({ carType }) => {
+const CarInformationGrid = ({ carType, rentalStation }) => {
   return (
     <div className="information-grid">
       <div className="information-grid__item">
@@ -85,6 +85,12 @@ const CarInformationGrid = ({ carType }) => {
           }`}
         />
         <span className="information-grid__property">Zweifahreroption</span>
+      </div>
+      <div className="information-grid__item">
+        <FontAwesomeIcon icon={faCheckCircle} className="information-grid__icon" />
+        <span className="information-grid__property">
+          Standort: {rentalStation}
+        </span>
       </div>
     </div>
   );

@@ -12,7 +12,7 @@ const registerUser = async (req, res) => {
   const {
     firstName,
     lastName,
-    phone,
+    birthday,
     email,
     password: plainTextPassword,
   } = req.body;
@@ -23,7 +23,7 @@ const registerUser = async (req, res) => {
     const user = await tables.Customer.create({
       firstName,
       lastName,
-      phone,
+      birthday,
       email,
       password,
       kilometersDriven: 0,

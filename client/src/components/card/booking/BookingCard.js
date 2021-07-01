@@ -1,49 +1,40 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { FilterContext } from "../../../context/filter/FilterState";
+import { ReservationContext } from "../../../context/reservation/ReservationState";
 import { UserContext } from "../../../context/user/UserState";
-import { get, post } from "../../../utils/rest";
+import { post } from "../../../utils/rest";
 import Card from "../Card";
 import MessageList from "../../list/message/MessageList";
+import TwoDriversForm from "../../form/drivers/TwoDriversForm";
 import "./BookingCard.css";
 
-const BookingCard = ({ id, carId, partnerId }) => {
+const BookingCard = ({
+  carId,
+  partnerId,
+  twoDrivers,
+  info,
+  removeInfoText,
+}) => {
   const { timeFilter, removeLocationFilter } = useContext(FilterContext);
+  const { setDriversFee } = useContext(ReservationContext);
   const { token } = useContext(UserContext);
 
+  const [secondDriver, setSecondDriver] = useState(false);
   const [errors, setErrors] = useState([]);
   const [success, setSuccess] = useState([]);
-  const [info, setInfo] = useState([]);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
-    let isMounted = true;
-
-    const fetchPrice = async () => {
-      const res = await get(`/api/v1/car/price/${id}/${token}`);
-
-      if (isMounted) {
-        if (res.discount) {
-          setInfo([
-            "Sie haben bereits über unsere Autovermietung 10.000 km zurückgelegt. Dafür gibt es von uns einen Rabatt von 10%! 🎉",
-          ]);
-        }
-      }
-    };
-
-    fetchPrice();
-
-    return () => {
-      isMounted = false;
-    };
+    setDriversFee(secondDriver);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token]);
+  }, [secondDriver]);
 
   const handleClick = async () => {
     setErrors([]);
     setSuccess([]);
-    setInfo([]);
+    removeInfoText();
 
     if (loading) return;
 
@@ -53,6 +44,7 @@ const BookingCard = ({ id, carId, partnerId }) => {
       token,
       carId,
       partnerId,
+      secondDriver,
       reservationFrom: timeFilter.startDate,
       reservationTo: timeFilter.endDate,
     });
@@ -60,11 +52,11 @@ const BookingCard = ({ id, carId, partnerId }) => {
     if (res.success) {
       setErrors([]);
       setSuccess((prevValue) => [...prevValue, res.data]);
+      setLoading(false);
     } else {
       setErrors((prevValue) => [...prevValue, res.data]);
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (
@@ -77,6 +69,19 @@ const BookingCard = ({ id, carId, partnerId }) => {
         <MessageList items={success} type="success" />
       ) : null}
       {info.length > 0 ? <MessageList items={info} type="info" /> : null}
+      {twoDrivers === true ? (
+        <TwoDriversForm
+          addDriver={() => setSecondDriver(true)}
+          removeDriver={() => setSecondDriver(false)}
+          addError={() =>
+            setErrors((prevValue) => [
+              ...prevValue,
+              "Bitte tragen Sie ein Geburtsdatum ein",
+            ])
+          }
+          removeErrors={() => setErrors([])}
+        />
+      ) : null}
       <p className="booking-card__text">
         Mit dem Klick auf "Reservierung abschließen" erhalten Sie eine
         Bestätigungsmail. Daraufhin können Sie die Reservierung innerhalb von 24

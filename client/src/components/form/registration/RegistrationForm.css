@@ -32,6 +32,11 @@
   flex: 1 1 50%;
 }
 
+.registration-form__input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.4);
+  cursor: pointer;
+}
+
 .registration-form__icon {
   position: absolute;
   top: 50%;

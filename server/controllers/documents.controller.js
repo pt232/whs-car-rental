@@ -5,8 +5,25 @@ const protocolTemplate = require("../documents/protocol");
 
 const createContract = async (req, res) => {
   const { reservationId, data } = req.body;
+  const { driversFee } = await tables.Reservation.findOne({
+    where: { id: reservationId },
+  });
+  let pdfData;
 
-  pdf.create(contractTemplate(data, {})).toBuffer((err, buffer) => {
+  if (driversFee) {
+    pdfData = {
+      ...data,
+      driversFee: {
+        fittingName: "Zweitfahrer unter 25",
+        fee: 0.25,
+        feeText: "25%",
+      },
+    };
+  } else {
+    pdfData = data;
+  }
+
+  pdf.create(contractTemplate(pdfData, {})).toBuffer((err, buffer) => {
     if (err) {
       return res
         .status(500)

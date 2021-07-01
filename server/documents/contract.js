@@ -9,6 +9,7 @@ const pdfTemplate = ({
   mileage,
   annotation,
   prices,
+  driversFee,
 }) => {
   return `<!DOCTYPE html>
   <html lang="en">
@@ -212,7 +213,8 @@ const pdfTemplate = ({
                   prices.priceList,
                   prices.priceListTotal,
                   prices.days,
-                  prices.discount
+                  prices.discount,
+                  driversFee
                 )}
               </tbody>
               <tfoot>
@@ -224,12 +226,13 @@ const pdfTemplate = ({
                     colspan="2"
                     class="invoice-table__td invoice-table__td--total"
                   >
-                    ${
-                      prices.discount
-                        ? (prices.price * prices.days + prices.priceListTotal) *
-                          (1 - prices.discount.discount)
-                        : prices.price * prices.days + prices.priceListTotal
-                    } &euro;
+                    ${calculatePrice(
+                      prices.price,
+                      prices.priceListTotal,
+                      prices.days,
+                      prices.discount,
+                      driversFee
+                    )} &euro;
                   </td>
                 </tr>
               </tfoot>
@@ -268,7 +271,14 @@ const pdfTemplate = ({
   `;
 };
 
-const tableRows = (price, priceList, priceListTotal, days, discount) => {
+const tableRows = (
+  price,
+  priceList,
+  priceListTotal,
+  days,
+  discount,
+  driversFee
+) => {
   let rows = "";
 
   rows += `<tr>
@@ -295,7 +305,31 @@ const tableRows = (price, priceList, priceListTotal, days, discount) => {
     </tr>`;
   }
 
+  if (driversFee) {
+    rows += `<tr>
+    <td class="invoice-table__td">${driversFee.fittingName}</td>
+    <td class="invoice-table__td">${driversFee.feeText}</td>
+    <td class="invoice-table__td">-${
+      (days * price + priceListTotal) * driversFee.fee
+    } &euro;</td>
+    </tr>`;
+  }
+
   return rows;
+};
+
+const calculatePrice = (price, priceListTotal, days, discount, driversFee) => {
+  let total = price * days + priceListTotal;
+
+  if (discount) {
+    total = total - total * discount.discount;
+  }
+
+  if (driversFee) {
+    total = total + price * days * driversFee.fee;
+  }
+
+  return total.toFixed(2);
 };
 
 module.exports = pdfTemplate;

@@ -48,6 +48,7 @@ const CarList = () => {
               car={car}
               carType={car.carType}
               partner={car.partner}
+              rentalStation={car.rentalStation.city}
             />
           );
         })

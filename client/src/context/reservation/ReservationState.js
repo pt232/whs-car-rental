@@ -4,6 +4,7 @@ import {
   GET_RESERVATIONS,
   RESERVATION_ERROR,
   RESERVATION_UPDATE,
+  SET_DRIVERS_FEE,
   SET_LOADING,
 } from "../types";
 import { reservationReducer } from "./reservationReducer";
@@ -14,6 +15,7 @@ export const ReservationContext = createContext();
 export const ReservationProvider = ({ children }) => {
   const initialState = {
     reservations: [],
+    driversFee: false,
     updateTrigger: false,
     loading: false,
     error: null,
@@ -77,16 +79,25 @@ export const ReservationProvider = ({ children }) => {
     }
   };
 
+  const setDriversFee = (isIncluded) => {
+    dispatch({
+      type: SET_DRIVERS_FEE,
+      payload: isIncluded,
+    });
+  };
+
   return (
     <ReservationContext.Provider
       value={{
         reservations: state.reservations,
+        driversFee: state.driversFee,
         updateTrigger: state.updateTrigger,
         loading: state.loading,
         error: state.error,
         getReservations,
         getBackProtocolReservations,
         updateReservationStatus,
+        setDriversFee,
       }}
     >
       {children}

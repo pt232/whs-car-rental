@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Redirect, useParams } from "react-router-dom";
 import { CarContext } from "../../../context/car/CarState";
 import { FilterContext } from "../../../context/filter/FilterState";
+import { ReservationContext } from "../../../context/reservation/ReservationState";
 import { UserContext } from "../../../context/user/UserState";
 import DeliverInformationCard from "../../../components/card/deliver/DeliverInformationCard";
 import OverviewCard from "../../../components/card/overview/OverviewCard";
@@ -9,19 +10,53 @@ import LoginForm from "../../../components/form/login/LoginForm";
 import "./CarCheckoutPage.css";
 import { LoadingSpinner } from "../../../components/spinner/LoadingSpinner";
 import BookingCard from "../../../components/card/booking/BookingCard";
+import { get } from "../../../utils/rest";
 
 const CarCheckoutPage = () => {
   const { getCar, currentCar, loading } = useContext(CarContext);
   const { locationFilter, timeFilter } = useContext(FilterContext);
+  const { driversFee } = useContext(ReservationContext);
   const { token } = useContext(UserContext);
 
   const [render, setRender] = useState("");
+  const [info, setInfo] = useState("");
+  const [priceInformation, setPriceInformation] = useState();
   const { id } = useParams();
 
   useEffect(() => {
     getCar(id);
     // eslint-disable-next-line
   }, [id]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const fetchPrice = async () => {
+      const res = await get(
+        `/api/v1/car/price/${id}/${token}?fee=${driversFee}`
+      );
+
+      if (isMounted) {
+        console.log(res);
+
+        if (res.discount) {
+          setInfo([
+            "Sie haben bereits über unsere Autovermietung 10.000 km zurückgelegt. Dafür gibt es von uns einen Rabatt von 10%! 🎉",
+          ]);
+        } else {
+          setInfo([]);
+        }
+        setPriceInformation(res);
+      }
+    };
+
+    fetchPrice();
+
+    return () => {
+      isMounted = false;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token, driversFee]);
 
   const handler = () => {
     setRender("Render");
@@ -55,7 +90,12 @@ const CarCheckoutPage = () => {
                       partner={currentCar.partner}
                       station={currentCar.rentalStation}
                     />
-                    <OverviewCard id={id} car={currentCar} />
+                    {priceInformation ? (
+                      <OverviewCard
+                        car={currentCar}
+                        priceInformation={priceInformation}
+                      />
+                    ) : null}
                   </>
                 ) : null}
               </aside>
@@ -66,11 +106,13 @@ const CarCheckoutPage = () => {
                     render={render}
                     handler={handler}
                   />
-                ) : currentCar.partner ? (
+                ) : currentCar.partner && priceInformation ? (
                   <BookingCard
-                    id={id}
                     carId={currentCar.id}
                     partnerId={currentCar.partner.id}
+                    twoDrivers={currentCar.carType.twoDrivers}
+                    info={info}
+                    removeInfoText={() => setInfo([])}
                   />
                 ) : null}
               </div>

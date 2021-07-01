@@ -7,7 +7,7 @@ import { blobToImageSrc } from "../../../utils/helpers";
 import "./CarCard.css";
 import CarInformationGrid from "../../grid/CarInformationGrid";
 
-const CarCard = ({ car, carType, partner }) => {
+const CarCard = ({ car, carType, partner, rentalStation }) => {
   const [showMore, setShowMore] = useState(false);
 
   return (
@@ -41,7 +41,9 @@ const CarCard = ({ car, carType, partner }) => {
             Mehr Informationen
           </span>
         </div>
-        {showMore ? <CarInformationGrid carType={carType} /> : null}
+        {showMore ? (
+          <CarInformationGrid carType={carType} rentalStation={rentalStation} />
+        ) : null}
       </div>
     </Card>
   );

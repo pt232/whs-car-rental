@@ -1,4 +1,4 @@
-const getPriceInformation = (car, customer) => {
+const getPriceInformation = (car, customer, fee) => {
   const basePrice = parseInt(car["price"]);
   const featurePrice = [
     { fittingName: "Navigation", name: "navigation", price: 25 },
@@ -11,6 +11,7 @@ const getPriceInformation = (car, customer) => {
   const carPriceList = [];
   let priceListTotal;
   let discount;
+  let driversFee;
 
   featurePrice.forEach((feature) => {
     if (car["carType"][feature.name] === true) {
@@ -30,11 +31,20 @@ const getPriceInformation = (car, customer) => {
     };
   }
 
+  if (fee === "true") {
+    driversFee = {
+      fittingName: "Zweitfahrer unter 25",
+      fee: 0.25,
+      feeText: "25%",
+    };
+  }
+
   return {
     price: basePrice,
     priceList: carPriceList,
     priceListTotal,
     discount,
+    driversFee,
   };
 };
 

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { minAgeToDate } from "../../../utils/helpers";
 import { post } from "../../../utils/rest";
 import Card from "../../card/Card";
 import MessageList from "../../list/message/MessageList";
@@ -7,7 +8,7 @@ import "./RegistrationForm.css";
 const RegistrationForm = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [phone, setTelephone] = useState("");
+  const [birthday, setBirthday] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordRepeat, setPasswordRepeat] = useState("");
@@ -20,20 +21,11 @@ const RegistrationForm = () => {
 
     if (loading) return;
 
-    const phonePattern = /^[0-9]+$/;
     const mailPattern = /\S+@\S+\.\S+/;
     let validation = true;
 
     setErrors([]);
     setSuccess([]);
-
-    if (phone && !phonePattern.test(phone)) {
-      setErrors((prevValue) => [
-        ...prevValue,
-        "Die angegebene Telefonnummer ist ungültig",
-      ]);
-      validation = false;
-    }
 
     if (!mailPattern.test(email)) {
       setErrors((prevValue) => [
@@ -65,18 +57,18 @@ const RegistrationForm = () => {
       const res = await post("/api/v1/register", {
         firstName,
         lastName,
-        phone,
+        birthday,
         email,
         password,
       });
 
       if (res.success === true) {
         setSuccess((prevValue) => [...prevValue, res.data]);
+        setLoading(false);
       } else {
         setErrors((prevValue) => [...prevValue, res.data]);
+        setLoading(false);
       }
-
-      setLoading(false);
     }
   };
 
@@ -117,15 +109,16 @@ const RegistrationForm = () => {
         </div>
         <div className="registration-form__row">
           <div className="registration-form__container">
-            <label htmlFor="regTelephone" className="label">
-              Telefonnummer
+            <label htmlFor="regBirthday" className="label">
+              Geburtsdatum
             </label>
             <input
-              type="telephone"
-              className="input"
-              id="regTelephone"
-              value={phone}
-              onChange={(e) => setTelephone(e.target.value)}
+              type="date"
+              className="registration-form__input input"
+              id="regBirthday"
+              value={birthday}
+              onChange={(e) => setBirthday(e.target.value)}
+              max={minAgeToDate(25)}
             />
           </div>
           <div className="registration-form__container">

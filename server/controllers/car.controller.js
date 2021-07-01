@@ -84,7 +84,7 @@ const getCar = async (req, res) => {
 const getCarPrice = async (req, res) => {
   try {
     const { id, token } = req.params;
-    const { customerId } = req.query;
+    const { customerId, fee } = req.query;
 
     const car = await tables.Car.findOne({
       where: { id: id },
@@ -126,10 +126,8 @@ const getCarPrice = async (req, res) => {
       }
     } catch (error) {}
 
-    const { price, priceList, priceListTotal, discount } = getPriceInformation(
-      car,
-      customer
-    );
+    const { price, priceList, priceListTotal, discount, driversFee } =
+      getPriceInformation(car, customer, fee);
 
     res.status(200).json({
       success: true,
@@ -137,6 +135,7 @@ const getCarPrice = async (req, res) => {
       priceList,
       priceListTotal,
       discount,
+      driversFee,
     });
   } catch (error) {
     res.status(500).json({

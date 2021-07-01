@@ -3,6 +3,7 @@ import {
   GET_RESERVATIONS,
   RESERVATION_ERROR,
   RESERVATION_UPDATE,
+  SET_DRIVERS_FEE,
   SET_LOADING,
 } from "../types";
 
@@ -25,6 +26,11 @@ export const reservationReducer = (state, action) => {
         ...state,
         updateTrigger: !state.updateTrigger,
         loading: false,
+      };
+    case SET_DRIVERS_FEE:
+      return {
+        ...state,
+        driversFee: action.payload,
       };
     case RESERVATION_ERROR:
       return {
