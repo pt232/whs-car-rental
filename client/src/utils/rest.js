@@ -1,5 +1,5 @@
 export const get = async (endpoint) => {
-  const baseUrl = "http://localhost:5000";
+  const baseUrl = "https://whs-car-rental.herokuapp.com";
   const url =
     endpoint.charAt(0) === "/" ? baseUrl + endpoint : "/" + baseUrl + endpoint;
 
@@ -12,7 +12,7 @@ export const get = async (endpoint) => {
 };
 
 export const post = async (endpoint, body) => {
-  const baseUrl = "http://localhost:5000";
+  const baseUrl = "https://whs-car-rental.herokuapp.com";
   const url =
     endpoint.charAt(0) === "/" ? baseUrl + endpoint : "/" + baseUrl + endpoint;
 
@@ -31,7 +31,7 @@ export const post = async (endpoint, body) => {
 };
 
 export const patch = async (endpoint, body) => {
-  const baseUrl = "http://localhost:5000";
+  const baseUrl = "https://whs-car-rental.herokuapp.com";
   const url =
     endpoint.charAt(0) === "/" ? baseUrl + endpoint : "/" + baseUrl + endpoint;
 

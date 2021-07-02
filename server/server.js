@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: process.env.ALLOWED_ORIGIN,
   })
 );
 
@@ -23,6 +23,10 @@ app.use("/api/v1/station", stationRouter);
 app.use("/api/v1/", authenticateRouter);
 app.use("/api/v1/reservation", reservationRouter);
 app.use("/api/v1/document", documentRouter);
+
+app.get("/", (req, res) => {
+  res.send("Welcome to this car rental API! 😎");
+});
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT} 🚀`);

@@ -33,7 +33,7 @@ const registerUser = async (req, res) => {
       },
       process.env.EMAIL_TOKEN_SECRET
     );
-    const confirmationUrl = `http://localhost:5000/api/v1/confirmation/${emailToken}`;
+    const confirmationUrl = `https://whs-car-rental.herokuapp.com/api/v1/confirmation/${emailToken}`;
 
     await transporter.sendMail({
       to: user.email,
@@ -76,7 +76,7 @@ const verifyUser = async (req, res) => {
       }
     );
 
-    res.redirect("http://localhost:3000/login");
+    res.redirect(`${process.env.ALLOWED_ORIGIN}/login`);
   } catch (error) {
     res.status(500).json({
       success: false,
@@ -225,7 +225,7 @@ const forgotPassword = async (req, res) => {
       },
       process.env.EMAIL_TOKEN_SECRET
     );
-    const confirmationUrl = `http://localhost:5000/api/v1/confirmation/${emailToken}`;
+    const confirmationUrl = `https://whs-car-rental.herokuapp.com/api/v1/confirmation/${emailToken}`;
 
     await transporter.sendMail({
       to: user.email,

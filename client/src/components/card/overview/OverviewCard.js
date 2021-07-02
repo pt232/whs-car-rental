@@ -75,13 +75,15 @@ const OverviewCard = ({ car, priceInformation }) => {
                     <td className="price-table__td">{discount.discountText}</td>
                     <td className="price-table__td">
                       -
-                      {(price *
-                        dateDifferenceInDays(
-                          timeFilter.startDate,
-                          timeFilter.endDate
-                        ) +
-                        priceListTotal) *
-                        discount.discount}{" "}
+                      {(
+                        (price *
+                          dateDifferenceInDays(
+                            timeFilter.startDate,
+                            timeFilter.endDate
+                          ) +
+                          priceListTotal) *
+                        discount.discount
+                      ).toFixed(2)}{" "}
                       &euro;
                     </td>
                   </tr>
@@ -94,12 +96,14 @@ const OverviewCard = ({ car, priceInformation }) => {
                     <td className="price-table__td">{driversFee.feeText}</td>
                     <td className="price-table__td">
                       +
-                      {price *
+                      {(
+                        price *
                         dateDifferenceInDays(
                           timeFilter.startDate,
                           timeFilter.endDate
                         ) *
-                        driversFee.fee}{" "}
+                        driversFee.fee
+                      ).toFixed(2)}{" "}
                       &euro;
                     </td>
                   </tr>
