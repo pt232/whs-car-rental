@@ -29,3 +29,18 @@ Befolge diese einfachen Schritte, um eine lokale Kopie des Projektes zum Laufen 
    ```sh
    npm start
    ```
+5. Anlegen von Umgebungsvariablen
+   ```sh
+   ALLOWED_ORIGIN=
+   
+   DB_NAME= 
+   DB_USERNAME=
+   DB_PASSWORD=
+   DB_HOST=
+   
+   ACCESS_TOKEN_SECRET=
+   EMAIL_TOKEN_SECRET=
+   
+   GMAIL_USER=
+   GMAIL_PASS=
+   ```
