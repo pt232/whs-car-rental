@@ -26,21 +26,17 @@ const pdfTemplate = ({
           box-sizing: border-box;
         }
   
-        html {
-          font-size: 10px;
-        }
-  
         body {
           color: #111516;
           font-family: "Poppins", sans-serif;
-          font-size: 1.6rem;
+          font-size: 10px;
           font-style: normal !important;
         }
   
         .contract {
-          max-width: 80rem;
+          max-width: 800px;
           margin: 0 auto;
-          padding: 1.5rem 4rem;
+          padding: 15px 25px;
           background-color: #fff;
         }
   
@@ -57,7 +53,7 @@ const pdfTemplate = ({
         }
   
         .contract__logo {
-          font-size: 2.8rem;
+          font-size: 18px;
           font-weight: bold;
         }
   
@@ -66,11 +62,11 @@ const pdfTemplate = ({
         }
   
         .contract__body {
-          margin: 6rem 0;
+          margin: 40px 0;
         }
   
         .information {
-          margin-bottom: 5rem;
+          margin-bottom: 40px;
         }
   
         .information:last-child {
@@ -79,8 +75,8 @@ const pdfTemplate = ({
   
         .information__title,
         .invoice__title {
-          margin-bottom: 2.5rem;
-          font-size: 1.8rem;
+          margin-bottom: 20px;
+          font-size: 12px;
         }
   
         .information__row {
@@ -93,16 +89,16 @@ const pdfTemplate = ({
           -webkit-box-align: center;
           -ms-flex-align: center;
           align-items: center;
-          width: 32rem;
-          margin-bottom: 2rem;
+          width: 270px;
+          margin-bottom: 15px;
         }
 
         .information__item {
-          max-width: 0rem;
+          max-width: 0px;
         }
   
         .item__title {
-          margin-bottom: 0.5rem;
+          margin-bottom: 4px;
           font-weight: normal;
           white-space: nowrap;
         }
@@ -114,13 +110,13 @@ const pdfTemplate = ({
   
         .invoice-table {
           width: 100%;
-          margin-bottom: 5rem;
-          padding: 1.5rem 1rem;
+          margin-bottom: 40px;
+          padding: 12px 8px;
           background-color: rgba(229, 229, 229, 0.4);
         }
   
         .invoice-table__th {
-          padding: 0 1rem 1rem 1rem;
+          padding: 0 6px 6px 6px;
           font-weight: 500;
           text-align: right;
         }
@@ -130,9 +126,9 @@ const pdfTemplate = ({
         }
   
         .invoice-table__td {
-          padding: 0.5rem 1.5rem;
+          padding: 4px 12px;
           color: #7b7c7d;
-          font-size: 1.4rem;
+          font-size: 10px;
           line-height: 1.4;
           text-align: right;
         }
@@ -155,7 +151,7 @@ const pdfTemplate = ({
       <div class="contract">
         <header class="contract__header">
           <div class="contract__logo">auto<span>vermietung.</span></div>
-          <div>Datum: ${new Date().toLocaleDateString()}</div>
+          <div>Datum: ${new Date().toLocaleDateString("de-DE")}</div>
         </header>
         <main class="contract__body">
           <div class="information">

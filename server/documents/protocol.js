@@ -23,22 +23,18 @@ const pdfTemplate = ({
             -webkit-box-sizing: border-box;
             box-sizing: border-box;
           }
-    
-          html {
-            font-size: 10px;
-          }
-    
+        
           body {
             color: #111516;
             font-family: "Poppins", sans-serif;
-            font-size: 1.6rem;
+            font-size: 10px;
             font-style: normal !important;
           }
     
           .contract {
-            max-width: 80rem;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 1.5rem 4rem;
+            padding: 15px 25px;
             background-color: #fff;
           }
     
@@ -55,7 +51,7 @@ const pdfTemplate = ({
           }
     
           .contract__logo {
-            font-size: 2.8rem;
+            font-size: 18px;
             font-weight: bold;
           }
     
@@ -64,11 +60,11 @@ const pdfTemplate = ({
           }
     
           .contract__body {
-            margin: 6rem 0;
+            margin: 40px 0;
           }
     
           .information {
-            margin-bottom: 5rem;
+            margin-bottom: 40px;
           }
     
           .information:last-child {
@@ -77,8 +73,8 @@ const pdfTemplate = ({
     
           .information__title,
           .invoice__title {
-            margin-bottom: 2.5rem;
-            font-size: 1.8rem;
+            margin-bottom: 20px;
+            font-size: 12px;
           }
     
           .information__row {
@@ -91,16 +87,16 @@ const pdfTemplate = ({
             -webkit-box-align: center;
             -ms-flex-align: center;
             align-items: center;
-            width: 32rem;
-            margin-bottom: 2rem;
+            width: 270px;
+            margin-bottom: 15px;
           }
   
           .information__item {
-            max-width: 0rem;
+            max-width: 0px;
           }
     
           .item__title {
-            margin-bottom: 0.5rem;
+            margin-bottom: 4px;
             font-weight: normal;
             white-space: nowrap;
           }
@@ -119,7 +115,7 @@ const pdfTemplate = ({
         <div class="contract">
           <header class="contract__header">
             <div class="contract__logo">auto<span>vermietung.</span></div>
-            <div>Datum: ${new Date().toLocaleDateString()}</div>
+            <div>Datum: ${new Date().toLocaleDateString("de-DE")}</div>
           </header>
           <main class="contract__body">
             <div class="information">
