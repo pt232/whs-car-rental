@@ -73,6 +73,12 @@ const RegistrationForm = () => {
       if (res.success === true) {
         setSuccess((prevValue) => [...prevValue, res.data]);
         setLoading(false);
+        setFirstName("");
+        setLastName("");
+        setBirthday("");
+        setEmail("");
+        setPassword("");
+        setPasswordRepeat("");
       } else {
         setErrors((prevValue) => [...prevValue, res.data]);
         setLoading(false);
@@ -118,7 +124,8 @@ const RegistrationForm = () => {
         <div className="registration-form__row">
           <div className="registration-form__container">
             <label htmlFor="regBirthday" className="label">
-              Geburtsdatum
+              Geburtsdatum{" "}
+              <span className="registration-form__required">*</span>
             </label>
             <input
               type="date"
@@ -127,6 +134,7 @@ const RegistrationForm = () => {
               value={birthday}
               onChange={(e) => setBirthday(e.target.value)}
               max={minAgeToDate(25)}
+              required
             />
           </div>
           <div className="registration-form__container">
