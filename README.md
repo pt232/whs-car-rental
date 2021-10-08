@@ -1,6 +1,6 @@
 # Webseite für eine Autovermietung 🚗
 
-Entwicklung einer web-basierten Anwendung für eine Autovermietung.
+Entwicklung einer webbasierten Anwendung für eine Autovermietung.
 
 ## Loslegen 
 
