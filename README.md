@@ -1,4 +1,4 @@
-# Webseite für eine Autovermietung 🚗
+# Website für eine Autovermietung 🚗
 
 Entwicklung einer webbasierten Anwendung für eine Autovermietung.
 
